@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 
+
 const rootReducer = combineReducers({
-  clients: clientReducer
-  // users: manageUser,
+  clients: clientReducer,
+  users: userReducer
   // talents: talentsReducer
   // talentCounts: talentCountReducer
 })
 
-export default rootReducer
 
 function clientReducer(state = [], action) {
   let idx
@@ -66,22 +66,22 @@ function clientReducer(state = [], action) {
 
 
 
-manageUser = (state={user: {}, loggedIn: false}, action) => {
+function userReducer (state= [{user: {}, loggedIn: false, loading: false}], action) {
   switch(action.type) {
+
+    case 'LOADING_USER':
+      return { user: action.user, loading: true}
 
     case 'LOGIN_USER':
       const user = {
         id: action.id, 
         name: action.name, 
-        email: action.email 
+        email: action.email,
+        password: action.password
       }
       return({
-        ...state, 
-        users: [
-          ...state.users, 
-          action.user, 
-          user
-        ]
+        ...state, loading: false, loggedIn: true,
+        users: [...state.users, action.user, user]
       })
     
     case 'REMOVE_USER':
@@ -116,3 +116,4 @@ manageUser = (state={user: {}, loggedIn: false}, action) => {
 
 
 
+export default rootReducer

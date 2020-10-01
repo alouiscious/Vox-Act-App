@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ClientInput from '../components/clients/ClientInput'
-import Clients from "../components/clients/Clients";
+import ClientInput from './clients/ClientInput'
+import Clients from "./clients/Clients";
 // import { Route } from 'react-router-dom';
 import { connect } from "react-redux";
 
