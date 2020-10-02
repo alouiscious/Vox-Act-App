@@ -11,15 +11,17 @@ function App() {
         <div>
           <VoxAct />
         </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+            <a
+            className="App-link"
+            href="https://alouisciousmedia.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span role="img"> 
+              ©℗1994-2020 Alouiscious Media™️
+            </span>
+              </a>
+        </header>
     </div>
   );
 }

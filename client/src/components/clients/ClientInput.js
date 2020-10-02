@@ -28,10 +28,10 @@ class ClientInput extends Component {
   handleClientOnSubmit = event => {
     event.preventDefault()
     const client = {...this.state, ...this.state.clientForm}
-    // this.props.addUser(...this.state.userForm)
+    this.props.addUser(...this.state.userForm)
     this.props.addClient(client)    
     this.setState({
-        // client
+        client,
         [event.target.name]: ''
     })
   }

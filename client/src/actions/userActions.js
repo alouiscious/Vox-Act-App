@@ -19,16 +19,16 @@ export const loginUser = (user) => {
     .then(resp => resp.json())
     .then(userJSON => {
       if (userJSON.error) {
-        alert("invalid credentials")
+        alert("Sorry. Not a Vox Act client? Sign up...")
       } 
       else {
-          dispatch({ type: 'LOGIN_USER', user: userJSON})
+        dispatch({ type: 'LOGIN_USER', user: userJSON})
         this.setState({
           currentUser: userJSON.user
-          (console.log('User fetch wa ha ', userJSON))
         })
       }
     })
+    .then(console.log('User fetch wa ha ', userJSON))
     .catch(console.log)  
   }
 }
