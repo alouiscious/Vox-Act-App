@@ -2,9 +2,12 @@ class SessionsController < ApplicationController
 
   def create #login
     @user = User.find_by(params [:user][:email])
+    binding.pry
 
     if @user && user.authenticate(params [:user][:password])
-      render json:  @user
+      token = encode_token(@user)
+
+      render json:  (user: @user, token: token)
     else
       resp = {
         error: "Login not valid."
