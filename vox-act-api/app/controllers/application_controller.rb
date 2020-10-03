@@ -9,11 +9,11 @@ class ApplicationController < ActionController::API
 
   end
 
-  def encode_token(payload)
-    Jwt.encode(payload, "super_secret")
-  end
+  # def encode_token(payload)
+  #   Jwt.encode(payload, "super_secret")
+  # end
 
-  def decode_token
+  # def decode_token
 
-  end
+  # end
 end

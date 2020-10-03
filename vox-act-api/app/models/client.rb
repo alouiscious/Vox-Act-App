@@ -1,7 +1,6 @@
 class Client < ApplicationRecord
-  has_secure_password
   has_many talents
   validates :email, :name, presence: true
-  validates :email, uniquesness: true
+  validates :email, uniqueness: true
 
 end
