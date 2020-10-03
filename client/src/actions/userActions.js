@@ -1,9 +1,9 @@
 
-
-const user = {...this.state.loginForm}
 export const loginUser = (user) => {
+  // const user = { ...this.state.loginForm}
 
   return (dispatch) => {
+    
     const configUser = {
       method: "POST",
       headers: {
@@ -11,7 +11,7 @@ export const loginUser = (user) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        user: user,
+        user: user
       })
     }
     dispatch({ type: 'LOADING_USER'})
@@ -23,12 +23,14 @@ export const loginUser = (user) => {
       } 
       else {
         dispatch({ type: 'LOGIN_USER', user: userJSON})
+        this.props.loginUser(user)
         this.setState({
-          currentUser: userJSON.user
+          currentUser: userJSON.user,
         })
       }
     })
-    .then(console.log('User fetch wa ha ', userJSON))
     .catch(console.log)  
   }
 }
+
+export default loginUser

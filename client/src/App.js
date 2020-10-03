@@ -17,8 +17,10 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span role="img"> 
-              ©℗1994-2020 Alouiscious Media™️
+            <span role="img" alt="copyright"> 
+              <label name="copyright">
+              </label>
+              © ℗1994-2020 Alouiscious Media™️
             </span>
               </a>
         </header>

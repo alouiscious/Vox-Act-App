@@ -5,7 +5,7 @@ import Clients from "./clients/Clients";
 import { connect } from "react-redux";
 
 
-class ClientsPage extends Component {
+class ClientPage extends Component {
 
   componentDidMount(){
     // this.props.fetchUsers()
@@ -63,6 +63,6 @@ const mapDispatchToProps = dispatch => ({
   })
 })
 
-// export default ClientsPage
+// export default ClientPage
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ClientPage)

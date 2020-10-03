@@ -15,6 +15,7 @@ function clientReducer(state = [], action) {
   switch(action.type) {
     case 'ADD_CLIENT':
       const client = {
+        id: action.id,
         name: action.name, 
         email: action.email, 
         
@@ -22,7 +23,7 @@ function clientReducer(state = [], action) {
         password: action.password
       }
       console.log('from manage', client)
-      return({...state, clients: [...state, action.client, client],
+      return({...state, client
         // ...state, clients: [...state.clients, action.client, client]
       })
     
@@ -66,23 +67,24 @@ function clientReducer(state = [], action) {
 
 
 
-function userReducer (state= [{user: {}, loggedIn: false, loading: false}], action) {
+function userReducer (state={user: {}, loggedIn: false, loading: false}, action) {
   switch(action.type) {
 
     case 'LOADING_USER':
-      return { user: action.user, loading: true}
+      return { ...state, loading: true}
 
     case 'LOGIN_USER':
-      const user = {
-        id: action.id, 
-        name: action.name, 
-        email: action.email,
-        password: action.password
-      }
-      return({
-        ...state, loading: false, loggedIn: true,
-        users: [...state.users, action.user, user]
-      })
+      return {user: action.user, loggedIn: true, loading: false}
+
+      // const user = {
+      //   id: action.id, 
+      //   email: action.email,
+      //   password: action.password
+      // }
+      // return({ user: action.user,
+      //   ...state, loading: false, loggedIn: true,
+      //   users: [ ...state.users, action.user, user ]
+      // })
     
     case 'REMOVE_USER':
       const removalIndex = state.users.findIndex(user => user.id === action.id)

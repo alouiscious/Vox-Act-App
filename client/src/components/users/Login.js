@@ -3,62 +3,38 @@ import React, { Component } from 'react';
 class Login extends Component {
 
   state = {
+    currentUser: null,
     loginForm: {
       email: "",
       password: ""
-    },
-    clientForm: {
-      id: '',
-      name: '',
-      hometown: '',
-      email: '',
-      password: ''
     }
   }
-
 
   handleLoginInputChange = event => {
     this.setState({ 
       [event.target.name]: event.target.value, },
-    () => {console.log('this is state', this.state)}
+    () => {console.log('this is state', this.state.loginForm)}
     )
   }
-
 
   handleLoginOnSubmit = event => {
     event.preventDefault()
     const user = { ...this.state.loginForm }
-    const client = { ...this.state.clientForm }
     this.props.loginUser(user)
-    this.props.addUser(client)
-    this.props.deleteUser(client)    
+  
     this.setState({
-      loginForm: {
         email: "",
         password: ""
-      },
-      clientForm: {
-        id: '',
-        name: '',
-        hometown: '',
-        email: '',
-        password: ''
-      }
     })
-    console.log('you clicked', this.event) 
   }
-
-//   const LoginUser = ({ 
-//     handleLoginInputChange, 
-//     handleLoginOnSubmit, 
-//   }) => {
-
-    render() {
+  
+  render() {
       return (
         <div className="Login">
           Existing client... just sign in.
 
           <form onSubmit={this.handleLoginOnSubmit}>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               name="email"
@@ -68,14 +44,14 @@ class Login extends Component {
               placeholder="email"
             />
             <br />
-
+            <label htmlFor="password">Password</label>
             <input
               type="text"
               name="password"
               id="password"
-              placeholder="password"
               onChange={this.handleLoginInputChange}
               value={this.state.password}
+              placeholder="password"
             />
             <br />
             <input 
@@ -87,6 +63,5 @@ class Login extends Component {
       )
     }
   }
-
 
 export default Login

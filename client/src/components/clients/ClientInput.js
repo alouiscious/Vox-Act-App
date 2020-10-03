@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-
+import {v4 as uuid} from 'uuid'
 
 class ClientInput extends Component {
 
   state = {
-    currentUser: null,
-    loginForm: {
-      email: '',
-      password: ''
-    },
     clientForm: {
-      id: '',
+      // id: '',
       name: '',
       hometown: '',
       email: '',
@@ -23,48 +18,44 @@ class ClientInput extends Component {
       [event.target.name]: event.target.value, },
     () => {console.log('wa ha input state', this.state.clientForm)}
     )
-  };
+  }
 
   handleClientOnSubmit = event => {
     event.preventDefault()
-    const client = {...this.state, ...this.state.clientForm}
-    this.props.addUser(...this.state.userForm)
-    this.props.addClient(client)    
+    const client = {...this.state.clientForm, id: uuid()}
+    this.props.addClient(client)
+    // this.props.deleteUser(client)      
+    
     this.setState({
-        client,
-        [event.target.name]: ''
+      name: '', 
+      hometown: '', 
+      email: '', 
+      password: '' 
     })
   }
 
 
-  render(handleClientOnChange, 
-    handleClientOnSubmit, 
-    // handleLoginInputChange, 
-    name, 
-    hometown, 
-    email, 
-    password ) {
-    
-  
-
+  render() {
     return (
       <div className="Client">
         New clients, create and account here
       
-        <form onSubmit={handleClientOnSubmit}>
+        <form onSubmit={this.handleClientOnSubmit}>
           <input
             type="text" 
             name="name"
-            onChange={handleClientOnChange}
-            value={name}
+            id="name"
+            onChange={this.handleClientOnChange}
+            value={this.state.name}
             placeholder="Enter Your Full Name"
           />
           <br />
           <input
             type="text" 
             name="hometown"
-            onChange={handleClientOnChange}
-            value={hometown}
+            id="hometown"
+            onChange={this.handleClientOnChange}
+            value={this.state.hometown}
             placeholder="Enter Your Hometown"
           />
           <br />
@@ -72,9 +63,9 @@ class ClientInput extends Component {
             type="text"
             name="email"
             id="email"
+            onChange={this.handleClientOnChange}
+            value={this.state.email}
             placeholder="email"
-            onChange={handleClientOnChange}
-            value={email}
           />
           <br />
 
@@ -82,25 +73,21 @@ class ClientInput extends Component {
             type="text"
             name="password"
             id="password"
+            onChange={this.handleClientOnChange}
+            value={this.state.password}
             placeholder="password"
-            onChange={handleClientOnChange}
-            value={password}
           />
 
           <br />
 
           <input 
             type="submit" 
-            value="Create Account"
+            value="ClientInput"
           />
         </form>
       </div>
     )
   }
 }
-
-  
-
-
 
 export default ClientInput

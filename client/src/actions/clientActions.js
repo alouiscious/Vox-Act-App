@@ -1,12 +1,9 @@
-import {v4 as uuid} from 'uuid'
 
-
-const client = { ...this.state.clientForm, id: uuid() }
-export function addClients(client) {
-  console.log('from action', {})
-
+export function addClient(client) {
+  // const client = ({...this.state.clientForm, id: uuid()})
+  
   return (dispatch) => {
-    
+
     const configClient = {
       method: "POST",
       headers: {
@@ -14,7 +11,7 @@ export function addClients(client) {
       },
       credentials: 'include',
       body: JSON.stringify({
-        client: client,
+        client: client
       })
     }
     
@@ -29,12 +26,11 @@ export function addClients(client) {
         this.props.addClient(client)
         this.setState(
           { client: clientJSON.client })
-        }
+      }
     })
-    .then(console.log('Client fetch wa ha', clientJSON))
     .catch(console.log)   
   }
 
-  
-
 }
+
+// export default addClient
