@@ -4,25 +4,24 @@ import {v4 as uuid} from 'uuid'
 class ClientInput extends Component {
 
   state = {
-    clientForm: {
       // id: '',
-      name: '',
-      hometown: '',
-      email: '',
-      password: ''
-    }
+    name: '',
+    hometown: '',
+    email: '',
+    password: ''
   }
 
   handleClientOnChange = event => {
     this.setState({ 
-      [event.target.name]: event.target.value, },
-    () => {console.log('wa ha input state', this.state.clientForm)}
-    )
+      [event.target.name]: event.target.value
+    })
   }
-
+    
   handleClientOnSubmit = event => {
     event.preventDefault()
-    const client = {...this.state.clientForm, id: uuid()}
+    const client = {...this.state, id: uuid()}
+    
+    console.log('wa ha input state', this.state)
     this.props.addClient(client)
     // this.props.deleteUser(client)      
     

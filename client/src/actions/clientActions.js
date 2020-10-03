@@ -1,7 +1,8 @@
 
 export function addClient(client) {
   // const client = ({...this.state.clientForm, id: uuid()})
-  
+  console.log('Client from actions', client)
+
   return (dispatch) => {
 
     const configClient = {
@@ -9,7 +10,6 @@ export function addClient(client) {
       headers: {
         "Content-Type": "application/json"
       },
-      credentials: 'include',
       body: JSON.stringify({
         client: client
       })
@@ -23,9 +23,7 @@ export function addClient(client) {
       } 
       else {
         dispatch({ type: 'ADD_CLIENT', client: clientJSON})
-        this.props.addClient(client)
-        this.setState(
-          { client: clientJSON.client })
+
       }
     })
     .catch(console.log)   
@@ -33,4 +31,4 @@ export function addClient(client) {
 
 }
 
-// export default addClient
+export default addClient

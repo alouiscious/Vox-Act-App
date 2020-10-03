@@ -3,28 +3,27 @@ import React, { Component } from 'react';
 class Login extends Component {
 
   state = {
-    currentUser: null,
-    loginForm: {
-      email: "",
-      password: ""
-    }
+    email: "",
+    password: ""
+    
   }
 
   handleLoginInputChange = event => {
     this.setState({ 
-      [event.target.name]: event.target.value, },
-    () => {console.log('this is state', this.state.loginForm)}
-    )
+      [event.target.name]: event.target.value
+    })
   }
-
+    
   handleLoginOnSubmit = event => {
     event.preventDefault()
-    const user = { ...this.state.loginForm }
+    const user = this.state
+    
+    console.log('this is state', this.state)
     this.props.loginUser(user)
-  
+
     this.setState({
-        email: "",
-        password: ""
+      email: "",
+      password: ""
     })
   }
   

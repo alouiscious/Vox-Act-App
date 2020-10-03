@@ -23,9 +23,9 @@ function clientReducer(state = [], action) {
         password: action.password
       }
       console.log('from manage', client)
-      return({...state, client
+      return{...state, client
         // ...state, clients: [...state.clients, action.client, client]
-      })
+      }
     
     case 'REMOVE_CLIENT':
       idx = state.clients.findIndex(client => client.id === action.id)

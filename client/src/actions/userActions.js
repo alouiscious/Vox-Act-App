@@ -1,6 +1,6 @@
 
 export const loginUser = (user) => {
-  // const user = { ...this.state.loginForm}
+console.log('User from actions', user)
 
   return (dispatch) => {
     
@@ -14,6 +14,7 @@ export const loginUser = (user) => {
         user: user
       })
     }
+    
     dispatch({ type: 'LOADING_USER'})
     fetch("http://localhost:3000/login", configUser)
     .then(resp => resp.json())
@@ -23,10 +24,7 @@ export const loginUser = (user) => {
       } 
       else {
         dispatch({ type: 'LOGIN_USER', user: userJSON})
-        this.props.loginUser(user)
-        this.setState({
-          currentUser: userJSON.user,
-        })
+
       }
     })
     .catch(console.log)  
