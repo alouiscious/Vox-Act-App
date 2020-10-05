@@ -22,7 +22,7 @@ function clientReducer(state = [], action) {
         hometown: action.hometown, 
         password: action.password
       }
-      console.log('from manage', client)
+      console.log('client from manage', client)
       return{...state, client
         // ...state, clients: [...state.clients, action.client, client]
       }
@@ -37,6 +37,14 @@ function clientReducer(state = [], action) {
           ]
         }
       )
+
+      case 'LOADING_USER':
+        return { ...state}
+  
+      case 'LOGIN_USER':
+        return {user: action.user}
+  
+
     default:
       return state
   }

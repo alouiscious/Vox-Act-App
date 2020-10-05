@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import ClientInput from './clients/ClientInput'
-import Clients from "./clients/Clients";
+import ClientInput from './ClientInput'
+import Clients from "./Clients";
+import Talents from "../talents/Talents";
 // import { Route } from 'react-router-dom';
 import { connect } from "react-redux";
 
@@ -17,8 +18,10 @@ class ClientPage extends Component {
     <li key={index}>
       {client.name},{client.hometown}
       {client.email}
+
     </li>)
     
+    console.log('wa ha talent props', this.props)
 
   return (
       <div>
@@ -35,7 +38,8 @@ class ClientPage extends Component {
             {clients}
           </ul>
 
-    
+          <button onClick={this.handleOnClick}> Remove Talent</button>
+
 
         </div>
       )
