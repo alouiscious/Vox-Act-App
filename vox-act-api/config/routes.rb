@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#delete'
   get 'get_current_user', to: 'sessions#get_current_user'
+  
   resources :clients
   post '/client', to: 'clients#create'
+  get '/clients', to: 'clients#index'
+  get '/client', to: 'clients#show'
   resources :talents
   resources :agents
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
