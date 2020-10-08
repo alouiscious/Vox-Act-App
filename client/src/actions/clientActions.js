@@ -4,7 +4,6 @@ export function addClient(client) {
   console.log('Client from actions', client)
 
   return (dispatch) => {
-
     const configClient = {
       method: "POST",
       headers: {
@@ -23,38 +22,29 @@ export function addClient(client) {
       } 
       else {
         dispatch({ type: 'ADD_CLIENT', client: clientJSON})
-        dispatch({ type: 'LOGIN_USER', user: clientJSON})
+        dispatch({ type: 'ADD_USER', user: clientJSON})
       }
     })
     .catch(console.log)   
   }
-
 }
+
+
 
 export function getClients(clients) {
   // const client = ({...this.state.clientForm, id: uuid()})
-  console.log('Client from actions', clients)
 
   return (dispatch) => {
-
-    const configClient = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        clients: clients
-      })
-    }
-    
-    fetch("http://localhost:3000/clients", configClient)
+    fetch("http://localhost:3000/clients")
     .then(resp => resp.json())
     .then(clientJSON => {
       if (clientJSON.error) {
         alert("Already a Vox Act Client")
       } 
       else {
-        dispatch({ type: 'GET_CLIENT', clients: clientJSON})
+        dispatch({ type: 'GET_CLIENTS', clients: clientJSON.clients})
+        console.log('Client from actions', clients)
+
       }
     })
     .catch(console.log)   

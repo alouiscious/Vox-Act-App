@@ -19,19 +19,21 @@ class ClientInput extends Component {
     
   handleClientOnSubmit = event => {
     event.preventDefault()
-    const client = {...this.state, id: uuid()}
-    const user = {...this.state}
     console.log('wa ha input client', this.state)
+    const client = {...this.state, id: uuid()}
     this.props.addClient(client)
-    // this.props.deleteUser(client)      
-    this.props.loginUser(user)
+
+    const user = ({email: this.state.email, password: this.state.password})
+    this.props.addUser(user)
+
     this.setState({
+      id: '',
       name: '', 
       hometown: '', 
       email: '', 
       password: '' 
     })
-    
+
   }
 
 

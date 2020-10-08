@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   clients: clientReducer,
-  users: userReducer
+  users: userReducer,
   // talents: talentsReducer
   // talentCounts: talentCountReducer
 })
@@ -38,13 +38,17 @@ function clientReducer(state = [], action) {
         }
       )
 
-      case 'LOADING_USER':
-        return { ...state}
-  
-      case 'LOGIN_USER':
-        return {user: action.user}
-  
+      
+    case 'LOADING_USER':
+      return { ...state, loading: true}
 
+    case 'LOGIN_USER':
+      return {user: action.user, loggedIn: true, loading: false}
+
+
+    case 'LOGIN_ERROR':
+        return {...state, loginError: action.loginError}
+        
     default:
       return state
   }
@@ -74,7 +78,6 @@ function clientReducer(state = [], action) {
 // }
 
 
-
 function userReducer (state={user: {}, loggedIn: false, loading: false}, action) {
   switch(action.type) {
 
@@ -84,15 +87,22 @@ function userReducer (state={user: {}, loggedIn: false, loading: false}, action)
     case 'LOGIN_USER':
       return {user: action.user, loggedIn: true, loading: false}
 
-      // const user = {
-      //   id: action.id, 
-      //   email: action.email,
-      //   password: action.password
-      // }
-      // return({ user: action.user,
-      //   ...state, loading: false, loggedIn: true,
-      //   users: [ ...state.users, action.user, user ]
-      // })
+
+    case 'LOGIN_ERROR':
+        return {...state, loginError: action.error}
+     
+    const user = ({
+      id: action.id, 
+      name: action.name,
+      hometown: action.hometown,
+      email: action.email,
+      password: action.password
+    })
+
+      return({ user: action.user,
+        ...state, loading: false, loggedIn: true,
+        users: [ ...state.users, action.user, user ]
+      })
     
     case 'REMOVE_USER':
       const removalIndex = state.users.findIndex(user => user.id === action.id)

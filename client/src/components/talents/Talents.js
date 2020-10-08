@@ -1,30 +1,38 @@
-import React, { Component } from "react";
-import Talent from './Talent'
+import React from "react";
+import { getTalents } from "../../actions/talentActions";
+import { getClients } from "../../actions/clientActions";
 
-class Talents extends Component {
-  
-  render() {
-    const { talents, clientId, deleteTalent } = this.props
-    const associatedTalents = Talents.filter(talent => talent.clientId === clientId)
-    const talentList = associatedTalents.map((talent, index) => {
-    // const talentList = talents.map(talent => {(talent.clientId === clientId), talent, index
-        return (
-        <Talent 
-          key={index} 
-          talent={talent} 
-          deleteTalent={deleteTalent} 
-        />
-      )
-    })
 
+const Talents = () => {
+  const clients = {getClients}
+  const { talents, deleteTalent } = {getTalents}
+    // const associatedTalents = talents.filter_by(talent => 
+    //   talent.client.id === this.props.client.id
+    //   )
+    // const clientTalents = associatedTalents.map(talent => {
+    //     (talent.clientId === this.props.clientId), 
+    //     talent, 
+    //     index
     return (
       <div>
+        <h1> Talents List</h1>
+      {clients.map((client, index) => 
+      <div key={index}> 
+        
+        <h4> Client: {client.name}, {client.hometown}</h4>
+        <p>Talents:</p>
         <ul>
-          {talentList}
-        </ul>
+              {client.talents.map((talent, index) => 
+                  <li key={index}>{talent}
+                    <button type="text" value={deleteTalent}>Delete Talent</button> 
+                  </li>
+              )}
+          </ul>
       </div>
-    )
-  }
-
+      )}
+    </div>
+  )
+  
 }
+
 export default Talents

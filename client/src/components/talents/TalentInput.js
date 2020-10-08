@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import {v4 as uuid} from 'uuid'
+import { getClients } from "../../actions/clientActions";
 
 class TalentInput extends Component {
   state = {
-    talent_style: '', 
-    client_name: '', 
-    client_id: '', 
+    talentStyle: '', 
+    clientName: '', 
+    clientId: '', 
     title: '', 
-    media_URL: ''
+    mediaURL: ''
     // mfid:
   }
   
   handleTalentOnChange = event => {
     console.log('client current', this.session.id, this.client.client.id)
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      clientName: this.client.client.clientName,
+      clientId: this.client.client.id
     })
   }
 

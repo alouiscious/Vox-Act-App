@@ -5,6 +5,11 @@ import { connect } from "react-redux";
 
 class Talent extends Component {
 
+  componentDidMount(){
+    this.props.getClients()
+    // this.props.getTalents()
+  }
+
   handleDeleteOnClick = () => {
     this.props.deleteTalent(this.props.talent.id)
   }
@@ -12,9 +17,9 @@ class Talent extends Component {
   render() {
     let talents = this.props.talents.map((talent, index) =>
     <li key={index}>
-    {talent.talent_style} 
-    {talent.client_name} 
-    {talent.client_id} 
+    {talent.talentStyle} 
+    {talent.client.clientName} 
+    {talent.client.id} 
     {talent.title} 
     {talent.media_URL}
     {talent.mfid}
@@ -46,10 +51,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addTalent: ({ 
-    id, talent_style, client_name, client_id, title, media_URL, mfid
+    id, talentStyle, clientName, clientId, title, mediaURL, mfid
   }) => dispatch({
     type: 'ADD_TALENT',
-    id, talent_style, client_name, client_id, title, media_URL, mfid
+    id, talentStyle, clientName, clientId, title, mediaURL, mfid
   }),
   deleteTalent: id => dispatch({type: 'DELETE_TALENT', id})
 })
