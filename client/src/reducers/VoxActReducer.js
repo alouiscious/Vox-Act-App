@@ -4,7 +4,7 @@ import { combineReducers } from "redux";
 const rootReducer = combineReducers({
   clients: clientReducer,
   users: userReducer,
-  // talents: talentsReducer
+  talents: talentsReducer
   // talentCounts: talentCountReducer
 })
 
@@ -18,12 +18,12 @@ function clientReducer(state = [], action) {
         id: action.id,
         name: action.name, 
         email: action.email, 
-        
+        photo: action.photo,
         hometown: action.hometown, 
         password: action.password
       }
       console.log('client from manage', client)
-      return{...state, client
+      return {...state, client
         // ...state, clients: [...state.clients, action.client, client]
       }
     
@@ -54,56 +54,60 @@ function clientReducer(state = [], action) {
   }
 }
 
-// function talentsReducer(state = [], action) {
-//   let idx
+function talentsReducer(state = [], action) {
+  let idx
 
-//   switch (action.type) {
-//     case 'ADD_TALENT':
-//       return [
-//         ...state, 
-//         action.talent
-//       ]
+  switch (action.type) {
+    case 'ADD_TALENT':
+      const talent = {
+        talent_style: action.talent_style,
+        client_name:  action.client_name,
+        client_id:  action.client_id,
+        mfid: action.mfid,
+        media_URL:  action.media_URL,
+        title:  action.title
+      }
+      return [
+        ...state, talent
+      ]
   
-//     case 'REMOVE_TALENT':
-//       idx = state.findIndex(talent => talent.id === action.id)
-//       return [
-//         ...state.slice(0, idx), 
-//         ...state.slice(idx + 1)
-//       ]
+    case 'REMOVE_TALENT':
+      idx = state.talents.findIndex(talent => talent.id === action.id)
+      return [
+        ...state.talents.slice(0, idx), 
+        ...state.talents.slice(idx + 1)
+      ]
 
   
-//     default:
-//       return state
-//   }
-// }
+    default:
+      return state
+  }
+}
 
 
 function userReducer (state={user: {}, loggedIn: false, loading: false}, action) {
   switch(action.type) {
-
+ 
     case 'LOADING_USER':
       return { ...state, loading: true}
 
     case 'LOGIN_USER':
-      return {user: action.user, loggedIn: true, loading: false}
-
-
-    case 'LOGIN_ERROR':
-        return {...state, loginError: action.error}
-     
-    const user = ({
-      id: action.id, 
-      name: action.name,
-      hometown: action.hometown,
-      email: action.email,
-      password: action.password
-    })
-
-      return({ user: action.user,
-        ...state, loading: false, loggedIn: true,
+      const user = ({
+        id: action.id, 
+        name: action.name,
+        hometown: action.hometown,
+        email: action.email,
+        password: action.password
+      })
+      return ({
+        user: action.user, loggedIn: true, loading: false,
+        ...state, 
         users: [ ...state.users, action.user, user ]
       })
-    
+
+    case 'LOGIN_ERROR':
+      return ({...state, loginError: action.error})
+
     case 'REMOVE_USER':
       const removalIndex = state.users.findIndex(user => user.id === action.id)
       return (

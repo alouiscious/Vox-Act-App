@@ -1,43 +1,34 @@
 import React, { Component } from "react";
-// import {
-  //   BrowserRouter as Router,
-  //   Redirect,
-  //   Route
-  // } from 'react-router-dom';
 import Login from '../components/users/Login'
 import ClientInput from '../components/clients/ClientInput'
-import ClientPage from '../components/clients/ClientPage';
-// import TalentInput from '../components/talents/Talents'
 import { getClients, addClient } from "../actions/clientActions";
-import { addTalent, getTalents } from "../actions/talentActions";
+import { getTalents } from "../actions/talentActions";
 import { addUser, loginUser } from "../actions/userActions";
 import { connect } from "react-redux";
 
 class VoxAct extends Component {
 
-  componentDidMount(){
-     
+  componentDidMount() {
     this.props.getClients()
-    // this.props.getTalents()
+    this.props.getTalents()
   }
 
   render() {
-
     return(
       <div className="VoxActHome">
-                <ClientInput 
-                  addClient={this.props.addClient} 
-                  addUser={this.props.addUser}
-                  loginUser={this.props.loginUser} 
-                />
-                <br />
-                {this.props.error ? <p>{this.props.error}</p> : null}
-                <Login 
-                  loginUser={this.props.loginUser} 
-                />
-                {/* <TalentInput 
-                  addTalent={this.props.addTalent} 
-                /> */}
+        <ClientInput 
+          addUser={this.props.addUser}
+          addClient={this.props.addClient} 
+          loginUser={this.props.loginUser} 
+        />
+        <br />
+          <Login
+            loginUser={this.props.loginUser} 
+          />
+
+
+                
+
       </div>
     )
   }
@@ -57,4 +48,4 @@ const mapStateToProps = state => {
 // }
 
 
-export default connect(mapStateToProps, { addClient, addUser, loginUser, getClients, addTalent, getTalents })(VoxAct)
+export default connect(mapStateToProps, { addClient, addUser, loginUser, getClients, getTalents })(VoxAct)

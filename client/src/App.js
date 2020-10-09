@@ -1,42 +1,25 @@
 import React from 'react';
-// import {
-//   BrowserRouter as Router, 
-//   Route, 
-//   Link,
-  
-//   useParams,
-//   useRouteMatch
-// } from 'react-router-dom';
-
-// import NavBar from './components/Navbar';
 import logo from './logo.jpg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import Clients from "./components/clients/Clients";
+import ClientPage from './components/clients/ClientPage';
 import VoxAct from './containers/VoxAct'
 
 function App() {
   return (
     <div className="App">
-      {/* <Router>
-          <Sidebar>
-            {talents ? (talents.map(talent => (
-              <SidebarItem key={talent.client.id}>
-                <Link to={ClientPage}> 
-                  view {client.name}
-                </Link>
-              </SidebarItem>
-            ))
-            ) : (<div> loading...</div>)}
-            <SidebarItem>
-              <Link to={VoxActHome}>Log In</Link>
-
-            </SidebarItem>
-          </Sidebar>
-        <NavBar />
-      </Router> */}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div>
-          <VoxAct />
+          <Router>
+            <Route exact path="/" component={VoxAct} />
+            <Route path="/clients" components={Clients} />
+            <Route path="/clients/:id" component={ClientPage} />            
+          </Router>
         </div>
             <a
             className="App-link"
