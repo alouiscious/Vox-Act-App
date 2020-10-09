@@ -9,6 +9,7 @@ class ClientInput extends Component {
     hometown: '',
     email: '',
     password: ''
+    
   }
 
   handleClientOnChange = event => {
@@ -20,7 +21,7 @@ class ClientInput extends Component {
   handleClientOnSubmit = event => {
     event.preventDefault()
     console.log('wa ha input client', this.state)
-    const client = {...this.state, id: uuid()}
+    const client = (this.state, {id: uuid()})
     this.props.addClient(client)
 
     const user = ({email: this.state.email, password: this.state.password})
@@ -35,7 +36,6 @@ class ClientInput extends Component {
     })
 
   }
-
 
   render() {
     return (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ClientInput from './ClientInput'
 import Clients from "./Clients";
-// import Talents from "../talents/Talents";
+import Talents from "../talents/Talents";
 // import { Route } from 'react-router-dom';
 import { connect } from "react-redux";
 
@@ -15,12 +15,12 @@ class ClientPage extends Component {
 
   render(){
 
-     let clients = this.props.clients.map((client, index) => 
-      <li key={index}>
-        {client.name},{client.hometown}
-        {client.email}
-      </li>
-      )
+    //  let clients = this.props.clients.map((client, index) => 
+    //   <li key={index}>
+    //     {client.name},{client.hometown}
+    //     {client.email}
+    //   </li>
+    //   )
     
     console.log('wa ha talent props', this.props)
 
@@ -34,11 +34,10 @@ class ClientPage extends Component {
                 deleteClient={this.props.deleteClient}
               />
         
-          Client Count: {this.props.numberOfClients}
-          <ul>
-            {clients}
-          </ul>
-
+ 
+                <Talents
+                  addTalent={this.props.addTalent} 
+                />
 
           <button onClick={this.handleOnClick}> Remove Talent</button>
 

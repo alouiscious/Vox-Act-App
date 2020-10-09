@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      render json: @clientPage, status: :created, location: @clientPage
+      render json: @client, status: :created, location: @client
     else
       render json: @client.errors, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:name, :hometown, :email, :password)
+      params.require(:client).permit(:name, :hometown, :email, :photo, :password)
     end
 
     

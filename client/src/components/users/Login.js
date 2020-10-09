@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { loginUser } from "../../actions/userActions";
+
 
 class Login extends Component {
 
@@ -19,7 +21,7 @@ class Login extends Component {
     const user = this.state
     
     console.log('this is state', this.state)
-    this.props.loginUser(user)
+    loginUser(user)
 
     this.setState({
       email: "",
@@ -58,6 +60,7 @@ class Login extends Component {
               value="Login"
             />
           </form>
+
         </div>
       )
     }
