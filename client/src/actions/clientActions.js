@@ -1,5 +1,6 @@
+const CLIENTURL = "http://localhost:3000/clients"
 
-export function addClient(client) {
+export const addClient = (client) => {
   
   console.log('Client from actions', client)
 
@@ -7,22 +8,21 @@ export function addClient(client) {
     const configClient = {
       method: "POST",
       headers: {
-        "Content-Type": "application/on"
+        "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify({
-        client: {client}
+        client: client
       })
     }
     
-    fetch("http://localhost:3000/clients", configClient)
+    fetch(CLIENTURL, configClient)
     .then(resp => resp.json())
     .then(clientJSON => {
+      dispatch({ type: 'ADD_CLIENT', client: clientJSON})
       if (clientJSON.error) {
-        alert("Already a Vox Act Client")
+        alert("Vox Act client creation not complete. - Please try again.")
       } 
-      else {
-        dispatch({ type: 'ADD_CLIENT', client: clientJSON})
-      }
     })
     .catch(console.log)   
   }
@@ -31,7 +31,7 @@ export function addClient(client) {
 
 export function getClients(clients) {
   return (dispatch) => {
-    fetch("http://localhost:3000/clients")
+    fetch(CLIENTURL)
     .then(resp => resp.json())
     .then(clientJSON => {
       dispatch({ type: 'GET_CLIENTS', clients: clientJSON.clients})

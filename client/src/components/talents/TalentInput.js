@@ -65,8 +65,8 @@ class TalentInput extends Component {
                 name="clientName"
                 id="clientName"
                 onChange={this.handleTalentOnChange}
-                value={this.client.id.name}
-                placeholder={this.client.id.name}
+                value={this.client.id.clientName}
+                placeholder={this.client.id.clientName}
               />
 
             </div>

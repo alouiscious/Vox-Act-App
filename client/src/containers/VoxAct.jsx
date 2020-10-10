@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 class VoxAct extends Component {
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.props.getClients()
     this.props.getTalents()
   }

@@ -4,11 +4,12 @@ import {v4 as uuid} from 'uuid'
 class ClientInput extends Component {
 
   state = {
-      // id: '',
-    name: '',
+    clientName: '',
     hometown: '',
     email: '',
-    password: ''
+    password: '',
+    cpid: '',
+    photo: ''
     
   }
 
@@ -21,18 +22,20 @@ class ClientInput extends Component {
   handleClientOnSubmit = event => {
     event.preventDefault()
     console.log('wa ha input client', this.state)
-    const client = (this.state, {id: uuid()})
+    const client = (this.state.client, {cpid: uuid()})
     this.props.addClient(client)
 
     const user = ({email: this.state.email, password: this.state.password})
     this.props.addUser(user)
-
+    
     this.setState({
       id: '',
-      name: '', 
+      clientName: '', 
       hometown: '', 
       email: '', 
-      password: '' 
+      password: '',
+      cpid: '',
+      photo: ''
     })
 
   }
@@ -40,15 +43,15 @@ class ClientInput extends Component {
   render() {
     return (
       <div className="Client">
-        New clients, create and account here
+        New clients, create an account here
       
         <form onSubmit={this.handleClientOnSubmit}>
           <input
             type="text" 
-            name="name"
-            id="name"
+            name="clientName"
+            id="clientName"
             onChange={this.handleClientOnChange}
-            value={this.state.name}
+            value={this.state.clientName}
             placeholder="Enter Your Full Name"
           />
           <br />
@@ -80,6 +83,15 @@ class ClientInput extends Component {
             placeholder="password"
           />
 
+          <br />
+          <input
+            type="file"
+            name="photo"
+            id="photo"
+            onChange={this.handleClientOnChange}
+            value={this.state.photo}
+            placeholder="Add a Bio Photo"
+          />
           <br />
 
           <input 

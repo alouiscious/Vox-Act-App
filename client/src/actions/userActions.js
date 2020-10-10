@@ -15,7 +15,8 @@ export const addUser = (user) => {
         })
       }
       
-      // dispatch({ type: 'LOADING_USER'})
+      dispatch({ type: 'LOADING_USER'})
+      
       fetch("http://localhost:3000/users", configUser)
       .then(resp => resp.json())
       .then(userJSON => {

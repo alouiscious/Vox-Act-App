@@ -18,7 +18,7 @@ function App() {
           <Router>
             <Route exact path="/" component={VoxAct} />
             <Route path="/clients" components={Clients} />
-            <Route path="/clients/:id" component={ClientPage} />            
+            <Route path="/clients/id" component={ClientPage} /> 
           </Router>
         </div>
             <a
@@ -30,7 +30,7 @@ function App() {
             <span role="img" alt="copyright"> 
               <label name="copyright">
               </label>
-              © ℗1994-2020 Alouiscious Media™️
+              ©℗ 1994-2020 Alouiscious Media™️
             </span>
               </a>
         </header>

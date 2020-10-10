@@ -17,7 +17,7 @@ class ClientPage extends Component {
 
     //  let clients = this.props.clients.map((client, index) => 
     //   <li key={index}>
-    //     {client.name},{client.hometown}
+    //     {client.clientName},{client.hometown}
     //     {client.email}
     //   </li>
     //   )
@@ -54,10 +54,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addClient: ({id, name, hometown, email, password}) => dispatch({
+  addClient: ({id, clientName, hometown, email, password}) => dispatch({
     type: 'ADD_CLIENT', 
     id, 
-    name, 
+    clientName, 
     hometown, 
     email,
     password

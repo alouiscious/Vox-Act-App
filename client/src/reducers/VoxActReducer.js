@@ -16,11 +16,11 @@ function clientReducer(state = [], action) {
     case 'ADD_CLIENT':
       const client = {
         id: action.id,
-        name: action.name, 
-        email: action.email, 
-        photo: action.photo,
+        clientName: action.clientName, 
         hometown: action.hometown, 
-        password: action.password
+        email: action.email, 
+        password: action.password,
+        photo: action.photo,
       }
       console.log('client from manage', client)
       return {...state, client
@@ -93,9 +93,6 @@ function userReducer (state={user: {}, loggedIn: false, loading: false}, action)
 
     case 'LOGIN_USER':
       const user = ({
-        id: action.id, 
-        name: action.name,
-        hometown: action.hometown,
         email: action.email,
         password: action.password
       })
