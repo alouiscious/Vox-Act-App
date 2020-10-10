@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2020_10_02_022042) do
     t.string "name"
     t.string "hometown"
     t.string "email"
+    t.string "password"
+    t.string "cpid"
     t.string "photo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
