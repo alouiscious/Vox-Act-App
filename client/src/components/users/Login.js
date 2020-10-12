@@ -25,7 +25,8 @@ class Login extends Component {
     })
     
     console.log('this is state', this.state)
-    this.props.loginUser(user).then( () => {
+    this.props.loginUser(user)
+    .then( () => {
       this.props.history.push('/ClientPage')
     })
 

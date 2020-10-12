@@ -38,9 +38,11 @@ class ClientInput extends Component {
       password: this.state.password
     })
 
-    this.props.addClient(client).then( () => {
+    this.props.addClient(client)
+    .then( () => {
       return this.props.addUser(user)
-    }).then(() => {
+    })
+    .then(() => {
       this.props.history.push('/ClientPage')
     })
     
