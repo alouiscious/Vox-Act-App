@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       userObj = {
         id: user.id,
         username: user.username,
-        email: user.email
+        email: user.email,
         token: token
       }
       # render json: @user
