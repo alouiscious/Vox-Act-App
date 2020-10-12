@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import {v4 as uuid} from 'uuid'
+import { connect } from "react-redux";
+import { addUser } from "../../actions/userActions";
+import { addClient } from "../../actions/clientActions";
 
 class ClientInput extends Component {
 
   state = {
-    clientName: '',
+    client_name: '',
     hometown: '',
     email: '',
     password: '',
@@ -22,21 +25,34 @@ class ClientInput extends Component {
   handleClientOnSubmit = event => {
     event.preventDefault()
     console.log('wa ha input client', this.state)
-    const client = (this.state.client, {cpid: uuid()})
-    this.props.addClient(client)
+    const client = ({
+      clientName: this.state.client_name,
+      hometown: this.state.hometown, 
+      email: this.state.email,
+      cpid: uuid(),
+      photo: this.state.photo
+    })     
+    
+    const user = ({
+      email: this.state.email, 
+      password: this.state.password
+    })
 
-    const user = ({email: this.state.email, password: this.state.password})
-    this.props.addUser(user)
+    this.props.addClient(client).then( () => {
+      return this.props.addUser(user)
+    }).then(() => {
+      this.props.history.push('/ClientPage')
+    })
     
     this.setState({
-      id: '',
-      clientName: '', 
+      client_name: '', 
       hometown: '', 
       email: '', 
       password: '',
       cpid: '',
       photo: ''
     })
+    
 
   }
 
@@ -48,10 +64,10 @@ class ClientInput extends Component {
         <form onSubmit={this.handleClientOnSubmit}>
           <input
             type="text" 
-            name="clientName"
+            name="client_name"
             id="clientName"
             onChange={this.handleClientOnChange}
-            value={this.state.clientName}
+            value={this.state.client_name}
             placeholder="Enter Your Full Name"
           />
           <br />
@@ -104,4 +120,4 @@ class ClientInput extends Component {
   }
 }
 
-export default ClientInput
+export default connect(null, {addClient, addUser})(ClientInput);

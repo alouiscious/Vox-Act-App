@@ -1,13 +1,11 @@
 import React from 'react';
 import logo from './logo.jpg';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
-import Clients from "./components/clients/Clients";
-import ClientPage from './components/clients/ClientPage';
+import { BrowserRouter as Router,
+  Route } from "react-router-dom";
 import VoxAct from './containers/VoxAct'
+import ClientInput from "./components/clients/ClientInput";
+import Login from './components/users/Login';
 
 function App() {
   return (
@@ -16,9 +14,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <div>
           <Router>
-            <Route exact path="/" component={VoxAct} />
-            <Route path="/clients" components={Clients} />
-            <Route path="/clients/id" component={ClientPage} /> 
+            <Route exact path="/" component={VoxAct}/>
+            <Route path="/ClientInput" component={ClientInput}/>
+            <Route path="/Login" component={Login}/>
           </Router>
         </div>
             <a

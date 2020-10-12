@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { loginUser } from "../../actions/userActions";
+import { connect } from "react-redux";
+import { loginUser } from '../../actions/userActions';
 
 
 class Login extends Component {
@@ -18,10 +19,15 @@ class Login extends Component {
     
   handleLoginOnSubmit = event => {
     event.preventDefault()
-    const user = this.state
+    const user = ({
+      email: this.state.email,
+      password: this.state.password
+    })
     
     console.log('this is state', this.state)
-    loginUser(user)
+    this.props.loginUser(user).then( () => {
+      this.props.history.push('/ClientPage')
+    })
 
     this.setState({
       email: "",
@@ -66,4 +72,4 @@ class Login extends Component {
     }
   }
 
-export default Login
+export default connect(null, {loginUser})(Login)

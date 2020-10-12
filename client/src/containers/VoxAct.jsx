@@ -17,18 +17,16 @@ class VoxAct extends Component {
     return(
       <div className="VoxActHome">
         <ClientInput 
+          history={this.props.history}
           addUser={this.props.addUser}
           addClient={this.props.addClient} 
           loginUser={this.props.loginUser} 
-        />
+          />
         <br />
           <Login
+            history={this.props.history}
             loginUser={this.props.loginUser} 
           />
-
-
-                
-
       </div>
     )
   }

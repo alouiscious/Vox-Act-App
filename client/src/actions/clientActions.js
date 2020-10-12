@@ -1,22 +1,22 @@
-const CLIENTURL = "http://localhost:3000/clients"
 
+const CLIENTURL = "http://localhost:3000/clients"
 export const addClient = (client) => {
   
-  console.log('Client from actions', client)
-
   return (dispatch) => {
     const configClient = {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      credentials: 'include',
       body: JSON.stringify({
         client: client
       })
     }
+    console.log('client from addClient (16)', client)
     
-    fetch(CLIENTURL, configClient)
+   dispatch({type: 'LOADING_CLIENT'})
+
+    return fetch(CLIENTURL, configClient)
     .then(resp => resp.json())
     .then(clientJSON => {
       dispatch({ type: 'ADD_CLIENT', client: clientJSON})
@@ -29,9 +29,9 @@ export const addClient = (client) => {
 }
 
 
-export function getClients(clients) {
+export const getClients = (clients) => {
   return (dispatch) => {
-    fetch(CLIENTURL)
+    return fetch(CLIENTURL)
     .then(resp => resp.json())
     .then(clientJSON => {
       dispatch({ type: 'GET_CLIENTS', clients: clientJSON.clients})

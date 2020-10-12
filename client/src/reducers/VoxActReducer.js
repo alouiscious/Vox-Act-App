@@ -13,20 +13,24 @@ function clientReducer(state = [], action) {
   let idx
 
   switch(action.type) {
-    case 'ADD_CLIENT':
+    
+    case 'LOADING_CLIENT':
       const client = {
-        id: action.id,
         clientName: action.clientName, 
         hometown: action.hometown, 
         email: action.email, 
         password: action.password,
-        photo: action.photo,
+        cpid: action.cpid,
+        photo: action.photo
       }
-      console.log('client from manage', client)
-      return {...state, client
+      return  [...state, client, {loading: true}]
+
+    case 'ADD_CLIENT':
+      console.log('client from manage', this.state.client)
+
+      return [...state, client]
         // ...state, clients: [...state.clients, action.client, client]
-      }
-    
+  
     case 'REMOVE_CLIENT':
       idx = state.clients.findIndex(client => client.id === action.id)
       return (
