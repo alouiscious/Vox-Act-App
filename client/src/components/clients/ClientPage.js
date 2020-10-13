@@ -12,21 +12,21 @@ class ClientPage extends Component {
     this.props.getClients()
     this.props.getTalents()
   }
-
   render(){
+    console.log('wa ha this from client page', this)
 
-    //  let clients = this.props.clients.map((client, index) => 
-    //   <li key={index}>
-    //     {client.clientName},{client.hometown}
-    //     {client.email}
-    //   </li>
-    //   )
+     let clientList = this.props.getClients.map((client, index) => 
+      <li key={index}>
+        {client.clientName},{client.hometown}
+        {client.email}
+      </li>
+      )
     
     console.log('wa ha talent props', this.props)
 
   return (
       <div>
-          <ClientInput addClient={this.props.addClient}/>
+          {/* <ClientInput addClient={this.props.addClient}/> */}
             
               <Clients
                 // clients={clients} 
@@ -35,7 +35,7 @@ class ClientPage extends Component {
               />
         
  
-                <Talents
+                <TalentInput
                   addTalent={this.props.addTalent} 
                 />
 

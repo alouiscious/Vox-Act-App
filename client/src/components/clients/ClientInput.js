@@ -26,7 +26,7 @@ class ClientInput extends Component {
     event.preventDefault()
     console.log('wa ha input client', this.state)
     const client = ({
-      clientName: this.state.client_name,
+      client_name: this.state.client_name,
       hometown: this.state.hometown, 
       email: this.state.email,
       cpid: uuid(),

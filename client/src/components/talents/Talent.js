@@ -7,7 +7,7 @@ class Talent extends Component {
 
   componentDidMount(){
     this.props.getClients()
-    // this.props.getTalents()
+    this.props.getTalents()
   }
 
   handleDeleteOnClick = () => {

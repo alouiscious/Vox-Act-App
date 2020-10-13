@@ -22,7 +22,7 @@ const Talents = () => {
       {clients.map((client, index) => 
       <div> key={index} 
         
-        <h4> Client: {client.name}, {client.hometown}</h4>
+        <h4> Client: {client.client_name}, {client.hometown}</h4>
         <p>Talents:</p>
         <ul>
               {client.talents.map((talent, index) => 

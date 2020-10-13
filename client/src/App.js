@@ -17,6 +17,7 @@ function App() {
             <Route exact path="/" component={VoxAct}/>
             <Route path="/ClientInput" component={ClientInput}/>
             <Route path="/Login" component={Login}/>
+            
           </Router>
         </div>
             <a

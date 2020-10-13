@@ -11,8 +11,9 @@ class SessionsController < ApplicationController
       # render json: UserSerializer.new(user, {token: token})
       userObj = {
         id: user.id,
-        username: user.username,
+        # username: user.username,
         email: user.email,
+        password: user.password
         token: token
       }
       # render json: @user

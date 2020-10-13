@@ -62,7 +62,7 @@ class TalentInput extends Component {
             <div className="talentDetails">
               <input 
                 type="text" 
-                name="clientName"
+                name="client_name"
                 id="clientName"
                 onChange={this.handleTalentOnChange}
                 value={this.client.id.clientName}

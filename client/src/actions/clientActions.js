@@ -8,11 +8,12 @@ export const addClient = (client) => {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify({
         client: client
       })
     }
-    console.log('client from addClient (16)', client)
+    console.log('addClient from addClient (16)', client)
     
    dispatch({type: 'LOADING_CLIENT'})
 
@@ -35,7 +36,7 @@ export const getClients = (clients) => {
     .then(resp => resp.json())
     .then(clientJSON => {
       dispatch({ type: 'GET_CLIENTS', clients: clientJSON.clients})
-      console.log('Client from actions', clients)
+      console.log('getClient from actions', clientJSON)
     })
     .catch(console.log)   
   }
