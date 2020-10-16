@@ -5,8 +5,10 @@ class CreateClients < ActiveRecord::Migration[6.0]
       t.string :hometown
       t.string :email
       t.string :password
-      t.string :cpid
-      t.string :photo
+      t.string :upid
+      t.string :phmf
+      t.string :vimf
+      t.string :aumf
    
       t.timestamps
     end

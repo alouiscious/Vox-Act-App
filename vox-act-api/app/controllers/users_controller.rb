@@ -15,8 +15,8 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(email: params[:user][:email], password: params[:user][:password])
-    # @user = User.new(user_params)
+    # @user = User.new(email: params[:user][:email], password: params[:user][:password])
+    @user = User.new(user_params)
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -47,6 +47,8 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(
+        :user_name, :hometown, :email, :password, :upid, :upph, :talent_id
+      )
     end
 end

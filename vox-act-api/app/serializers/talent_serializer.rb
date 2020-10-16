@@ -1,3 +1,3 @@
 class TalentSerializer < ActiveModel::Serializer
-  attributes :id, :talent_style, :client_name, :client_id, :title, :media_URL, :mfid
+  attributes :id, :talent_style, :user_name, :upid, :title, :description, :media_URL, :phmf, :vimf, :aumf
 end
