@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
-
+import * as clientActions from "../actions/clientActions";
+// import * as talentActions from "../actions/talentActions";
+// import * as userActions from "../actions/userActions";
 
 const rootReducer = combineReducers({
   clients: clientReducer,
@@ -9,7 +11,12 @@ const rootReducer = combineReducers({
 })
 
 
-function clientReducer(state = [], action) {
+const initialState = {
+  clients: [],
+  loading: false, 
+  hasErrors: false,
+}
+function clientReducer(state = initialState, action) {
   let idx
 
   switch(action.type) {
@@ -24,6 +31,15 @@ function clientReducer(state = [], action) {
         photo: action.photo
       }
       return  [...state, client, {loading: true}]
+
+    case clientActions.GET_CLIENTS:
+      return {...state, loading: true}
+
+    case clientActions.GET_CLIENTS_SUCCESS:
+      return {clients: action.payload, loading: false, hasErrors: false}
+
+    case clientActions.CLIENT_ACTION_FAILURE:
+      return{...state, laoding: false, hasErrors: true}
 
     case 'ADD_CLIENT':
       console.log('client from manage', this.state.client)

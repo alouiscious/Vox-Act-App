@@ -1,55 +1,63 @@
-import React, { Component } from 'react'
-import ClientInput from './ClientInput'
-import Clients from "./Clients";
-import Talents from "../talents/Talents";
-// import { Route } from 'react-router-dom';
+import React from 'react'
+// import Clients from "./Clients";
+// import Talents from "../talents/Talents";
+import {Client} from "../clients/Client";
 import { connect } from "react-redux";
+// import { Link } from 'react-router-dom';
 
+// this.props.componentDidMount() (
+//   this.props.getClients(),
+//   this.props.getTalents()
+// )
 
-class ClientPage extends Component {
+const ClientPage = ({loading, clients, hasErrors}) => {
+  console.log('wa ha this from client page', clients)
 
-  componentDidMount(){
-    this.props.getClients()
-    this.props.getTalents()
-  }
-  render(){
-    console.log('wa ha this from client page', this)
-
-     let clientList = this.props.getClients.map((client, index) => 
-      <li key={index}>
-        {client.clientName},{client.hometown}
-        {client.email}
-      </li>
-      )
-    
-    console.log('wa ha talent props', this.props)
-
-  return (
-      <div>
-          {/* <ClientInput addClient={this.props.addClient}/> */}
-            
-              <Clients
-                // clients={clients} 
-                clients={this.props.clients}
-                deleteClient={this.props.deleteClient}
-              />
+  const renderClient = () => {
+    if (loading) return <p>Laoding Client...</p>
+    if (hasErrors) return <p>Unable to display Client.</p>
+   
+      return (
+        clients.map((client, id) => 
+             <Client key={client.id}
+              client={client.clientName /client.hometown}
+              email={client.email}
+              // deleteClient={deleteClient}
+            /> 
         
- 
-                <TalentInput
-                  addTalent={this.props.addTalent} 
-                />
-
-          <button onClick={this.handleOnClick}> Remove Talent</button>
-
-
-        </div>
+        // client.talents.map((talent, id) => (
+        //   <div>
+        //     <li key={id}>{talent}</li>),
+    
+        //     <Link to="/talents" className="button">
+        //       view talents
+        //     </Link>
+        //     <Link to="/talentInput"
+        //       addTalent={this.props.addTalent}>
+        //         add talent
+        //     </Link>
+        //     <button onClick={this.handleOnClick}> Remove Talent</button>
+        //     <Clients
+        //       clients={clients}
+        //     />
+        //   </div>
+        // ))
       )
-  } 
+    )
   }
+    
+    return (
+      <div>
+        {renderClient}
+      </div>
+    )
+}
 
-
+   
 const mapStateToProps = state => ({ 
+  loading: state.posts.loading,
   clients: state.clients,
+  hasErrors: state.clients.hasErrors,
   numberOfClients: state.clients.length
 })
 

@@ -2,9 +2,12 @@ import React from 'react';
 import logo from './logo.jpg';
 import './App.css';
 import { BrowserRouter as Router,
-  Route } from "react-router-dom";
+  Route, Switch
+} from "react-router-dom";
 import VoxAct from './containers/VoxAct'
 import ClientInput from "./components/clients/ClientInput";
+import ClientPage from './components/clients/ClientPage';
+import Clients from './components/clients/Clients';
 import Login from './components/users/Login';
 
 function App() {
@@ -14,10 +17,13 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <div>
           <Router>
-            <Route exact path="/" component={VoxAct}/>
-            <Route path="/ClientInput" component={ClientInput}/>
-            <Route path="/Login" component={Login}/>
-            
+            <Switch>
+              <Route exact path="/" component={VoxAct} />
+              <Route path="/ClientInput" component={ClientInput} />
+              <Route path="/Login" component={Login} />
+              <Route exact path="/ClientPage" component={ClientPage} />
+              <Route path="/Clients" component={Clients} />
+            </Switch>
           </Router>
         </div>
             <a

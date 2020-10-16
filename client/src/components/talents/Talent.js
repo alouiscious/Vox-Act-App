@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TalentInput from "./TalentInput";
-import Talents from "./Talents";
+import {Talents} from "./Talents";
 import { connect } from "react-redux";
 
 class Talent extends Component {
