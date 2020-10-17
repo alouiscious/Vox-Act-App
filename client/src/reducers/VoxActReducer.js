@@ -1,113 +1,24 @@
 import { combineReducers } from "redux";
-import * as clientActions from "../actions/clientActions";
-// import * as talentActions from "../actions/talentActions";
-// import * as userActions from "../actions/userActions";
+import talentsReducer from "./TalentsReducer";
+import userReducer from "./UserReducer";
+import usersReducer from "./UsersReducer";
 
 const rootReducer = combineReducers({
-  clients: clientReducer,
-  users: userReducer,
+  user: userReducer,
+  users: usersReducer,
+  login: loginReducer,
   talents: talentsReducer
-  // talentCounts: talentCountReducer
 })
 
 
 const initialState = {
-  clients: [],
   loading: false, 
   hasErrors: false,
+  users: [],
 }
-function clientReducer(state = initialState, action) {
-  let idx
-
+function loginReducer(state = initialState, action) {
   switch(action.type) {
-    
-    case 'LOADING_CLIENT':
-      const client = {
-        clientName: action.clientName, 
-        hometown: action.hometown, 
-        email: action.email, 
-        password: action.password,
-        cpid: action.cpid,
-        photo: action.photo
-      }
-      return  [...state, client, {loading: true}]
-
-    case clientActions.GET_CLIENTS:
-      return {...state, loading: true}
-
-    case clientActions.GET_CLIENTS_SUCCESS:
-      return {clients: action.payload, loading: false, hasErrors: false}
-
-    case clientActions.CLIENT_ACTION_FAILURE:
-      return{...state, laoding: false, hasErrors: true}
-
-    case 'ADD_CLIENT':
-      console.log('client from manage', this.state.client)
-
-      return [...state, client]
-        // ...state, clients: [...state.clients, action.client, client]
   
-    case 'REMOVE_CLIENT':
-      idx = state.clients.findIndex(client => client.id === action.id)
-      return (
-        {...state,
-          clients: [
-            ...state.clients.slice(0, idx),
-            ...state.clients.slice(idx + 1)
-          ]
-        }
-      )
-
-      
-    case 'LOADING_USER':
-      return { ...state, loading: true}
-
-    case 'LOGIN_USER':
-      return {user: action.user, loggedIn: true, loading: false}
-
-
-    case 'LOGIN_ERROR':
-        return {...state, loginError: action.loginError}
-        
-    default:
-      return state
-  }
-}
-
-function talentsReducer(state = [], action) {
-  let idx
-
-  switch (action.type) {
-    case 'ADD_TALENT':
-      const talent = {
-        talent_style: action.talent_style,
-        client_name:  action.client_name,
-        client_id:  action.client_id,
-        mfid: action.mfid,
-        media_URL:  action.media_URL,
-        title:  action.title
-      }
-      return [
-        ...state, talent
-      ]
-  
-    case 'REMOVE_TALENT':
-      idx = state.talents.findIndex(talent => talent.id === action.id)
-      return [
-        ...state.talents.slice(0, idx), 
-        ...state.talents.slice(idx + 1)
-      ]
-
-  
-    default:
-      return state
-  }
-}
-
-
-function userReducer (state={user: {}, loggedIn: false, loading: false}, action) {
-  switch(action.type) {
- 
     case 'LOADING_USER':
       return { ...state, loading: true}
 
@@ -139,22 +50,5 @@ function userReducer (state={user: {}, loggedIn: false, loading: false}, action)
         return state
   }
 }
-
-
-
-
-//  function manageAgents(state = {
-//   numberOfAgents: 0}, action){
-//   switch(action.type) {
-//     case 'INCREASE':
-//       return [{...state}, { 
-//         numberOfAgents: state.numberOfAgents + 1
-//       }]
-//     default:
-//       return state  
-//   }
-// }
-
-
 
 export default rootReducer
