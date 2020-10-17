@@ -4,32 +4,32 @@ import {v4 as uuid} from 'uuid'
 class TalentInput extends Component {
   state = {
     talentStyle: '', 
-    clientName: '', 
-    clientId: '', 
+    userName: '', 
+    userId: '', 
     title: '', 
     mediaURL: ''
     // mfid:
   }
   
   handleTalentOnChange = event => {
-    console.log('client current', this.session.id, this.client.client.id)
+    console.log('user current', this.session.id, this.user.user.id)
     this.setState({
       [event.target.name]: event.target.value,
-      clientName: this.client.client.clientName,
-      clientId: this.client.client.id
+      userName: this.user.user.userName,
+      userId: this.user.user.id
     })
   }
 
   handleTalentOnSubmit = event => {
     event.preventDefault()
-    const client = {client_id: this.client_id, client_name: this.client_name}
+    const user = {user_id: this.user_id, user_name: this.user_name}
     const talent = { ...this.state, mfid: uuid()}
     console.log('wa ha input talent', this.state)
-    this.props.addTalent(talent, client)
+    this.props.addTalent(talent, user)
     this.setState({
       talent_style: '', 
-      client_name: '', 
-      client_id: '', 
+      user_name: '', 
+      user_id: '', 
       title: '', 
       media_URL: ''
     })
@@ -62,11 +62,11 @@ class TalentInput extends Component {
             <div className="talentDetails">
               <input 
                 type="text" 
-                name="client_name"
-                id="clientName"
+                name="user_name"
+                id="userName"
                 onChange={this.handleTalentOnChange}
-                value={this.client.id.clientName}
-                placeholder={this.client.id.clientName}
+                value={this.user.id.userName}
+                placeholder={this.user.id.userName}
               />
 
             </div>

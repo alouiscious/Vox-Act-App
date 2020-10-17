@@ -27,9 +27,9 @@ const NavBar = () => {
 
       <NavLink 
         style={{ marginRight: '10px' }} 
-        to="/clients"
+        to="/users"
       >
-        Clients
+        Users
       </NavLink>
     </div>
   );

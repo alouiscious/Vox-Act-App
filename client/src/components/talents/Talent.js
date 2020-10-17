@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 class Talent extends Component {
 
   componentDidMount(){
-    this.props.getClients()
+    this.props.getUsers()
     this.props.getTalents()
   }
 
@@ -18,8 +18,8 @@ class Talent extends Component {
     let talents = this.props.talents.map((talent, index) =>
     <li key={index}>
     {talent.talentStyle} 
-    {talent.client.clientName} 
-    {talent.client.id} 
+    {talent.user.userName} 
+    {talent.user.id} 
     {talent.title} 
     {talent.media_URL}
     {talent.mfid}
@@ -51,10 +51,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addTalent: ({ 
-    id, talentStyle, clientName, clientId, title, mediaURL, mfid
+    id, talentStyle, userName, userId, title, mediaURL, mfid
   }) => dispatch({
     type: 'ADD_TALENT',
-    id, talentStyle, clientName, clientId, title, mediaURL, mfid
+    id, talentStyle, userName, userId, title, mediaURL, mfid
   }),
   deleteTalent: id => dispatch({type: 'DELETE_TALENT', id})
 })

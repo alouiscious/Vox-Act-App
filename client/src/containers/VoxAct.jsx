@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Login from '../components/users/Login'
-import ClientInput from '../components/clients/ClientInput'
-import { getClients, addClient } from "../actions/clientActions";
+import UserInput from '../components/users/UserInput'
+import { getUsers, addUser } from "../actions/userActions";
 import { getTalents } from "../actions/talentActions";
 import { addUser, loginUser } from "../actions/userActions";
 import { connect } from "react-redux";
@@ -9,17 +9,17 @@ import { connect } from "react-redux";
 class VoxAct extends Component {
 
   componentDidUpdate() {
-    this.props.getClients()
+    this.props.getUsers()
     this.props.getTalents()
   }
 
   render() {
     return(
       <div className="VoxActHome">
-        <ClientInput 
+        <UserInput 
           history={this.props.history}
           addUser={this.props.addUser}
-          addClient={this.props.addClient} 
+          addUser={this.props.addUser} 
           loginUser={this.props.loginUser} 
           />
         <br />
@@ -40,10 +40,10 @@ const mapStateToProps = state => {
 
 // const mapDispatchToProps = dispatch => {
 //   return {
-//     addClient: client => dispatch({ type: 'ADD_CLIENT', client}),
+//     addUser: user => dispatch({ type: 'ADD_CLIENT', user}),
 //     loginUser: user => dispatch({type: 'LOGIN_USER', user})
 //   }
 // }
 
 
-export default connect(mapStateToProps, { addClient, addUser, loginUser, getClients, getTalents })(VoxAct)
+export default connect(mapStateToProps, { addUser, addUser, loginUser, getUsers, getTalents })(VoxAct)

@@ -1,42 +1,12 @@
-const LOGINURL = "http://localhost:3000/login"
-
-export const loginUser = (user) => {
-  return (dispatch) => {
-    const configLogin = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        user: user
-      })
-    }
-    
-    dispatch({ type: 'LOADING_USER'})
-    return fetch(LOGINURL, configLogin)
-    .then(resp => resp.json())
-    .then(userJSON => {
-      if (userJSON.error) {
-        alert("Sorry. Not a Vox Act client? Sign up...")
-        dispatch({ type: 'LOGIN_ERROR', error: userJSON.error})
-      } 
-      else {
-        dispatch({ type: 'LOGIN_USER', user: userJSON})
-      }
-    })
-    .catch(console.log)  
-  }
-}
 
 const USERURL = "http://localhost:3000/users"
+
 export const ADD_USER = 'ADD_USERS'
 export const ADD_USER_SUCCESS = 'ADD_USERS_SUCCESS'
 
 export const addUser = (user) => {
   
-  return (dispatch) => {
-    
+  return async (dispatch) => {
     const configUser = {
       method: "POST",
       headers: {
@@ -47,10 +17,10 @@ export const addUser = (user) => {
         user: user
       })
     }
-    console.log('addUser from userActions (50)', user)
-      
-    dispatch({ type: 'LOADING_USER'})
-      
+    console.log('addUser from addUser (16)', user)
+    
+   dispatch({type: 'LOADING_USER'})
+
     return fetch(USERURL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
@@ -59,7 +29,7 @@ export const addUser = (user) => {
         alert("Vox Act user creation not complete. - Please try again.")
       } 
     })
-    .catch(console.log)  
+    .catch(console.log) 
   }
 }
 
@@ -98,8 +68,4 @@ export function getUsers() {
 }
     
 
-export default {
-  loginUser,
-  getUsers, 
-  addUser, 
-}
+export default getUsers
