@@ -5,9 +5,10 @@ import { BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
 import VoxAct from './containers/VoxAct'
-import ClientInput from "./components/clients/ClientInput";
-import ClientPage from './components/clients/ClientPage';
-import Clients from './components/clients/Clients';
+import UserInput from "./components/users/UserInput";
+import UsersPage from './components/users/UsersPage';
+import Users from './components/users/Users';
+import User from "./components/users/User";
 import Login from './components/users/Login';
 
 function App() {
@@ -19,10 +20,11 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={VoxAct} />
-              <Route path="/ClientInput" component={ClientInput} />
+              <Route path="/UserInput" component={UserInput} />
               <Route path="/Login" component={Login} />
-              <Route exact path="/ClientPage" component={ClientPage} />
-              <Route path="/Clients" component={Clients} />
+              <Route exact path="/UsersPage" component={UsersPage} />
+              <Route exact path="/User" component={User} />
+              <Route path="/Users" component={Users} />
             </Switch>
           </Router>
         </div>

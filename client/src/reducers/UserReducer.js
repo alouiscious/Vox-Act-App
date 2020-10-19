@@ -4,7 +4,7 @@ import * as userActions from "../actions/userActions";
 const initialState = {
   loading: false, 
   hasErrors: false,
-  users: [],
+  user: [],
 }
 export default function userReducer(state = initialState, action) {
   let idx
@@ -18,9 +18,9 @@ export default function userReducer(state = initialState, action) {
         email: action.email, 
         password: action.password,
         upid: action.upid,
-        photo: action.upph
+        upph: action.upph
       }
-      return  [...state, user, {loading: true}]
+      return  {...state, user, loading: true}
 
     case userActions.GET_USER:
       return {...state, loading: true}
@@ -47,7 +47,12 @@ export default function userReducer(state = initialState, action) {
           ]
         }
       )
-  
+    
+    case userActions.ADD_USER_PHOTO:
+      const userPhoto = {upph: action.upph}
+
+      return [...state, userPhoto ]
+
     default:
       return state
   }

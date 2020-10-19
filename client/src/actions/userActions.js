@@ -1,5 +1,8 @@
 const LOGINURL = "http://localhost:3000/login"
 
+export const LOADING_USER = 'LOADING_USER'
+export const REMOVE_USER = 'LOADING_USER'
+
 export const loginUser = (user) => {
   return (dispatch) => {
     const configLogin = {
@@ -12,7 +15,6 @@ export const loginUser = (user) => {
         user: user
       })
     }
-    
     dispatch({ type: 'LOADING_USER'})
     return fetch(LOGINURL, configLogin)
     .then(resp => resp.json())
@@ -30,13 +32,13 @@ export const loginUser = (user) => {
 }
 
 const USERURL = "http://localhost:3000/users"
-export const ADD_USER = 'ADD_USERS'
-export const ADD_USER_SUCCESS = 'ADD_USERS_SUCCESS'
+const ADDUSER_URL = "http://localhost:3000/users/id"
+
+export const ADD_USER = 'ADD_USER'
+export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS'
 
 export const addUser = (user) => {
-  
   return (dispatch) => {
-    
     const configUser = {
       method: "POST",
       headers: {
@@ -47,11 +49,10 @@ export const addUser = (user) => {
         user: user
       })
     }
-    console.log('addUser from userActions (50)', user)
       
     dispatch({ type: 'LOADING_USER'})
       
-    return fetch(USERURL, configUser)
+    return fetch(ADDUSER_URL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
       dispatch({ type: 'ADD_USER', user: userJSON})
@@ -63,22 +64,22 @@ export const addUser = (user) => {
   }
 }
 
-export const GET_USERS = 'GET_USERS'
-export const fetchUsers = () => ({
-  type: GET_USERS,
+export const GET_USER = 'GET_USER'
+export const fetchUser = () => ({
+  type: GET_USER,
 })
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
+export const GET_USER_SUCCESS = 'GET_USERS_SUCCESS'
 export const getUserSuccess = (users) => ({
-  type: GET_USERS_SUCCESS,
+  type: GET_USER_SUCCESS,
   payload: users,
 })
-export const USER_ACTION_FAILURE = 'USER_ACTION_FAILURE'
+export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
 export const userActionFailure = () => ({
-  type: USER_ACTION_FAILURE,
+  type: GET_USER_FAILURE,
 })
 export function getUsers() {
   return async (dispatch) => {
-    dispatch(fetchUsers())
+    dispatch(fetchUser())
 
     try {
       fetch(USERURL)
@@ -97,9 +98,40 @@ export function getUsers() {
 
 }
     
+export const ADD_USER_PHOTO = 'ADD_USER_PHOTO'
+export const addUserPhoto = (userPhoto) => {
+  
+  return async (dispatch) => {
+    const configUser = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        userPhoto: userPhoto
+      })
+    }
+    console.log('addUser from addUser (16)', userPhoto)
+    
+   dispatch({type: 'LOADING_USERS'})
+
+    return fetch(ADDUSER_URL, configUser)
+    .then(resp => resp.json())
+    .then(userJSON => {
+      dispatch({ type: 'ADD_USER', user: userJSON})
+      if (userJSON.error) {
+        alert("Vox Act user creation not complete. - Please try again.")
+      } 
+    })
+    .catch(console.log) 
+  }
+}
+
 
 export default {
   loginUser,
   getUsers, 
   addUser, 
+  addUserPhoto,
 }

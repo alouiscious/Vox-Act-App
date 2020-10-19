@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import {v4 as uuid} from 'uuid'
 import { connect } from "react-redux";
-import { addUser } from "../../actions/userActions";
-import { addUser } from "../../actions/userActions";
+import { addUser, loginUser } from "../../actions/userActions";
 
 class UserInput extends Component {
 
@@ -11,8 +10,7 @@ class UserInput extends Component {
     hometown: '',
     email: '',
     password: '',
-    cpid: '',
-    photo: ''
+    upid: ''
     
   }
 
@@ -24,26 +22,27 @@ class UserInput extends Component {
     
   handleUserOnSubmit = event => {
     event.preventDefault()
-    console.log('wa ha input user', this.state)
     const user = ({
       user_name: this.state.user_name,
       hometown: this.state.hometown, 
       email: this.state.email,
-      cpid: uuid(),
-      photo: this.state.photo
-    })     
-    
-    const user = ({
-      email: this.state.email, 
+      upid: (uuid()),
       password: this.state.password
+    })     
+    console.log('wa ha input user', this.state)
+    
+    const login = ({
+      upid: this.state.upid,
+      password: this.state.password,
+      email: this.state.email, 
     })
 
     this.props.addUser(user)
     .then( () => {
-      return this.props.addUser(user)
+      return this.props.loginUser(login)
     })
     .then(() => {
-      this.props.history.push('/UserPage')
+      this.props.history.push('/Users')
     })
     
     this.setState({
@@ -51,17 +50,14 @@ class UserInput extends Component {
       hometown: '', 
       email: '', 
       password: '',
-      cpid: '',
-      photo: ''
+      upid: ''
     })
-    
-
   }
 
   render() {
     return (
-      <div className="User">
-        New users, create an account here
+      <div className="UserInput">
+        New Clients, please create an account here
       
         <form onSubmit={this.handleUserOnSubmit}>
           <input
@@ -100,21 +96,10 @@ class UserInput extends Component {
             value={this.state.password}
             placeholder="password"
           />
-
           <br />
-          <input
-            type="file"
-            name="photo"
-            id="photo"
-            onChange={this.handleUserOnChange}
-            value={this.state.photo}
-            placeholder="Add a Bio Photo"
-          />
-          <br />
-
           <input 
             type="submit" 
-            value="UserInput"
+            value="Create Client Profile"
           />
         </form>
       </div>
@@ -122,4 +107,4 @@ class UserInput extends Component {
   }
 }
 
-export default connect(null, {addUser, addUser})(UserInput);
+export default connect(null, {addUser, loginUser})(UserInput);

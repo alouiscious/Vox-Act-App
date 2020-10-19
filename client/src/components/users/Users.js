@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import  {getUsers} from '../../actions/userActions';
 import  {getTalents}  from "../../actions/talentActions";
-import {User} from "../users/User";
+import User from "../users/User";
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {

@@ -6,11 +6,9 @@ const initialState = {
   users: [],
 }
 export default function usersReducer(state = initialState, action) {
-  let idx
 
   switch(action.type) {
-    
-    case usersActions.LOADING_USER:
+    case usersActions.LOADING_USERS:
       const user = {
         userName: action.user_name, 
         hometown: action.hometown, 
@@ -30,8 +28,8 @@ export default function usersReducer(state = initialState, action) {
     case usersActions.GET_USERS_FAILURE:
       return{...state, laoding: false, hasErrors: true}
 
-    case usersActions.LOADING_USERS:
-      return { ...state, loading: true}
+    // case usersActions.LOADING_USERS:
+    //   return { ...state, loading: true}
 
    
     default:

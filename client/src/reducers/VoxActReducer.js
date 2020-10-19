@@ -11,12 +11,12 @@ const rootReducer = combineReducers({
 })
 
 
-const initialState = {
-  loading: false, 
-  hasErrors: false,
-  users: [],
-}
-function loginReducer(state = initialState, action) {
+// const initialState = {
+//   loading: false, 
+//   hasErrors: false,
+//   users: [],
+// }
+function loginReducer(state = [], action) {
   switch(action.type) {
   
     case 'LOADING_USER':
@@ -36,16 +36,7 @@ function loginReducer(state = initialState, action) {
     case 'LOGIN_ERROR':
       return ({...state, loginError: action.error})
 
-    case 'REMOVE_USER':
-      const removalIndex = state.users.findIndex(user => user.id === action.id)
-      return (
-        {...state,
-          users: [
-            ...state.users.slice(0, removalIndex),
-            ...state.users.slice(removalIndex + 1)
-          ]
-        }
-      )
+
       default:
         return state
   }

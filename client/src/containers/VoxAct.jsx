@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Login from '../components/users/Login'
 import UserInput from '../components/users/UserInput'
-import { getUsers, addUser } from "../actions/userActions";
+import { getUsers } from "../actions/usersActions";
 import { getTalents } from "../actions/talentActions";
 import { addUser, loginUser } from "../actions/userActions";
 import { connect } from "react-redux";
@@ -16,17 +16,28 @@ class VoxAct extends Component {
   render() {
     return(
       <div className="VoxActHome">
+        <table>
+          <thead></thead>
+          <tbody>
+          <tr>
+            <td>
+        <Login
+          history={this.props.history}
+          loginUser={this.props.loginUser} 
+          />
+          </td>
+          <td>
         <UserInput 
           history={this.props.history}
           addUser={this.props.addUser}
-          addUser={this.props.addUser} 
           loginUser={this.props.loginUser} 
           />
+
+          </td>
+          </tr>
+          </tbody>
+        </table>
         <br />
-          <Login
-            history={this.props.history}
-            loginUser={this.props.loginUser} 
-          />
       </div>
     )
   }
@@ -46,4 +57,4 @@ const mapStateToProps = state => {
 // }
 
 
-export default connect(mapStateToProps, { addUser, addUser, loginUser, getUsers, getTalents })(VoxAct)
+export default connect(mapStateToProps, { addUser, loginUser, getUsers, getTalents })(VoxAct)
