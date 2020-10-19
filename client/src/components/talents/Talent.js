@@ -21,8 +21,9 @@ class Talent extends Component {
     {talent.user.userName} 
     {talent.user.id} 
     {talent.title} 
-    {talent.media_URL}
-    {talent.mfid}
+    {talent.aumf}
+    {talent.phmf}
+    {talent.vimf}
     </li>)
     console.log('wa ha talent props', this.props)
     return (

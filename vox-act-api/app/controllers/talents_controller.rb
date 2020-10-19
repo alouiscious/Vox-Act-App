@@ -51,7 +51,7 @@ end
 
     # Only allow a trusted parameter "white list" through.
     def talent_params
-      params.require(:talent).permit(:talent_style, :user_name, :upid, :title, :description, :media_URL, :phmf, :vimf, :aumf)
+      params.require(:talent).permit(:talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf)
     end
 end
 

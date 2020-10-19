@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import  {getUsers} from '../../actions/userActions';
 import  {getTalents}  from "../../actions/talentActions";
-import User from "../users/User";
+// import User from "../users/User";
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {
@@ -15,7 +15,7 @@ const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
     if (loading) return <p>Laoding User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
     return users.map((user) => 
-        <User key={user.id} 
+        <li key={user.id} 
           user={user.userName /user.hometown}
           email={user.email}
         />

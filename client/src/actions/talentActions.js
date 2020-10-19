@@ -1,11 +1,15 @@
 const TALENTURL = "http://localhost:3000/talents"
+const ADDTALENTURL = "http://localhost:3000/talents/id"
 
-export function addTalent(talent) {
-  const talent = ({...this.state.talentInput, upid: upid})
-  console.log('Talent from actions', talent)
+export const ADD_TALENT = 'ADD_TALENT'
+export const ADD_TALENT_SUCCESS = 'ADD_TALENT_SUCCESS'
+export const ADD_TALENT_FAILURE = 'ADD_TALENT_FAILURE'
+export const LOADING_TALENTS = 'LOADING_TALENTS'
 
+// export const addTalent = () => ({ type: ADD_TALENT })
+
+export const addTalent = (talent) => {
   return (dispatch) => {
-
     const configTalent = {
       method: "POST",
       headers: {
@@ -15,17 +19,14 @@ export function addTalent(talent) {
         talent: talent
       })
     }
-    
-    fetch(TALENTURL, configTalent)
+    dispatch({ type: 'LOADING_TALENT'})
+    return fetch((ADDTALENTURL), configTalent)
     .then(resp => resp.json())
     .then(talentJSON => {
+      dispatch({ type: 'ADD_TALENT', talent: talentJSON})
       if (talentJSON.error) {
         alert("Talent creation was not complete.")
       } 
-      else {
-        dispatch({ type: 'ADD_TALENT', talent: talentJSON})
-        // dispatch({ type: 'DELETE_TALENT', talent: talentJSON})
-      }
     })
     .catch(console.log)   
   }
@@ -64,7 +65,11 @@ export function getTalents(upid) {
   }
 }
 
-export function removeTalent() {
+
+export const DELETE_TALENT = 'DELETE_TALENT'
+// export const deleteTalent = () => ({ type: DELETE_TALENT })
+
+export function deleteTalent(talent) {
   return (dispatch) => {
 
     const configTalent = {
@@ -90,5 +95,6 @@ export function removeTalent() {
     })
     .catch(console.log)   
   }
+}
 
-// export default {addTalent, getTalents, removeTalent}
+export default {addTalent, getTalents, deleteTalent}

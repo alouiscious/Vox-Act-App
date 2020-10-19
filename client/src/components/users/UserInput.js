@@ -39,7 +39,7 @@ class UserInput extends Component {
 
     this.props.addUser(user)
     .then( () => {
-      return this.props.loginUser(login)
+      return this.props.addUser(login)
     })
     .then(() => {
       this.props.history.push('/Users')

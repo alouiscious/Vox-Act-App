@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2020_10_02_022042) do
     t.string "upid"
     t.string "title"
     t.string "description"
-    t.string "media_URL"
     t.string "phmf"
     t.string "vimf"
     t.string "aumf"

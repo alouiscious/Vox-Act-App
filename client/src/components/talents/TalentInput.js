@@ -4,34 +4,39 @@ import {v4 as uuid} from 'uuid'
 class TalentInput extends Component {
   state = {
     talentStyle: '', 
-    userName: '', 
-    userId: '', 
+    user_name: '', 
+    upid: '', 
     title: '', 
-    mediaURL: ''
-    // mfid:
+    description: '',
+    phmf: '',
+    vimf: '',
+    aumf: ''
   }
   
   handleTalentOnChange = event => {
     console.log('user current', this.session.id, this.user.user.id)
     this.setState({
       [event.target.name]: event.target.value,
-      userName: this.user.user.userName,
+      user_name: this.user.user.user_name,
       userId: this.user.user.id
     })
   }
 
   handleTalentOnSubmit = event => {
     event.preventDefault()
-    const user = {user_id: this.user_id, user_name: this.user_name}
-    const talent = { ...this.state, mfid: uuid()}
+    const user = {upid: this.upid, user_name: this.user_name}
+    const talent =  this.state
     console.log('wa ha input talent', this.state)
     this.props.addTalent(talent, user)
     this.setState({
       talent_style: '', 
       user_name: '', 
-      user_id: '', 
+      upid: '', 
       title: '', 
-      media_URL: ''
+      description: '',
+      aumf: '',
+      phmf: '',
+      vimf: ''
     })
   }
 
