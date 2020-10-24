@@ -15,13 +15,14 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    # @user = User.new(email: params[:user][:email], password: params[:user][:password])
-    @user = User.new(user_params)
+    binding.pry
+    @user = User.new(:user_name params[:user][:user_name], :hometown params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], :upid params[:user][:upid], :upph params[:user][:upph])
+    # @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      render json: user, status: :created, location: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(params{:upid})
     end
 
     # Only allow a trusted parameter "white list" through.
