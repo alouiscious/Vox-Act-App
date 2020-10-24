@@ -29,10 +29,10 @@ export default function userReducer(state = initialState, action) {
       return {users: action.payload, loading: false, hasErrors: false}
 
     case userActions.GET_USER_FAILURE:
-      return{...state, laoding: false, hasErrors: true}
+      return{...state, loading: false, hasErrors: true}
 
     case userActions.ADD_USER:
-      console.log('user', this.state.user)
+      // console.log('user', ...state)
 
       return [...state, user]
         // ...state, users: [...state.users, action.user, user]

@@ -6,7 +6,7 @@ import { BrowserRouter as Router,
 } from "react-router-dom";
 import VoxAct from './containers/VoxAct'
 import UserInput from "./components/users/UserInput";
-import UsersPage from './components/users/UsersPage';
+import UserPage from './components/users/UserPage';
 import Users from './components/users/Users';
 import User from "./components/users/User";
 import Login from './components/users/Login';
@@ -22,7 +22,7 @@ function App() {
               <Route exact path="/" component={VoxAct} />
               <Route path="/UserInput" component={UserInput} />
               <Route path="/Login" component={Login} />
-              <Route exact path="/UsersPage" component={UsersPage} />
+              <Route exact path="/UserPage" component={UserPage} />
               <Route exact path="/User" component={User} />
               <Route path="/Users" component={Users} />
             </Switch>

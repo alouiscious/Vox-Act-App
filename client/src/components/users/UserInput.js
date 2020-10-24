@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {v4 as uuid} from 'uuid'
 import { connect } from "react-redux";
 import { addUser, loginUser } from "../../actions/userActions";
 
@@ -26,7 +25,7 @@ class UserInput extends Component {
       user_name: this.state.user_name,
       hometown: this.state.hometown, 
       email: this.state.email,
-      upid: (uuid()),
+      upid: this.state.upid,
       password: this.state.password
     })     
     console.log('wa ha input user', this.state)
@@ -39,11 +38,11 @@ class UserInput extends Component {
 
     this.props.addUser(user)
     .then( () => {
-      return this.props.addUser(login)
+      return this.props.loginUser(login)
     })
-    .then(() => {
-      this.props.history.push('/Users')
-    })
+    // .then(() => {
+    //   this.props.history.push('/Users')
+    // })
     
     this.setState({
       user_name: '', 
@@ -79,9 +78,9 @@ class UserInput extends Component {
           />
           <br />
           <input
-            type="text"
+            type="email"
             name="email"
-            id="email"
+            id="emailCreate"
             onChange={this.handleUserOnChange}
             value={this.state.email}
             placeholder="email"
@@ -89,9 +88,9 @@ class UserInput extends Component {
           <br />
 
           <input
-            type="text"
+            type="password"
             name="password"
-            id="password"
+            id="passwordCreate"
             onChange={this.handleUserOnChange}
             value={this.state.password}
             placeholder="password"

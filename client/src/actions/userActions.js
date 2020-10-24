@@ -1,3 +1,4 @@
+import {v4 as uuid} from 'uuid'
 const LOGINURL = "http://localhost:3000/login"
 
 export const LOADING_USER = 'LOADING_USER'
@@ -24,7 +25,7 @@ export const loginUser = (user) => {
         dispatch({ type: 'LOGIN_ERROR', error: userJSON.error})
       } 
       else {
-        dispatch({ type: 'LOGIN_USER', user: userJSON})
+        dispatch({ type: 'LOGIN_USER', user: userJSON, upid: (uuid())})
       }
     })
     .catch(console.log)  
@@ -32,7 +33,7 @@ export const loginUser = (user) => {
 }
 
 const USERURL = "http://localhost:3000/users"
-const ADDUSER_URL = "http://localhost:3000/users/id"
+const ADDUSER_URL = "http://localhost:3000/users"
 
 export const ADD_USER = 'ADD_USER'
 export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS'

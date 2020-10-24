@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TalentInput from "../talents/TalentInput";
+// import TalentInput from "../talents/TalentInput";
 import { connect } from "react-redux";
 import { addUserPhoto } from "../../actions/userActions";
 
@@ -23,7 +23,7 @@ class User extends Component {
       return this.props.addUserPhoto(userPhoto)
     })
     .then(() => {
-      this.props.history.push('/UsersPage')
+      this.props.history.push('/UserPage')
     })
     
     this.setState({

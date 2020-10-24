@@ -2,8 +2,12 @@ import React from "react";
 import { getTalents } from "../../actions/talentActions";
 import { getUsers } from "../../actions/userActions";
 
+// componentDidMount(){
+//   this.props.getUsers()
+//   this.props.getTalents()
+// }
 
-const Talents = () => {
+export const Talents = () => {
   const users = {getUsers}
   const { talents, deleteTalent } = {getTalents}
 

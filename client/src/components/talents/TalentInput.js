@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {v4 as uuid} from 'uuid'
+// import {v4 as uuid} from 'uuid'
 
 class TalentInput extends Component {
   state = {
@@ -14,7 +14,7 @@ class TalentInput extends Component {
   }
   
   handleTalentOnChange = event => {
-    console.log('user current', this.session.id, this.user.user.id)
+    console.log('user current', this.session.upid, this.user.user.id)
     this.setState({
       [event.target.name]: event.target.value,
       user_name: this.user.user.user_name,

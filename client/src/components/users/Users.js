@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import  {getUsers} from '../../actions/userActions';
-import  {getTalents}  from "../../actions/talentActions";
+// import  {getTalents}  from "../../actions/talentActions";
 // import User from "../users/User";
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {
-    dispatch(getUsers(), getTalents())
+    dispatch(getUsers())
+    // dispatch(getUsers(), getTalents())
   },[dispatch])
   
   const countUsers = numberOfUsers

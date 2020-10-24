@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import Login from '../components/users/Login'
 import UserInput from '../components/users/UserInput'
 import { getUsers } from "../actions/usersActions";
-import { getTalents } from "../actions/talentActions";
+// import { getTalents } from "../actions/talentActions";
 import { addUser, loginUser } from "../actions/userActions";
 import { connect } from "react-redux";
 
 class VoxAct extends Component {
 
   componentDidUpdate() {
-    this.props.getUsers()
-    this.props.getTalents()
+    // this.props.getUsers()
+    // this.props.getTalents()
   }
 
   render() {
@@ -57,4 +57,5 @@ const mapStateToProps = state => {
 // }
 
 
-export default connect(mapStateToProps, { addUser, loginUser, getUsers, getTalents })(VoxAct)
+export default connect(mapStateToProps, { addUser, loginUser, getUsers})(VoxAct)
+// export default connect(mapStateToProps, { addUser, loginUser, getUsers, getTalents })(VoxAct)
