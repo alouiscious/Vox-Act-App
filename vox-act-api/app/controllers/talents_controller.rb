@@ -3,7 +3,7 @@ class TalentsController < ApplicationController
 
   # GET /talents
   def index
-    if logged_in?
+    if logged_in? && current_user.talents?
 
       @talents = current_user.talents
       render json: @talents, status: :ok
