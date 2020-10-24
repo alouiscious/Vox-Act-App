@@ -2,7 +2,7 @@ import {v4 as uuid} from 'uuid'
 const LOGINURL = "http://localhost:3000/login"
 
 export const LOADING_USER = 'LOADING_USER'
-export const REMOVE_USER = 'LOADING_USER'
+export const REMOVE_USER = 'REMOVE_USER'
 
 export const loginUser = (user) => {
   return (dispatch) => {
@@ -33,7 +33,6 @@ export const loginUser = (user) => {
 }
 
 const USERURL = "http://localhost:3000/users"
-const ADDUSER_URL = "http://localhost:3000/users"
 
 export const ADD_USER = 'ADD_USER'
 export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS'
@@ -47,13 +46,14 @@ export const addUser = (user) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        user: user
+        user: user,
+        upid: (uuid())
       })
     }
       
     dispatch({ type: 'LOADING_USER'})
       
-    return fetch(ADDUSER_URL, configUser)
+    return fetch(USERURL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
       dispatch({ type: 'ADD_USER', user: userJSON})
@@ -117,7 +117,7 @@ export const addUserPhoto = (userPhoto) => {
     
    dispatch({type: 'LOADING_USERS'})
 
-    return fetch(ADDUSER_URL, configUser)
+    return fetch(USERURL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
       dispatch({ type: 'ADD_USER', user: userJSON})
