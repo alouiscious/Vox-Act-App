@@ -130,9 +130,9 @@ export const addUserPhoto = (userPhoto) => {
 }
 
 
-export default {
+export default (
   loginUser,
   getUsers, 
   addUser, 
-  addUserPhoto,
-}
+  addUserPhoto
+)

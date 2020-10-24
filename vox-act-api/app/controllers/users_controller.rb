@@ -3,23 +3,23 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    users = User.all
 
-    render json: @users
+    render json: users
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: user
   end
 
   # POST /users
   def create
-    binding.pry
-    @user = User.new(:user_name params[:user][:user_name], :hometown params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], :upid params[:user][:upid], :upph params[:user][:upph])
+    # binding.pry
+    user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
     # @user = User.new(user_params)
 
-    if @user.save
+    if user.save
       render json: user, status: :created, location: @user
     else
       render json: user.errors, status: :unprocessable_entity

@@ -72,4 +72,4 @@ export function getUsers() {
 }
     
 
-export default {getUsers, addUser}
+export default (getUsers, addUser)

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       # render json: UserSerializer.new(user, {token: token})
       userObj = {
         id: user.upid,
-        # username: user.username,
+        username: user.user_name,
         email: user.email,
         password: user.password,
         token: token
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
     else
       resp = {
         error: "Login not valid.",
-        details: @user.errors.full_messages
+        details: user.errors.full_messages
       }
       render json: resp, status: unauthorized
     end

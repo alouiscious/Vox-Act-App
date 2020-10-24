@@ -45,7 +45,7 @@ export const getTalentsSuccess = talents => ({
 })
 
 
-export function getTalents(upid) {
+export const getTalents = () => {
   return async dispatch => {
     dispatch(fetchTalents())
 
@@ -55,7 +55,7 @@ export function getTalents(upid) {
       console.log('talentsJSON from actions', talentsJSON)
       if (talentsJSON.error) {
         dispatch(getTalentsFailure())
-        alert("Talent List did not collect. Talent 41")
+        alert("Talent List did not collect. getTalentActions")
       } 
       else {
         dispatch(getTalentsSuccess(talentsJSON.talents))
@@ -97,4 +97,4 @@ export function deleteTalent(talent) {
   }
 }
 
-export default {addTalent, getTalents, deleteTalent}
+export default (addTalent, getTalents, deleteTalent)
