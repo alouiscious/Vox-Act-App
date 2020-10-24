@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#delete'
   get 'get_current_user', to: 'sessions#get_current_user'
-  post '/user', to: 'users#create'
+  post '/users', to: 'users#create'
   get '/users', to: 'users#index'
-  get '/user', to: 'users#show'
+  get '/users', to: 'users#show'
   resources :talents
   post '/talent', to: 'talents#create'
   get '/talents', to: 'talents#index'
