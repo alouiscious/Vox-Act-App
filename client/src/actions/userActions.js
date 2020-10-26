@@ -56,7 +56,7 @@ export const addUser = (user) => {
     return fetch(USERURL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
-      dispatch({ type: 'ADD_USER', user: userJSON})
+      dispatch({ type: 'ADD_USER', user: userJSON, upid: (uuid())})
       if (userJSON.error) {
         alert("Vox Act user creation not complete. - Please try again.")
       } 
@@ -66,37 +66,37 @@ export const addUser = (user) => {
 }
 
 export const GET_USER = 'GET_USER'
-export const fetchUser = () => ({
+export const getUser = () => ({
   type: GET_USER,
 })
+
 export const GET_USER_SUCCESS = 'GET_USERS_SUCCESS'
 export const getUserSuccess = (users) => ({
   type: GET_USER_SUCCESS,
   payload: users,
 })
+
 export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
 export const userActionFailure = () => ({
   type: GET_USER_FAILURE,
 })
-export function getUsers() {
+
+export function fetchUser() {
   return async (dispatch) => {
-    dispatch(fetchUser())
+    dispatch(getUser())
 
     try {
+      const resp = await
       fetch(USERURL)
-      .then(resp => resp.json())
-      // (userJSON => await resp.json())
-      .then((userJSON) => {
-        dispatch(getUserSuccess(userJSON))
-        console.log('getUsers from actions', userJSON.users)
-      })
+      const userJSON = await resp.json()
+      dispatch(getUserSuccess(userJSON))
+      console.log('getUsers from actions', userJSON)
     }
     catch (error) {  
       alert('No users available')
       dispatch(userActionFailure())
     }
   }
-
 }
     
 export const ADD_USER_PHOTO = 'ADD_USER_PHOTO'
@@ -129,10 +129,4 @@ export const addUserPhoto = (userPhoto) => {
   }
 }
 
-
-export default (
-  loginUser,
-  getUsers, 
-  addUser, 
-  addUserPhoto
-)
+export default ( loginUser, getUser, addUser, addUserPhoto )

@@ -22,8 +22,8 @@ function App() {
               <Route exact path="/" component={VoxAct} />
               <Route path="/UserInput" component={UserInput} />
               <Route path="/Login" component={Login} />
-              <Route exact path="/UserPage" component={UserPage} />
-              <Route exact path="/User" component={User} />
+              <Route path="/UserPage" component={UserPage} />
+              <Route path="/User" component={User} />
               <Route path="/Users" component={Users} />
             </Switch>
           </Router>

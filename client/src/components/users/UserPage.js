@@ -1,52 +1,57 @@
 import React, { useEffect } from 'react'
-import { getUsers } from "../../actions/usersActions";
-import Users from "./Users";
-// import { getTalents } from "../../actions/talentActions";
-// import Talents from "./Talents"
+import { fetchUser } from "../../actions/userActions";
 import { connect } from "react-redux";
+import User from "../users/User";
+
+import { getTalents } from "../../actions/talentActions";
+import Talent from "../talents/Talent"
 // import { Link } from 'react-router-dom';
 
 
 
-const UserPage = ({
-  dispatch, 
-  // dispatchTalent,
-  loading, 
-  users, 
-  // talents, 
-  hasErrors
-}) => {
+const UserPage = ({dispatch, loading, users, talents, hasErrors}) => {
   useEffect(() => {
-    dispatch(getUsers()) 
+    dispatch(fetchUser())
+    dispatch(getTalents())
   }, [dispatch])
-  // useEffect(() => {
-  //   dispatch(getTalents())
-  // }, dispatch)
  
+ 
+  console.log('wa ha this from userpage', ({users}))
+  
   const renderUser = () => {
-    console.log('wa ha this from user page', users)
     if (loading) return <p>Loading User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
 
-    return () =>{ 
-      users.map((user) => <Users key={user.upid} user={user.userName} hometown={user.hometown} email={user.email} />)
-        // talents.map((talent) => <Talents key={talent.user.upid} />)
-    }
+    return (
+      users.map((user) => {
+        talents.map((talent) => 
+          <div>
+            <User key={user.id}>
+              {user.user_name} {user.hometown} {user.email} {user.upph}
+            </User>
+            <Talent key={talent.user.upid}> 
+              {talent.talent_style}
+            </Talent>
+          </div>
+        )
+      })
+    ) 
   }
 
   return (
     <div className="renderUser">
       <h1>User</h1>
-      {renderUser()}
+      <div>{renderUser()}</div>
     </div>
   )
 }
       
 const mapStateToProps = (state) => ({ 
-  loading: state.users.loading,
-  users: state.users,
-  hasErrors: state.users.hasErrors,
-  numberOfUsers: state.users.length
+  loading: state.user.loading,
+  user: state.user,
+  hasErrors: state.user.hasErrors,
+  numberOfUsers: state.user.length
+  
 })
     
 

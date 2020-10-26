@@ -1,6 +1,5 @@
 import * as userActions from "../actions/userActions";
 
-
 const initialState = {
   loading: false, 
   hasErrors: false,
@@ -32,8 +31,7 @@ export default function userReducer(state = initialState, action) {
       return{...state, loading: false, hasErrors: true}
 
     case userActions.ADD_USER:
-      console.log('user', user)
-
+      
       return [...state, user]
         // ...state, users: [...state.users, action.user, user]
   

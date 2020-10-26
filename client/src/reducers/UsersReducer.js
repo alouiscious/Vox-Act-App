@@ -26,7 +26,7 @@ export default function usersReducer(state = initialState, action) {
       return {users: action.payload, loading: false, hasErrors: false}
 
     case usersActions.GET_USERS_FAILURE:
-      return{...state, laoding: false, hasErrors: true}
+      return{...state, loading: false, hasErrors: true}
 
     // case usersActions.LOADING_USERS:
     //   return { ...state, loading: true}

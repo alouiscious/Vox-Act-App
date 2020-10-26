@@ -33,7 +33,7 @@ export default function talentsReducer(state = initialState, action) {
       return { ...state, talents: action.payload, loading: false}
 
     case talentActions.GET_TALENTS_FAILURE:
-      return { ...state, laoding: false, hasErrors: true } 
+      return { ...state, loading: false, hasErrors: true } 
 
     case talentActions.DELETE_TALENT:
       idx = state.talents.findIndex(talent => talent.id === action.id)

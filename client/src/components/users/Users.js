@@ -1,28 +1,33 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import  { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
-import  {getUsers} from '../../actions/userActions';
 // import  {getTalents}  from "../../actions/talentActions";
-// import User from "../users/User";
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {
-    dispatch(getUsers())
-    // dispatch(getUsers(), getTalents())
+    dispatch(fetchUsers())
   },[dispatch])
   
-  const countUsers = numberOfUsers
   
   const renderUser = () => {
-    if (loading) return <p>Laoding User...</p>
+    if (loading) return <p>Loading User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
-    return users.map((user) => 
-        <li key={user.id} 
-          user={user.userName /user.hometown}
-          email={user.email}
-        />
+    return (
+      users.map((user) => 
+        <div key={user.id}>
+
+          <li> 
+            <Link to="/user/:upid" className="userLink">
+            {user.user_name}, </Link> {user.hometown}
+            <br />
+            {user.email}
+          </li>
+          <br />
+        </div> 
+      )
     )
   }
-          // deleteUser={deleteUser}
         
       
       
@@ -48,9 +53,8 @@ const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
      
       return (
         <div>
-          <h1>User List</h1>
+          <h1>Users List</h1>
           {renderUser()}
-          <p>{countUsers}</p>
         </div>
       )   
 
