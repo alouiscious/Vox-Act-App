@@ -23,7 +23,7 @@ const UserPage = ({dispatch, loading, users, talents, hasErrors}) => {
     if (hasErrors) return <p>Unable to display User.</p>
 
     return (
-      users.map((user) => {
+      users.map((user => {
         talents.map((talent) => 
           <div>
             <User key={user.id}>
@@ -34,7 +34,7 @@ const UserPage = ({dispatch, loading, users, talents, hasErrors}) => {
             </Talent>
           </div>
         )
-      })
+      }))
     ) 
   }
 

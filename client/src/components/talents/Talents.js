@@ -1,6 +1,6 @@
 import React from "react";
 import { getTalents } from "../../actions/talentActions";
-import { getUsers } from "../../actions/userActions";
+import { fetchUser } from "../../actions/userActions";
 
 // componentDidMount(){
 //   this.props.getUsers()
@@ -8,7 +8,7 @@ import { getUsers } from "../../actions/userActions";
 // }
 
 export const Talents = () => {
-  const users = {getUsers}
+  const users = {fetchUser}
   const { talents, deleteTalent } = {getTalents}
 
   console.log('Wa Ha Talents', talents)

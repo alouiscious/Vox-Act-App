@@ -1,6 +1,5 @@
-import {v4 as uuid} from 'uuid'
-
 const USERSURL = "http://localhost:3000/users"
+
 export const LOADING_USERS = 'LOADING_USERS'
 export const ADD_USER = 'ADD_USERS'
 export const ADD_USER_SUCCESS = 'ADD_USERS_SUCCESS'
@@ -16,7 +15,8 @@ export const addUser = (user) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        user: user
+        user: user,
+        
       })
     }
     console.log('addUser from addUser (16)', user)
@@ -26,7 +26,7 @@ export const addUser = (user) => {
     return fetch(USERSURL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
-      dispatch({ type: 'ADD_USER', user: userJSON, upid: (uuid())})
+      dispatch({ type: 'ADD_USER', user: userJSON})
       if (userJSON.error) {
         alert("Vox Act user creation not complete. - Please try again.")
       } 

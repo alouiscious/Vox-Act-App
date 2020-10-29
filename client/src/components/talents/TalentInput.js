@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import {v4 as uuid} from 'uuid'
 
 class TalentInput extends Component {
   state = {

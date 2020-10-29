@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addUser, loginUser } from "../../actions/userActions";
+import {v4 as uuid} from 'uuid'
 
 class UserInput extends Component {
 
@@ -9,7 +10,8 @@ class UserInput extends Component {
     hometown: '',
     email: '',
     password: '',
-    upid: ''
+    upid: (uuid()),
+    upph: ''
     
   }
 
@@ -26,7 +28,8 @@ class UserInput extends Component {
       hometown: this.state.hometown, 
       email: this.state.email,
       upid: this.state.upid,
-      password: this.state.password
+      password: this.state.password,
+      upph: this.state.upph
     })     
     console.log('wa ha input user', this.state)
     
@@ -48,8 +51,7 @@ class UserInput extends Component {
       user_name: '', 
       hometown: '', 
       email: '', 
-      password: '',
-      upid: ''
+      password: ''
     })
   }
 
