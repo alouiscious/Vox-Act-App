@@ -4,15 +4,16 @@ const initialState = {
   loading: false, 
   hasErrors: false,
   user: [],
+  talent: []
 }
 export default function userReducer(state = initialState, action) {
   let idx
-
+  
   switch(action.type) {
     
     case userActions.LOADING_USER:
       const user = {
-        userName: action.user_name, 
+        user_name: action.user_name, 
         hometown: action.hometown, 
         email: action.email, 
         password: action.password,
@@ -45,7 +46,7 @@ export default function userReducer(state = initialState, action) {
           ]
         }
       )
-    
+
     case userActions.ADD_USER_PHOTO:
       const userPhoto = {upph: action.upph}
 

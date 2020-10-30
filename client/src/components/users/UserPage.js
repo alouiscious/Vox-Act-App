@@ -9,32 +9,33 @@ import Talent from "../talents/Talent"
 
 
 
-const UserPage = ({dispatch, loading, users, talents, hasErrors}) => {
+const UserPage = ({dispatch, loading, user, talents, hasErrors}) => {
   useEffect(() => {
     dispatch(fetchUser())
     dispatch(getTalents())
   }, [dispatch])
  
  
-  console.log('wa ha this from userpage', ({users}))
+  console.log('wa ha this from userpage', ({user}))
   
   const renderUser = () => {
     if (loading) return <p>Loading User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
 
     return (
-      users.map((user => {
+      user.map((profile, id) => 
         talents.map((talent) => 
           <div>
-            <User key={user.id}>
-              {user.user_name} {user.hometown} {user.email} {user.upph}
+            <User key={profile.id}>
+              {profile.profile_name} {profile.hometown} {profile.email} {profile.upph}
             </User>
-            <Talent key={talent.user.upid}> 
+            <Talent key={talent.profile.upid}> 
               {talent.talent_style}
             </Talent>
           </div>
         )
-      }))
+      )
+      
     ) 
   }
 

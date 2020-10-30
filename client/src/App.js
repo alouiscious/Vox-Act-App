@@ -10,6 +10,7 @@ import UserPage from './components/users/UserPage';
 import Users from './components/users/Users';
 import User from "./components/users/User";
 import Login from './components/users/Login';
+import TalentInput from './components/talents/TalentInput';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/UserPage" component={UserPage} />
               <Route path="/User" component={User} />
               <Route path="/Users" component={Users} />
+              <Route path="/TalentInput" component={TalentInput} />
             </Switch>
           </Router>
         </div>

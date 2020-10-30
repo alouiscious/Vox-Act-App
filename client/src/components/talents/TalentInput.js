@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import addTalent from "../../actions/talentActions"
 
 class TalentInput extends Component {
   state = {
@@ -12,21 +14,28 @@ class TalentInput extends Component {
     aumf: ''
   }
   
-  handleTalentOnChange = event => {
-    console.log('user current', this.session.upid, this.user.user.id)
+  handleTalentInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
-      user_name: this.user.user.user_name,
-      userId: this.user.user.id
+      user_name: this.user.user_name,
+      upid: this.user.user.upid
     })
   }
-
+  
   handleTalentOnSubmit = event => {
     event.preventDefault()
-    const user = {upid: this.upid, user_name: this.user_name}
+    const user = ({
+      upid: this.user.upid, 
+      user_name: this.user.user_name
+    })
     const talent =  this.state
     console.log('wa ha input talent', this.state)
+    console.log('user current', this.session.upid, this.user.user.id)
+    
     this.props.addTalent(talent, user)
+    .then(() => {
+      this.props.history.push('/Talents')
+    })
     this.setState({
       talent_style: '', 
       user_name: '', 
@@ -42,12 +51,21 @@ class TalentInput extends Component {
   render(){
     return (
       <div className="Talent">
-        Complete this form and add your Talent!
+        Complete this form and add your Talent, {this.state.user_name}!
+       
         <form onSubmit={this.handleTalentOnSubmit}>
-          <label>Choose your talents...</label>
+          <label htmlFor="talent_style">Choose your talents...</label>
+          <input 
+            type="text"
+            name="title"
+            id="title"
+            value={this.state.title}
+            onChange={this.handleTalentInputChange}
+            placeholder="Talent Title"
+          />
           <select 
               value={this.state.talent_style}
-              onChange={this.handleTalentOnChange}
+              onChange={this.handleTalentInputChange}
             >
            
               <option
@@ -68,9 +86,9 @@ class TalentInput extends Component {
                 type="text" 
                 name="user_name"
                 id="userName"
-                onChange={this.handleTalentOnChange}
-                value={this.user.id.userName}
-                placeholder={this.user.id.userName}
+                onChange={this.handleTalentInputChange}
+                value={this.state.user_name}
+                placeholder={this.state.user_name}
               />
 
             </div>
@@ -85,4 +103,4 @@ class TalentInput extends Component {
   }
 }
 
-export default TalentInput
+export default connect(null, {addTalent})(TalentInput)

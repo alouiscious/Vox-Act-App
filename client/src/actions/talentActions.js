@@ -1,5 +1,4 @@
 const TALENTURL = "http://localhost:3000/talents"
-const ADDTALENTURL = "http://localhost:3000/talents/id"
 
 export const ADD_TALENT = 'ADD_TALENT'
 export const ADD_TALENT_SUCCESS = 'ADD_TALENT_SUCCESS'
@@ -20,7 +19,7 @@ export const addTalent = (talent) => {
       })
     }
     dispatch({ type: 'LOADING_TALENT'})
-    return fetch((ADDTALENTURL), configTalent)
+    return fetch((TALENTURL), configTalent)
     .then(resp => resp.json())
     .then(talentJSON => {
       dispatch({ type: 'ADD_TALENT', talent: talentJSON})

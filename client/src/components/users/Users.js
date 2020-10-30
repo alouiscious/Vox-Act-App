@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import  { fetchUsers } from '../../actions/usersActions';
+import  { fetchUser } from '../../actions/userActions';
 import { connect } from 'react-redux';
 // import  {getTalents}  from "../../actions/talentActions";
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {
-    dispatch(fetchUsers())
+    dispatch(fetchUser())
   },[dispatch])
   
   
@@ -18,7 +18,7 @@ const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
         <div key={user.id}>
 
           <li> 
-            <Link to="/user/:upid" className="userLink">
+            <Link to="/user/:id" className="userLink">
             {user.user_name}, </Link> {user.hometown}
             <br />
             {user.email}

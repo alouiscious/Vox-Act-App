@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { getUsers } from "../../actions/usersActions";
+import { fetchUser } from "../../actions/userActions";
+import { connect } from "react-redux";
 
 // import TalentInput from "../talents/TalentInput";
-// import { connect } from "react-redux";
 
 // import { addUserPhoto } from "../../actions/userActions";
 
@@ -63,34 +63,54 @@ import { getUsers } from "../../actions/usersActions";
 //     }
 //   }
 // }
-
-const User = ({ dispatch, users }) => {
+const User = ({ dispatch, loading, users, hasErrors }) => {
   useEffect( () => {
-    dispatch(getUsers)
+    dispatch(fetchUser())
   }, [dispatch])
 
-  const renderUser = (users) => {
+  const renderUser = () => {
+    if (loading) return <p>Loading User...</p>
+    if (hasErrors) return <p>Unable to display User.</p>
     console.log('wa ha this from user', users)
-    // return users.map((user) => <User key={user.id}/>)
+    return (
+      users.map((user, upid) => 
+        <div key={upid} className="user-details">
+          <h3>Welcome to Vox Act, {user.user_name}!</h3>
+          <p>
+            Thanks for joining us from {user.hometown}
+            <br />
+            {user.upid}
+            <br />
+            We plan to connect your talents using {user.email}</p>
+          <p>Next Steps: 
+            <br />
+              Please add your profile photo.
+            <br />
+              Then...
+            <br />
+            Let's add your talent(s). Complete the Talent Form.
+          </p>
+        </div>
+      )
+    )
   }
 
   return (
-    <div className="user-details">
-      <h3>
-        Welcome to Vox Act {renderUser()}!
-      </h3>
-      <p>You're joining us from {}</p>
-      <br/>
-      <p>We plan to connect your talents with {}</p>
-
-      <p>please add your profile photo.
-        Let start by adding a talent.
-              Complete this form
-      </p>
+    <div>
+      {renderUser()}  
     </div>
   )
-  }
- 
 
-export default (User)
+
+}
+
+const mapStateToProps = (state) => ({
+  loading: state.users.loading,
+  users: state.users.users,
+  hasErrors: state.users.hasErrors,
+  numberOfUsers: state.users.count,
+
+}) 
+export default connect(mapStateToProps)(User)
+// export default (User)
 // export default connect(null, {addUserPhoto, UserDetails})(User)

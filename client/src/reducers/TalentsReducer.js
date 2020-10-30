@@ -23,9 +23,15 @@ export default function talentsReducer(state = initialState, action) {
       }
       return [...state, talent, {loading: true}]
       
-    case talentActions.ADD_TALENT:
-      return [ ...state, talent]
-
+      case talentActions.ADD_TALENT:
+        let existingUser = state.filter(
+          user => user.user_name === action.talent.user_name
+        );
+        if (existingUser.length > 0) {
+          return state;
+        } else {
+          return [...state, {loading: true}, { user_name: action.talent.user_name, upid: action.talent.upid}];
+        }
     case talentActions.GET_TALENTS:
       return { ...state, loading: true }
 

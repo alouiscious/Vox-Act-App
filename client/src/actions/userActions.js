@@ -96,7 +96,7 @@ export function fetchUser() {
     }
   }
 }
-    
+
 export const ADD_USER_PHOTO = 'ADD_USER_PHOTO'
 export const addUserPhoto = (userPhoto) => {
   
