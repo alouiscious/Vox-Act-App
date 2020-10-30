@@ -17,15 +17,15 @@ ActiveRecord::Schema.define(version: 2020_10_02_022042) do
 
   create_table "talents", force: :cascade do |t|
     t.string "talent_style"
-    t.string "user_name"
-    t.string "upid"
     t.string "title"
     t.string "description"
     t.string "phmf"
     t.string "vimf"
     t.string "aumf"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_talents_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,4 +39,5 @@ ActiveRecord::Schema.define(version: 2020_10_02_022042) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "talents", "users"
 end
