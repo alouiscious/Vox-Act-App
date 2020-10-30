@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import  { fetchUser } from '../../actions/userActions';
 import { connect } from 'react-redux';
-// import  {getTalents}  from "../../actions/talentActions";
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {

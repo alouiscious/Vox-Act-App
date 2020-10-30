@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import { fetchUser } from "../../actions/userActions";
 import { connect } from "react-redux";
 import User from "../users/User";
+// import { addUserPhoto } from "../../actions/userActions";
 
 import { getTalents } from "../../actions/talentActions";
 import Talent from "../talents/Talent"
+import TalentInput from '../talents/TalentInput';
 // import { Link } from 'react-router-dom';
 
 
@@ -32,11 +34,12 @@ const UserPage = ({dispatch, loading, user, talents, hasErrors}) => {
             <Talent key={talent.profile.upid}> 
               {talent.talent_style}
             </Talent>
+            <TalentInput />
           </div>
         )
-      )
-      
-    ) 
+        )
+        
+        ) 
   }
 
   return (

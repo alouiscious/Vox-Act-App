@@ -5,7 +5,7 @@ import addTalent from "../../actions/talentActions"
 class TalentInput extends Component {
   state = {
     talentStyle: '', 
-    user_name: '', 
+    user_name: this.user_name, 
     upid: '', 
     title: '', 
     description: '',
@@ -17,8 +17,8 @@ class TalentInput extends Component {
   handleTalentInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
-      user_name: this.user.user_name,
-      upid: this.user.user.upid
+      user_name: this.existingUser.user_name,
+      upid: this.existingUser.upid,
     })
   }
   
@@ -38,8 +38,8 @@ class TalentInput extends Component {
     })
     this.setState({
       talent_style: '', 
-      user_name: '', 
-      upid: '', 
+      user_name: this.user.user_name, 
+      upid: this.user.upid, 
       title: '', 
       description: '',
       aumf: '',
@@ -54,7 +54,9 @@ class TalentInput extends Component {
         Complete this form and add your Talent, {this.state.user_name}!
        
         <form onSubmit={this.handleTalentOnSubmit}>
-          <label htmlFor="talent_style">Choose your talents...</label>
+          <div className="talentDetails">
+          <label htmlFor="title">Define your talents: </label>
+          
           <input 
             type="text"
             name="title"
@@ -63,11 +65,12 @@ class TalentInput extends Component {
             onChange={this.handleTalentInputChange}
             placeholder="Talent Title"
           />
+          <label htmlFor="talent_style"> as </label>
+
           <select 
               value={this.state.talent_style}
               onChange={this.handleTalentInputChange}
             >
-           
               <option
                 value="Actor"
                 name='talent01'
@@ -81,20 +84,75 @@ class TalentInput extends Component {
                 name="talent03"
               >Model</option>                        
             </select> 
-            <div className="talentDetails">
+
+            <br />
+            <label htmlFor="talent_style">Client Name: </label>
               <input 
                 type="text" 
                 name="user_name"
                 id="userName"
-                onChange={this.handleTalentInputChange}
-                value={this.state.user_name}
-                placeholder={this.state.user_name}
+                defaultValue={this.props.user_name}
+                readOnly={this.props.user_name}
               />
 
-            </div>
+          <br />
+          <label htmlFor="description"> Description </label>
+          <input 
+            type="textarea"
+            name="description"
+            id="description"
+            value={this.state.description}
+            onChange={this.handleTalentInputChange}
+            placeholder="Provide Description"
+          />
+
+          <br />
+          <label htmlFor="upid"> Talent Key </label>
+          <input 
+            type="text"
+            id="upid"
+            defaultValue={this.props.user_name}
+            readOnly={this.props.user_name}
+          />
+
+
+          <br />
+        <label htmlFor="phmf"> Add Photo </label>
+          <input 
+            type="file"
+            id="phmf"
+            name="phmf"
+            value={this.state.phmf}
+            onChange={this.handleTalentInputChange}
+            placeholder="Talent Photo Link"
+          />
+          <br />
+          <label htmlFor="vimf"> Add Video </label>
+          <input 
+            type="file"
+            name="vimf"
+            id="vimf"
+            value={this.state.vimf}
+            onChange={this.handleTalentInputChange}
+            placeholder="Talent Video Link"
+          />
+          <br />
+          <label htmlFor="aumf"> Add Audio </label>
+          <input 
+            type="file"
+            name="aumf"
+            id="aumf"
+            value={this.state.aumf}
+            onChange={this.handleTalentInputChange}
+            placeholder="Talent Audio Link"
+          />
+          <br />
+          <br />
+          </div>
+
             <input 
               type="submit"
-              value="TalentInput"
+              value="Create Talent"
             />
 
         </form>

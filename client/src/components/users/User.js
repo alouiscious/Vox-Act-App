@@ -1,68 +1,10 @@
 import React, { useEffect } from "react";
 import { fetchUser } from "../../actions/userActions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-// import TalentInput from "../talents/TalentInput";
 
-// import { addUserPhoto } from "../../actions/userActions";
 
-// class User extends Component {
-  
-//   handleUserOnChange = event => {
-//     this.setState({ 
-//       [event.target.name]: event.target.value
-//     })
-//   }
-    
-//   handleUserOnSubmit = event => {
-//     event.preventDefault()
-//     console.log('wa ha input user', this.state)
-//     const userPhoto = ({
-//       upph: this.state.upph
-//     })     
-
-//     this.props.addUserPhoto(userPhoto)
-//     .then( () => {
-//       return this.props.addUserPhoto(userPhoto)
-//     })
-//     .then(() => {
-//       this.props.history.push('/UserPage')
-//     })
-    
-//     this.setState({
-//       user_name: '', 
-//       hometown: '', 
-//       email: '', 
-//       password: '',
-//       upid: '',
-//       upph: ''
-//     })
-    
-
-  
-
-//     render = () => {
-//       return ( 
-//         <form onSubmit={this.handleUserOnSubmit}>
-//         <br />
-//             <input
-//               type="file"
-//               name="upph"
-//               id="upph"
-//               onChange={this.handleUserOnChange}
-//               value={this.state.upph}
-//               placeholder="Add a Bio Photo"
-//             />
-//             <br />
-//             <input 
-//               type="submit" 
-//               value="UserInput"
-//             />
-//           </form>
-//       )
-//     }
-//   }
-// }
 const User = ({ dispatch, loading, users, hasErrors }) => {
   useEffect( () => {
     dispatch(fetchUser())
@@ -87,9 +29,13 @@ const User = ({ dispatch, loading, users, hasErrors }) => {
               Please add your profile photo.
             <br />
               Then...
+            Let's add your talent(s).  
             <br />
-            Let's add your talent(s). Complete the Talent Form.
           </p>
+          <Link to="./UserPage/:id" className="userPageLink">
+            Complete the Talent Form.
+          </Link>
+          
         </div>
       )
     )
