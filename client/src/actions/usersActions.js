@@ -3,6 +3,7 @@ const USERSURL = "http://localhost:3000/users"
 export const LOADING_USERS = 'LOADING_USERS'
 export const ADD_USER = 'ADD_USERS'
 export const ADD_USER_SUCCESS = 'ADD_USERS_SUCCESS'
+export const REMOVE_USER = 'REMOVE_USER'
 
 
 //ADD USER
@@ -19,7 +20,6 @@ export const addUser = (user) => {
         
       })
     }
-    console.log('addUser from addUser (16)', user)
     
    dispatch({type: 'LOADING_USERS'})
 
@@ -61,7 +61,7 @@ export function fetchUsers() {
       fetch(USERSURL)
       const userJSON = await resp.json()
       dispatch(getUserSuccess(userJSON))
-      console.log('getUsers from actions', userJSON.users)
+      console.log('getUsers from actions', userJSON)
     }
     catch (error) {  
       alert('No users available')

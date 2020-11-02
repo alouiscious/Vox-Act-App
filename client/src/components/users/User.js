@@ -13,6 +13,7 @@ const User = ({ dispatch, loading, user, hasErrors }) => {
   const renderUser = () => {
     if (loading) return <p>Loading User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
+    console.log('wa ha this from user', user)
     return (
       
       user.map((profile) => 
@@ -26,7 +27,6 @@ const User = ({ dispatch, loading, user, hasErrors }) => {
       )
     )
   }
-    console.log('wa ha this from user', user)
     
     // return (
         

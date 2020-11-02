@@ -3,7 +3,7 @@ import Login from '../components/users/Login'
 import UserInput from '../components/users/UserInput'
 import { getUsers } from "../actions/usersActions";
 // import { getTalents } from "../actions/talentActions";
-import { addUser } from "../actions/userActions";
+import { addUser } from "../actions/usersActions";
 import { loginUser } from "../actions/loginActions";
 import { connect } from "react-redux";
 

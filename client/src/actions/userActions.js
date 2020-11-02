@@ -1,38 +1,7 @@
 
 export const LOADING_USER = 'LOADING_USER'
-export const REMOVE_USER = 'REMOVE_USER'
 
 const USERURL = "http://localhost:3000/users"
-
-export const ADD_USER = 'ADD_USER'
-export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS'
-
-export const addUser = (user) => {
-  return (dispatch) => {
-    const configUser = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        user: user,
-      })
-    }
-      
-    dispatch({ type: 'LOADING_USER'})
-      
-    return fetch(USERURL, configUser)
-    .then(resp => resp.json())
-    .then(userJSON => {
-      dispatch({ type: 'ADD_USER', user: userJSON })
-      if (userJSON.error) {
-        alert("Vox Act user creation not complete. - Please try again.")
-      } 
-    })
-    .catch(console.log)  
-  }
-}
 
 export const GET_USER = 'GET_USER'
 export const getUser = () => ({
@@ -56,10 +25,10 @@ export function fetchUser() {
 
     try {
       const resp = await
-      fetch(USERURL +`/id`)
+      fetch(USERURL)
       const userJSON = await resp.json()
       dispatch(getUserSuccess(userJSON))
-      console.log('getUsers from actions', userJSON)
+      console.log('getUser from actions', userJSON)
     }
     catch (error) {  
       alert('No users available')
@@ -98,4 +67,4 @@ export const addUserPhoto = (userPhoto) => {
   }
 }
 
-export default ( fetchUser, addUser, addUserPhoto )
+export default ( fetchUser, addUserPhoto )

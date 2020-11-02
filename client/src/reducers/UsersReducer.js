@@ -6,6 +6,7 @@ const initialState = {
   users: [],
 }
 export default function usersReducer(state = initialState, action) {
+  let idx
 
   switch(action.type) {
     case usersActions.LOADING_USERS:
@@ -31,6 +32,21 @@ export default function usersReducer(state = initialState, action) {
     // case usersActions.LOADING_USERS:
     //   return { ...state, loading: true}
 
+    case usersActions.ADD_USER:
+      
+      return {...state, user}
+        // ...state, users: [...state.users, action.user, user]
+  
+    case usersActions.REMOVE_USER:
+      idx = state.users.findIndex(user => user.id === action.id)
+      return (
+        {...state,
+          user: [
+            ...state.users.slice(0, idx),
+            ...state.users.slice(idx + 1)
+          ]
+        }
+      )
    
     default:
       return state

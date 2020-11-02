@@ -20,7 +20,7 @@ export default function userReducer(state = initialState, action) {
         upid: action.upid,
         upph: action.upph
       }
-      return  [...state, user, {loading: true}]
+      return {...state, user, loading: true}
 
     case userActions.GET_USER:
       idx = state.users.findIndex(user => user.id === action.id)
@@ -33,21 +33,6 @@ export default function userReducer(state = initialState, action) {
     case userActions.GET_USER_FAILURE:
       return{...state, loading: false, hasErrors: true}
 
-    case userActions.ADD_USER:
-      
-      return [...state, user]
-        // ...state, users: [...state.users, action.user, user]
-  
-    case userActions.REMOVE_USER:
-      idx = state.users.findIndex(user => user.id === action.id)
-      return (
-        {...state,
-          user: [
-            ...state.users.slice(0, idx),
-            ...state.users.slice(idx + 1)
-          ]
-        }
-      )
 
     case userActions.ADD_USER_PHOTO:
       const userPhoto = {upph: action.upph}
