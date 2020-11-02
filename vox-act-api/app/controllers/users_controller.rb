@@ -10,6 +10,12 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    # user = User.find_by(id: params[:id])
+    # render json: user.to_json(:include => {
+    #   :talents => {
+    #     :only => [:id, :talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf, :talent_id]
+    #   }
+    # })
     render json: user
   end
 
@@ -43,7 +49,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params{:upid})
+      @user = User.find(params{:id})
     end
 
     # Only allow a trusted parameter "white list" through.

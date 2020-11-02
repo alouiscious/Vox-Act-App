@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addUser, loginUser } from "../../actions/userActions";
+import { addUser } from "../../actions/userActions";
+import { loginUser } from "../../actions/loginActions";
 import {v4 as uuid} from 'uuid'
 
 class UserInput extends Component {

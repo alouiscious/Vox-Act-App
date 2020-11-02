@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import  { fetchUser } from '../../actions/userActions';
+import  { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
 
 const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
   useEffect(() => {
-    dispatch(fetchUser())
+    dispatch(fetchUsers())
   },[dispatch])
   
   
-  const renderUser = () => {
+  const renderUsers = () => {
     if (loading) return <p>Loading User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
     return (
       users.map((user) => 
         <div key={user.id}>
-
           <li> 
-            <Link to="/user/:id" className="userLink">
+            <Link to="/user" className="userLink">
             {user.user_name}, </Link> {user.hometown}
             <br />
             {user.email}
@@ -53,7 +52,7 @@ const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
       return (
         <div>
           <h1>Users List</h1>
-          {renderUser()}
+          {renderUsers()}
         </div>
       )   
 

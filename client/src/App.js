@@ -23,14 +23,14 @@ function App() {
               <Route exact path="/" component={VoxAct} />
               <Route path="/UserInput" component={UserInput} />
               <Route path="/Login" component={Login} />
-              <Route path="/UserPage" component={UserPage} />
-              <Route path="/User" component={User} />
+              <Route exact path="/UserPage" component={UserPage} />
+              <Route path="/User/:id" component={User} />
               <Route path="/Users" component={Users} />
               <Route path="/TalentInput" component={TalentInput} />
             </Switch>
           </Router>
         </div>
-            <a
+          <a
             className="App-link"
             href="https://alouisciousmedia.com"
             target="_blank"
@@ -39,9 +39,9 @@ function App() {
             <span role="img" alt="copyright"> 
               <label name="copyright">
               </label>
-              ©℗ 1994-2020 Alouiscious Media™️
+              © ℗ 1994-2020 Alouiscious Media™️
             </span>
-              </a>
+          </a>
         </header>
     </div>
   );

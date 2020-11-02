@@ -1,35 +1,6 @@
-const LOGINURL = "http://localhost:3000/login"
 
 export const LOADING_USER = 'LOADING_USER'
 export const REMOVE_USER = 'REMOVE_USER'
-
-export const loginUser = (user) => {
-  return (dispatch) => {
-    const configLogin = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        user: user
-      })
-    }
-    dispatch({ type: 'LOADING_USER'})
-    return fetch(LOGINURL, configLogin)
-    .then(resp => resp.json())
-    .then(userJSON => {
-      if (userJSON.error) {
-        alert("Sorry. Not a Vox Act client? Sign up...")
-        dispatch({ type: 'LOGIN_ERROR', error: userJSON.error})
-      } 
-      else {
-        dispatch({ type: 'LOGIN_USER', user: userJSON })
-      }
-    })
-    .catch(console.log)  
-  }
-}
 
 const USERURL = "http://localhost:3000/users"
 
@@ -69,9 +40,9 @@ export const getUser = () => ({
 })
 
 export const GET_USER_SUCCESS = 'GET_USERS_SUCCESS'
-export const getUserSuccess = (users) => ({
+export const getUserSuccess = (user) => ({
   type: GET_USER_SUCCESS,
-  payload: users,
+  payload: user,
 })
 
 export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
@@ -85,7 +56,7 @@ export function fetchUser() {
 
     try {
       const resp = await
-      fetch(USERURL)
+      fetch(USERURL +`/id`)
       const userJSON = await resp.json()
       dispatch(getUserSuccess(userJSON))
       console.log('getUsers from actions', userJSON)
@@ -127,4 +98,4 @@ export const addUserPhoto = (userPhoto) => {
   }
 }
 
-export default ( loginUser, getUser, addUser, addUserPhoto )
+export default ( fetchUser, addUser, addUserPhoto )

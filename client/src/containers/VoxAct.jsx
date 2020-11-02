@@ -3,7 +3,8 @@ import Login from '../components/users/Login'
 import UserInput from '../components/users/UserInput'
 import { getUsers } from "../actions/usersActions";
 // import { getTalents } from "../actions/talentActions";
-import { addUser, loginUser } from "../actions/userActions";
+import { addUser } from "../actions/userActions";
+import { loginUser } from "../actions/loginActions";
 import { connect } from "react-redux";
 
 class VoxAct extends Component {
