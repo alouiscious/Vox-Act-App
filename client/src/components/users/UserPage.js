@@ -1,13 +1,13 @@
+
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
+import Navbar from "../Navbar";
 import { fetchUser } from "../../actions/userActions";
 import  User  from "../users/User";
-
 import { getTalents } from "../../actions/talentActions";
 import Talent from "../talents/Talent"
 import TalentInput from '../talents/TalentInput';
 // import { addUserPhoto } from "../../actions/userActions";
-// import { Link } from 'react-router-dom';
 
 
 
@@ -19,7 +19,7 @@ const UserPage = ({match, dispatch, user, talents, hasErrors, loading }) => {
   }, [dispatch, match])
  
  
-  // console.log('wa ha this from userpage', (user))
+  console.log('wa ha this from userpage', (user))
   
   const renderUser = () => {
     if (loading.user) return <p>Loading User...</p>
@@ -42,7 +42,13 @@ const UserPage = ({match, dispatch, user, talents, hasErrors, loading }) => {
   }
 
   return (
-    <div className="renderUser">
+      <div className="renderUser">
+    <div>
+
+      <Navbar />
+    </div>
+    {/* <Link to="/" component={VoxAct}>Login</Link> */}
+    {/* <Link to="/Users" component={Users}>Client List</Link> */}
       <h2>User</h2>
         {renderUser()}
       <h3>Talents</h3>

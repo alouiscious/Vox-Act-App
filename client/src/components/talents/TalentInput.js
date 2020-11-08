@@ -98,11 +98,15 @@ class TalentInput extends Component {
           <br />
           <label htmlFor="description"> Description </label>
           <input 
-            type="textarea"
+            type="textarea" 
             name="description"
             id="description"
             value={this.state.description}
             onChange={this.handleTalentInputChange}
+            cols={400} 
+            rows={100}
+            wrap={true}
+            required={true}
             placeholder="Provide Description"
           />
 
@@ -111,7 +115,7 @@ class TalentInput extends Component {
           <input 
             type="text"
             id="upid"
-            defaultValue={this.props.user_name}
+            defaultValue={this.state.user_name}
             readOnly={this.props.user_name}
           />
 

@@ -14,7 +14,7 @@ const link = {
   color: 'brown',
 }
 
-const NavBar = () => {
+const Navbar = () => {
   return (
     <div >
       <NavLink 
@@ -22,17 +22,25 @@ const NavBar = () => {
         activeStyle={{ background: 'darkblue'}}      
         to="/"
       >
-        Home
+        Sign In
       </NavLink>
 
       <NavLink 
-        style={{ marginRight: '10px' }} 
+        style={{ link, marginRight: '10px' }} 
+        activeStyle={{ background: 'darkblue'}}      
         to="/users"
       >
-        Users
+        Client List
+      </NavLink>
+      <NavLink
+        style={{ link, marginRight: '10px' }} 
+        activeStyle={{ background: 'darkblue'}}      
+        to="/users"
+      >
+        Sign Out
       </NavLink>
     </div>
   );
 }
 
-export default NavBar;
+export default Navbar;

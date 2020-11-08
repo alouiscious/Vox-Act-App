@@ -5,12 +5,8 @@ import { BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
 import VoxAct from './containers/VoxAct'
-// import UserInput from "./components/users/UserInput";
 import UserPage from './components/users/UserPage';
 import Users from './components/users/Users';
-// import User from "./components/users/User";
-// import Login from './components/users/Login';
-// import TalentInput from './components/talents/TalentInput';
 
 function App() {
   return (
