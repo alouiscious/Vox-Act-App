@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addUser } from "../../actions/usersActions";
 import { loginUser } from "../../actions/loginActions";
+import { addUser } from "../../actions/usersActions";
 import {v4 as uuid} from 'uuid'
 
 class UserInput extends Component {
@@ -45,7 +45,7 @@ class UserInput extends Component {
       return this.props.loginUser(login)
     })
     .then(() => {
-      this.props.history.push('/User')
+      this.props.history.push('/UserPage')
     })
     
     this.setState({

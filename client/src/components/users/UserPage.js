@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { fetchUser } from "../../actions/userActions";
 import { connect } from "react-redux";
-import User from "../users/User";
+import { fetchUser } from "../../actions/userActions";
+import { User } from "../users/User";
 // import { addUserPhoto } from "../../actions/userActions";
 
 import { getTalents } from "../../actions/talentActions";
@@ -11,76 +11,54 @@ import TalentInput from '../talents/TalentInput';
 
 
 
-const UserPage = ({dispatch, loading, user, talents, hasErrors}) => {
+const UserPage = ({match, dispatch, loading, user, talents, hasErrors}) => {
   useEffect(() => {
-    dispatch(fetchUser())
-    dispatch(getTalents())
-  }, [dispatch])
+    const { id } = match.params
+    dispatch(fetchUser(id))
+    dispatch(getTalents(id))
+  }, [dispatch, match])
  
  
   console.log('wa ha this from userpage', ({user}))
   
   const renderUser = () => {
-    if (loading) return <p>Loading User...</p>
-    if (hasErrors) return <p>Unable to display User.</p>
+    if (loading.user) return <p>Loading User...</p>
+    if (hasErrors.user) return <p>Unable to display User.</p>
+    return <User user={user} />
+  }
 
-    return (
-      user.map((profile, id) => 
-        talents.map((talent) => 
-          <div>
-            <User key={profile.id}>
-              {profile.profile_name} {profile.hometown} {profile.email} {profile.upph}
-            </User>
-            <Talent key={talent.profile.upid}> 
-              {talent.talent_style}
-            </Talent>
-            <TalentInput />
-          </div>
-        )
-        )
-        
-        ) 
+  const renderTalents = () => {
+    if (loading.user) return <p>Loading User...</p>
+    if (hasErrors.user) return <p>Unable to display User.</p>
+    return talents.map(talent => (
+      <Talent key={talent.id} talent={talent}> 
+        {talent.talent_style}
+      </Talent>
+    ))
   }
 
   return (
     <div className="renderUser">
-      <h1>User</h1>
-      <div>{renderUser()}</div>
+      <h2>User</h2>
+      {renderUser()}
+      <h3>Talents</h3>
+      {renderTalents()}
+      <br />
+      <br />
+      Add Talents here...
+        <TalentInput />
     </div>
   )
 }
       
-const mapStateToProps = (state) => ({ 
+const mapStateToProps = state => ({ 
+  user: state.user.user,
+  talents: state.talents.talents,
   loading: state.user.loading,
-  user: state.user,
   hasErrors: state.user.hasErrors,
   numberOfUsers: state.user.length
   
 })
-    
-
-            /*         
-        
-         
-          <Link to="/talents" className="button">
-            view talents
-          </Link>
-          <Link to="/talentInput"
-            addTalent={this.props.addTalent}>
-              add talent
-          </Link>
-            <button onClick={this.handleOnClick}> Remove Talent</button>
-            
-            </div>
-            
-            )
-          })}
-        */ 
-  
-    
-
-   
-
 
 // const mapDispatchToProps = dispatch => ({
 //   addUser: ({upid, user_name, hometown, email, password, upph}) => dispatch({

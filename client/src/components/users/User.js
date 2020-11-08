@@ -1,79 +1,16 @@
-import React, { useEffect } from "react";
-import { fetchUser } from "../../actions/userActions";
-import { connect } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
 
+export const User = ({ user, talent }) => (
+  <div key={user.id} className={talent ? 'talent_style' : 'user'}>
+    <h3>{user.user_name}, {user.hometown}</h3>
+    {talent && (<Link to={`/users/${user.id}`} >
+      Details for {user.user_name}</Link>
+    )} <br />{talent ? user.email : user.upph}
+  
+    <p></p>
+    {console.log('wa ha user from user', user)}
+  </div>
+)
 
-
-const User = ({ dispatch, loading, user, hasErrors }) => {
-  useEffect( () => {
-    dispatch(fetchUser())
-  }, [dispatch])
-
-  const renderUser = () => {
-    if (loading) return <p>Loading User...</p>
-    if (hasErrors) return <p>Unable to display User.</p>
-    console.log('wa ha this from user', user)
-    return (
-      
-      user.map((profile) => 
-        <div key={profile.id}>
-        <li> 
-          <Link to="/user/:id" className="userLink">
-            {profile.user_name}
-          </Link> 
-        </li>
-        </div>
-      )
-    )
-  }
-    
-    // return (
-        
-    //   user.map((profile) => 
-    //     <div key={id} className="profile-details">
-    //       <h3>Welcome to Vox Act, {profile.user_name}!</h3>
-    //       <p>
-    //         Thanks for joining us from {profile.hometown}
-    //         <br />
-    //         {profile.upid}
-    //         <br />
-    //         We plan to connect your talents using {profile.email}</p>
-    //       <p>Next Steps: 
-    //         <br />
-    //           Please add your profile photo.
-    //         <br />
-    //           Then...
-    //         Let's add your talent(s).  
-    //         <br />
-    //       </p>
-         
-    //       <Link to="./UserPage/id" className="userPageLink">
-    //         Complete the Talent Form.
-    //       </Link>
-    //     </div>
-    //       )
-      // )
-    // ))
-
-    
-    return (
-      <div>
-      {renderUser()}  
-    </div>
-  )
-}
-
-
-
-    
-  const mapStateToProps = (state) => ({
-    loading: state.users.loading,
-    users: state.users.users,
-    hasErrors: state.users.hasErrors,
-    numberOfUsers: state.users.count,
-  }) 
-
-export default connect(mapStateToProps)(User)
-// export default (User)
-// export default connect(null, {addUserPhoto, UserDetails})(User)
+export default User

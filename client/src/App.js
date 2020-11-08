@@ -5,12 +5,12 @@ import { BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
 import VoxAct from './containers/VoxAct'
-import UserInput from "./components/users/UserInput";
+// import UserInput from "./components/users/UserInput";
 import UserPage from './components/users/UserPage';
 import Users from './components/users/Users';
-import User from "./components/users/User";
-import Login from './components/users/Login';
-import TalentInput from './components/talents/TalentInput';
+// import User from "./components/users/User";
+// import Login from './components/users/Login';
+// import TalentInput from './components/talents/TalentInput';
 
 function App() {
   return (
@@ -21,12 +21,12 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={VoxAct} />
-              <Route path="/UserInput" component={UserInput} />
-              <Route path="/Login" component={Login} />
-              <Route exact path="/UserPage" component={UserPage} />
-              <Route path="/User/:id" component={User} />
-              <Route path="/Users" component={Users} />
-              <Route path="/TalentInput" component={TalentInput} />
+              {/* <Route path="/UserInput" component={UserInput} /> */}
+              {/* <Route path="/Login" component={Login} /> */}
+              <Route exact path="/UserPage/:id" component={UserPage} />
+              {/* <Route exact path="/User" component={User} /> */}
+              <Route exact path="/Users" component={Users} />
+              {/* <Route path="/TalentInput" component={TalentInput} /> */}
             </Switch>
           </Router>
         </div>

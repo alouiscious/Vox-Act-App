@@ -4,13 +4,12 @@ class UsersController < ApplicationController
   # GET /users
   def index
     users = User.all
-
     render json: users
   end
 
   # GET /users/1
   def show
-    # user = User.find_by(id: params[:id])
+    user = Users.find_by(id: params[:id])
     # render json: user.to_json(:include => {
     #   :talents => {
     #     :only => [:id, :talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf, :talent_id]

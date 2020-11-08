@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:user][:email])
 
     if user && user.authenticate(params[:user][:password])
-      token = encode_token(upid: user.upid)
+      token = encode_token(upid: user.id)
       # binding.pry
       # render json: UserSerializer.new(user, {token: token})
       userObj = {
-        id: user.upid,
+        id: user.id,
         username: user.user_name,
         email: user.email,
         password: user.password,

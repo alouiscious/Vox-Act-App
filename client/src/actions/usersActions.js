@@ -2,7 +2,7 @@ const USERSURL = "http://localhost:3000/users"
 
 export const LOADING_USERS = 'LOADING_USERS'
 export const ADD_USER = 'ADD_USERS'
-export const ADD_USER_SUCCESS = 'ADD_USERS_SUCCESS'
+export const ADD_USERS_SUCCESS = 'ADD_USERS_SUCCESS'
 export const REMOVE_USER = 'REMOVE_USER'
 
 
@@ -38,10 +38,10 @@ export const addUser = (user) => {
 
 //GET USERS
 export const GET_USERS = 'GET_USERS'
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
 export const getUsers = () => ({
   type: GET_USERS,
 })
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
 export const getUserSuccess = (users) => ({
   type: GET_USERS_SUCCESS,
   payload: users,

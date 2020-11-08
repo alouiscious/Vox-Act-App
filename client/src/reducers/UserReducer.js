@@ -3,15 +3,14 @@ import * as userActions from "../actions/userActions";
 const initialState = {
   loading: false, 
   hasErrors: false,
-  users: [],
-  talent: []
+  user: [],
+  talents: []
 }
 export default function userReducer(state = initialState, action) {
-  let idx
   
   switch(action.type) {
     case userActions.LOADING_USER:
-      const user = {
+      const user = ({
         id: action.id,
         user_name: action.user_name, 
         hometown: action.hometown, 
@@ -19,28 +18,20 @@ export default function userReducer(state = initialState, action) {
         password: action.password,
         upid: action.upid,
         upph: action.upph
-      }
-      return {...state, user, loading: true}
-
+      })
+      return  {...state, user, loading: true}
     case userActions.GET_USER:
-      idx = state.users.findIndex(user => user.id === action.id)
-      return {...state, idx, loading: true}
-      
-
+      return {...state.user, loading: true}
     case userActions.GET_USER_SUCCESS:
-      return {user: action.payload, loading: false, hasErrors: false}
-
+      return {
+        user: action.payload, loading: false, hasErrors: false,
+      }
     case userActions.GET_USER_FAILURE:
-      return{...state, loading: false, hasErrors: true}
-
-
+      return {...state, loading: false, hasErrors: true}
     case userActions.ADD_USER_PHOTO:
       const userPhoto = {upph: action.upph}
 
       return [...state, userPhoto ]
-      
-    
-
     default:
       return state
     }

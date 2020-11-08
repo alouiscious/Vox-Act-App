@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { User } from "../users/User";
 import  { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
 
@@ -13,54 +13,26 @@ const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
     if (loading) return <p>Loading User...</p>
     if (hasErrors) return <p>Unable to display User.</p>
     return (
-      users.map((user) => 
+      users.map((user => 
         <div key={user.id}>
-          <li> 
-            <Link to="/user" className="userLink">
-            {user.user_name}, </Link> {user.hometown}
-            <br />
-            {user.email}
-          </li>
-          <br />
+            <User  className="userLink" user={user} talent /> 
         </div> 
-      )
+      ))
     )
-  }
-        
-      
-      
-
-      // user.talents.map((talent, id) => {
-      //   <div>
-      //     <li key={id}>{talent}</li>),
-  
-      //     <Link to="/talents" className="button">
-      //       view talents
-      //     </Link>
-      //     <Link to="/talentInput"
-      //       addTalent={this.props.addTalent}>
-      //         add talent
-      //     </Link>
-      //     <button onClick={this.handleOnClick}> Remove Talent</button>
-      //     <Users
-      //       users={users}
-      //     />
-      //   </div>
-      // })
+  }   
     
-     
-      return (
-        <div>
-          <h1>Users List</h1>
-          {renderUsers()}
-        </div>
-      )   
-
-      }
-
+  return (
+    <div>
+      <h1>Vox Act - Client List</h1>
+      Get connected to more than {numberOfUsers} clients
+      {renderUsers()}
+    </div>
+  )   
+      
+}
 
 // Map Redux state to React component props
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.users.loading,
   users: state.users.users,
   hasErrors: state.users.hasErrors,
@@ -69,3 +41,8 @@ const mapStateToProps = (state) => ({
 })      
 // Connect Redux to React
 export default connect(mapStateToProps)(Users)
+  
+        
+      
+      
+

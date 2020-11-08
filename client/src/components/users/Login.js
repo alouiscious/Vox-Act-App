@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { loginUser } from '../../actions/loginActions';
 
-
 class Login extends Component {
 
   state = {
+    id: "",
     email: "",
     password: ""
     
@@ -27,7 +27,7 @@ class Login extends Component {
     console.log('this is state', this.state)
     this.props.loginUser(user)
     .then( () => {
-      this.props.history.push('/User')
+      this.props.history.push('/UserPage')
     })
 
     this.setState({

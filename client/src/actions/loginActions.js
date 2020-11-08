@@ -4,6 +4,7 @@ export const LOADING_USER = 'LOADING_USER'
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 
+
 export const loginUser = (user) => {
   return (dispatch) => {
     const configLogin = {
@@ -26,6 +27,7 @@ export const loginUser = (user) => {
       } 
       else {
         dispatch({ type: 'LOGIN_USER', user: userJSON })
+        // dispatch({ type: 'GET_USER', user: user })
       }
     })
     .catch(console.log)  

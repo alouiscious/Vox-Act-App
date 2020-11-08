@@ -18,7 +18,7 @@ export default function usersReducer(state = initialState, action) {
         upid: action.upid,
         photo: action.upph
       }
-      return  [...state, user, {loading: true}]
+      return  {...state, user, loading: true}
 
     case usersActions.GET_USERS:
       return {...state, loading: true}
@@ -28,9 +28,6 @@ export default function usersReducer(state = initialState, action) {
 
     case usersActions.GET_USERS_FAILURE:
       return{...state, loading: false, hasErrors: true}
-
-    // case usersActions.LOADING_USERS:
-    //   return { ...state, loading: true}
 
     case usersActions.ADD_USER:
       

@@ -1,37 +1,31 @@
 
+export const GET_USER = 'GET_USER'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
 export const LOADING_USER = 'LOADING_USER'
 
-const USERURL = "http://localhost:3000/users"
-
-export const GET_USER = 'GET_USER'
-export const getUser = () => ({
-  type: GET_USER,
-})
-
-export const GET_USER_SUCCESS = 'GET_USERS_SUCCESS'
-export const getUserSuccess = (user) => ({
+export const getUser = () => ({ type: GET_USER })
+export const getUserSuccess = user => ({
   type: GET_USER_SUCCESS,
   payload: user,
 })
 
-export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
-export const userActionFailure = () => ({
-  type: GET_USER_FAILURE,
-})
+export const userActionFailure = () => ({ type: GET_USER_FAILURE })
+const USERURL = "http://localhost:3000/users/"
 
-export function fetchUser() {
-  return async (dispatch) => {
+export function fetchUser(id) {
+  return async dispatch => {
     dispatch(getUser())
 
     try {
       const resp = await
-      fetch(USERURL)
+      fetch(`https://localhost:3000/users/${id}`)
       const userJSON = await resp.json()
       dispatch(getUserSuccess(userJSON))
       console.log('getUser from actions', userJSON)
     }
     catch (error) {  
-      alert('No users available')
+      alert('No user available')
       dispatch(userActionFailure())
     }
   }
@@ -67,4 +61,4 @@ export const addUserPhoto = (userPhoto) => {
   }
 }
 
-export default ( fetchUser, addUserPhoto )
+// export default ( fetchUser, addUserPhoto )

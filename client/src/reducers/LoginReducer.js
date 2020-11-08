@@ -13,12 +13,11 @@ export default function loginReducer(state = initialState, action) {
 
     case loginActions.LOGIN_USER:
     const user = ({
-      id: action.id,
-      email: action.email,
+       email: action.email,
       password: action.password
     })
     return ({
-      user: action.user, loggedIn: true, loading: false,
+      user: [action.user, {loggedIn: true}, {loading: false}],
       ...state, 
       users: [ ...state.users, action.user, user ]
     })
