@@ -5,7 +5,7 @@ import addTalent from "../../actions/talentActions"
 class TalentInput extends Component {
   state = {
     talentStyle: '', 
-    user_name: this.user_name, 
+    user_name: '', 
     upid: '', 
     title: '', 
     description: '',
@@ -17,16 +17,16 @@ class TalentInput extends Component {
   handleTalentInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
-      user_name: this.existingUser.user_name,
-      upid: this.existingUser.upid,
+      user_name: this.state.user_name,
+      upid: this.state.upid,
     })
   }
   
   handleTalentOnSubmit = event => {
     event.preventDefault()
     const user = ({
-      upid: this.user.upid, 
-      user_name: this.user.user_name
+      upid: this.state.user.upid, 
+      user_name: this.state.user.user_name
     })
     const talent =  this.state
     console.log('wa ha input talent', this.state)

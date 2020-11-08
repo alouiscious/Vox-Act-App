@@ -1,37 +1,33 @@
-import * as userActions from "../actions/userActions";
+import * as userActions from '../actions/userActions'
 
-const initialState = {
+export const initialState = {
   loading: false, 
   hasErrors: false,
   user: [],
-  talents: []
 }
+
 export default function userReducer(state = initialState, action) {
-  
   switch(action.type) {
-    case userActions.LOADING_USER:
-      const user = ({
-        id: action.id,
-        user_name: action.user_name, 
-        hometown: action.hometown, 
-        email: action.email, 
-        password: action.password,
-        upid: action.upid,
-        upph: action.upph
-      })
-      return  {...state, user, loading: true}
+    // case userActions.LOADING_USER:
+    //   const user = ({
+    //     id: action.id,
+    //     user_name: action.user_name, 
+    //     hometown: action.hometown, 
+    //     email: action.email, 
+    //     password: action.password,
+    //     upid: action.upid,
+    //     upph: action.upph
+    //   })
+    //   return  {...state, user, loading: true}
     case userActions.GET_USER:
-      return {...state.user, loading: true}
+      return { ...state.user, loading: true }
     case userActions.GET_USER_SUCCESS:
-      return {
-        user: action.payload, loading: false, hasErrors: false,
-      }
+      return { user: action.payload, loading: false, hasErrors: false }
     case userActions.GET_USER_FAILURE:
-      return {...state, loading: false, hasErrors: true}
+      return { ...state, loading: false, hasErrors: true }
     case userActions.ADD_USER_PHOTO:
       const userPhoto = {upph: action.upph}
-
-      return [...state, userPhoto ]
+      return { ...state, userPhoto }
     default:
       return state
     }
