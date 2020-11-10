@@ -7,10 +7,13 @@ const initialState = {
 }
 export default function usersReducer(state = initialState, action) {
   let idx
+  console.log('reducer login', state)
+  console.table(state)
 
   switch(action.type) {
     case usersActions.LOADING_USERS:
       const user = {
+        id: action.id,
         userName: action.user_name, 
         hometown: action.hometown, 
         email: action.email, 
@@ -30,7 +33,6 @@ export default function usersReducer(state = initialState, action) {
       return{...state, loading: false, hasErrors: true}
 
     case usersActions.ADD_USER:
-      
       return {...state, user}
         // ...state, users: [...state.users, action.user, user]
   
@@ -44,11 +46,21 @@ export default function usersReducer(state = initialState, action) {
           ]
         }
       )
-   
+
+    case usersActions.LOADING_USER:
+      return {...state, loading: true}
+      
+    case usersActions.LOGIN_USER:
+      console.log('action login', action)
+      return ({
+        ...state, 
+        user: {...action.user, loggedIn: true, loading: false},
+      })
+
+    case usersActions.LOGIN_ERROR:
+      return ({...state, loginError: action.error})
+    
     default:
       return state
   }
 }
-
-
-

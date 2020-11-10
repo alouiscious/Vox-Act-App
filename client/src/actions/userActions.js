@@ -15,19 +15,20 @@ export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
 export function fetchUser(id) {
   return async dispatch => {
-    dispatch(getUser())
+    dispatch(getUser(id))
 
     try {
-      const resp = await fetch(
+      const resp = await 
+      fetch(
         `https://localhost:3000/users/${id}`
       )
-      const data = await resp.json()
-
-      dispatch(getUserSuccess(data))
-      // console.log('getUser from actions', data)
-    } catch (error) {  
+      const userJSON = await resp.json()
+      dispatch(getUserSuccess(userJSON))
+      (console.log('getUser from actions', userJSON))
+    } 
+    catch (error) {  
       dispatch(userActionFailure())
-      alert('No user available')
+      alert('No User available')
     }
   }
 }

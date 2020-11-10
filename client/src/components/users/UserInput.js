@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/loginActions";
+import { loginUser } from "../../actions/usersActions";
 import { addUser } from "../../actions/usersActions";
 import {v4 as uuid} from 'uuid'
 
@@ -41,11 +41,12 @@ class UserInput extends Component {
     })
 
     this.props.addUser(user)
-    .then( () => {
+    .then(userJSON  => {
+      console.log('userJSON resp', userJSON)
       return this.props.loginUser(login)
     })
     .then(() => {
-      this.props.history.push('/UserPage')
+      this.props.history.push('/Users')
     })
     
     this.setState({
@@ -59,7 +60,8 @@ class UserInput extends Component {
   render() {
     return (
       <div className="UserInput">
-        New Clients, please create an account here
+        <br />
+        Create NEW VoxAct
       
         <form onSubmit={this.handleUserOnSubmit}>
           <input

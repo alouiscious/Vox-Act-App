@@ -7,6 +7,7 @@ import { BrowserRouter as Router,
 import VoxAct from './containers/VoxAct'
 import UserPage from './components/users/UserPage';
 import Users from './components/users/Users';
+import {User} from './components/users/User';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
               {/* <Route path="/UserInput" component={UserInput} /> */}
               {/* <Route path="/Login" component={Login} /> */}
               <Route exact path="/UserPage/:id" component={UserPage} />
-              {/* <Route exact path="/User" component={User} /> */}
+              <Route exact path="/Users/id" component={User} />
               <Route exact path="/Users" component={Users} />
               {/* <Route path="/TalentInput" component={TalentInput} /> */}
             </Switch>

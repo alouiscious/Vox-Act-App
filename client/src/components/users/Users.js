@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Navbar from "../Navbar";
 import { User } from "../users/User";
 import  { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
@@ -23,6 +24,8 @@ const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
     
   return (
     <div>
+      <Navbar />
+      <br />
       <h1>Vox Act - Client List</h1>
       Get connected to more than {numberOfUsers} clients
       {renderUsers()}
@@ -40,6 +43,7 @@ const mapStateToProps = state => ({
 
 })      
 // Connect Redux to React
+
 export default connect(mapStateToProps)(Users)
   
         

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { loginUser } from '../../actions/loginActions';
+import { loginUser } from '../../actions/usersActions';
 
 class Login extends Component {
 
@@ -27,7 +27,8 @@ class Login extends Component {
     console.log('this is state', this.state)
     this.props.loginUser(user)
     .then( () => {
-      this.props.history.push('/UserPage/:id')
+      console.log('this is user', user)
+      this.props.history.push(`/UserPage/${user.id}`)
     })
 
     this.setState({
@@ -39,7 +40,7 @@ class Login extends Component {
   render() {
       return (
         <div className="Login">
-          Existing client... just sign in.
+          Sign In.
 
           <form onSubmit={this.handleLoginOnSubmit}>
             <label htmlFor="email">Email</label>

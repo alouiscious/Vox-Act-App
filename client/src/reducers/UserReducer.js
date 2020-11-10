@@ -6,7 +6,9 @@ export const initialState = {
   user: [],
 }
 
-export default function userReducer(state = initialState, action) {
+export default function userReducer(state = {}, action) {
+  console.table(state)
+  console.log('reducer user', state)
   switch(action.type) {
     // case userActions.LOADING_USER:
     //   const user = ({

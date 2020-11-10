@@ -105,8 +105,8 @@ class TalentInput extends Component {
             onChange={this.handleTalentInputChange}
             cols={400} 
             rows={100}
-            wrap={true}
-            required={true}
+            // wrap={1}
+            // required={1}
             placeholder="Provide Description"
           />
 

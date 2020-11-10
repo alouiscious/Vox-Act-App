@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react'
-import { connect } from "react-redux";
 import Navbar from "../Navbar";
+import { connect } from "react-redux";
 import { fetchUser } from "../../actions/userActions";
 import  User  from "../users/User";
 import { getTalents } from "../../actions/talentActions";
@@ -62,7 +62,7 @@ const UserPage = ({match, dispatch, user, talents, hasErrors, loading }) => {
 }
       
 const mapStateToProps = state => ({ 
-  user: state.user.user,
+  user: state.login.user,
   talents: state.talents.talents,
   loading: { user: state.user.loading, talents: state.talents.loading },
   hasErrors: { user: state.user.hasErrors, talents: state.talents.hasErrors },
