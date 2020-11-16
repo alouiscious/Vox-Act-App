@@ -5,11 +5,11 @@ const initialState = {
   hasErrors: false,
   users: [],
 }
-export default function usersReducer(state = initialState, action) {
-  let idx
-  console.log('reducer login', state)
-  console.table(state)
+let idx
 
+export default function usersReducer(state = initialState, action) {
+  console.table(state)
+  
   switch(action.type) {
     case usersActions.LOADING_USERS:
       const user = {
@@ -21,21 +21,27 @@ export default function usersReducer(state = initialState, action) {
         upid: action.upid,
         photo: action.upph
       }
-      return  {...state, user, loading: true}
+      console.log('user  - usersRed LOADING_USER after login', user)
+      return  {...state, loading: true}
 
     case usersActions.GET_USERS:
       return {...state, loading: true}
 
     case usersActions.GET_USERS_SUCCESS:
-      return {users: action.payload, loading: false, hasErrors: false}
+      return {...state, users: action.payload, loading: false, hasErrors: false}
 
     case usersActions.GET_USERS_FAILURE:
-      return{...state, loading: false, hasErrors: true}
-
+      return {
+        ...state, 
+        loading: false, 
+        hasErrors: true
+      }
+  
     case usersActions.ADD_USER:
       return {...state, user}
         // ...state, users: [...state.users, action.user, user]
-  
+        
+
     case usersActions.REMOVE_USER:
       idx = state.users.findIndex(user => user.id === action.id)
       return (
@@ -51,7 +57,7 @@ export default function usersReducer(state = initialState, action) {
       return {...state, loading: true}
       
     case usersActions.LOGIN_USER:
-      console.log('action login', action)
+      // console.log('action login', action)
       return ({
         ...state, 
         user: {...action.user, loggedIn: true, loading: false},

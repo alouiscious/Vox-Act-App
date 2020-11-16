@@ -6,21 +6,21 @@ export const initialState = {
   user: [],
 }
 
-export default function userReducer(state = {}, action) {
+export default function userReducer(state = initialState, action) {
   console.table(state)
   console.log('reducer user', state)
   switch(action.type) {
-    // case userActions.LOADING_USER:
-    //   const user = ({
-    //     id: action.id,
-    //     user_name: action.user_name, 
-    //     hometown: action.hometown, 
-    //     email: action.email, 
-    //     password: action.password,
-    //     upid: action.upid,
-    //     upph: action.upph
-    //   })
-    //   return  {...state, user, loading: true}
+    case userActions.LOADING_USER:
+      const user = ({
+        id: action.id,
+        user_name: action.user_name, 
+        hometown: action.hometown, 
+        email: action.email, 
+        password: action.password,
+        upid: action.upid,
+        upph: action.upph
+      })
+      return  {...state, user, loading: true}
     case userActions.GET_USER:
       return { ...state.user, loading: true }
     case userActions.GET_USER_SUCCESS:

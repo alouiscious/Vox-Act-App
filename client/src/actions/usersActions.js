@@ -1,13 +1,51 @@
 const USERSURL = "http://localhost:3000/users"
-const LOGINURL = "http://localhost:3000/login"
 
 export const LOADING_USERS = 'LOADING_USERS'
+export const GET_USERS = 'GET_USERS'
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
+export const GET_USERS_FAILURE = 'USER_ACTION_FAILURE'
+
+//GET USERS
+export const getUsers = () => ({
+  type: GET_USERS,
+})
+export const getUserSuccess = (users) => ({
+  type: GET_USERS_SUCCESS,
+  payload: users,
+})
+
+export const usersActionFailure = () => ({
+  type: GET_USERS_FAILURE,
+})
+
+export function fetchUsers() {
+  return async dispatch => {
+    dispatch(getUsers())
+    
+    try {
+      const resp = await
+      fetch(USERSURL)
+      const usersJSON = await resp.json()
+      dispatch(getUserSuccess(usersJSON))
+      console.log('getUsers from actions', usersJSON)
+      // dispatch({type: 'LOADING_USERS'})
+      // dispatch({ type: 'GET_USERS', users: usersJSON })      
+      // if (usersJSON) {
+    } catch {
+      // dispatch({ type: 'GET_USERS_FAILURE', error: usersJSON.error})
+      alert('No Users available(75)')
+      dispatch(usersActionFailure())
+    }
+    
+  }
+}
+
+export const LOADING_USER = 'LOADING_USER'
 export const ADD_USER = 'ADD_USERS'
 export const ADD_USERS_SUCCESS = 'ADD_USERS_SUCCESS'
-export const REMOVE_USER = 'REMOVE_USER'
-export const LOADING_USER = 'LOADING_USER'
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const REMOVE_USER = 'REMOVE_USER'
 
 
 //ADD USER
@@ -18,7 +56,7 @@ export const addUser = (user) => {
       headers: {
         "Content-Type": "application/json"
       },
-      credentials: 'include',
+      credentials: 'true',
       body: JSON.stringify({
         user: user,
         
@@ -30,52 +68,17 @@ export const addUser = (user) => {
     return fetch(USERSURL, configUser)
     .then(resp => resp.json())
     .then(userJSON => {
-      dispatch({ type: 'ADD_USER', user: userJSON})
+      dispatch({ type: 'ADD_USER', users: userJSON })
       if (userJSON.error) {
         alert("Vox Act user creation not complete. - Please try again.")
-      } 
+      } else {
+        
+        dispatch({ type: 'ADD_USER_SUCESS', users: userJSON })
+      }
     })
-    .catch(console.log) 
+    .catch(console.table) 
   }
 }
-
-
-//GET USERS
-export const GET_USERS = 'GET_USERS'
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
-export const getUsers = () => ({
-  type: GET_USERS,
-})
-export const getUserSuccess = (users) => ({
-  type: GET_USERS_SUCCESS,
-  payload: users,
-})
-export const GET_USERS_FAILURE = 'USER_ACTION_FAILURE'
-export const userActionFailure = () => ({
-  type: GET_USERS_FAILURE,
-})
-
-
-export function fetchUsers() {
-  return async (dispatch) => {
-    dispatch(getUsers())
-
-    try {
-      const resp = await
-      fetch(USERSURL)
-      const userJSON = await resp.json()
-      dispatch(getUserSuccess(userJSON))
-      console.log('getUsers from actions', userJSON)
-    }
-    catch (error) {  
-      alert('No users available')
-      dispatch(userActionFailure())
-    }
-  }
-}
-    
-
-
 
 
 export const loginUser = (user) => {
@@ -91,7 +94,7 @@ export const loginUser = (user) => {
       })
     }
     dispatch({ type: 'LOADING_USER'})
-    return fetch(LOGINURL, configLogin)
+    return fetch(USERSURL, configLogin)
     .then(resp => resp.json())
     .then(userJSON => {
       console.log('login resp', userJSON)
@@ -100,10 +103,10 @@ export const loginUser = (user) => {
         dispatch({ type: 'LOGIN_ERROR', error: userJSON.error})
       } 
       else {
-        dispatch({ type: 'LOGIN_USER', user: userJSON })
-        // dispatch({ type: 'GET_USER', user: user })
+        dispatch({ type: 'LOGIN_USER', users: userJSON })
       }
     })
     .catch(console.log)  
   }
 }
+export default ( fetchUsers, addUser, loginUser, getUserSuccess )

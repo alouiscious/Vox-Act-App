@@ -1,6 +1,8 @@
-const USERURL = "http://localhost:3000/users/"
+import { addUser, getUsers } from "./usersActions"
 
-// export const LOADING_USER = 'LOADING_USER'
+const USERURL = `http://localhost:3000/users/`
+
+export const LOADING_USER = 'LOADING_USER'
 export const GET_USER = 'GET_USER'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
@@ -13,6 +15,7 @@ export const getUserSuccess = user => ({
 
 export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
+// Get userlist
 export function fetchUser(id) {
   return async dispatch => {
     dispatch(getUser(id))
@@ -63,4 +66,4 @@ export const addUserPhoto = (userPhoto) => {
   }
 }
 
-export default ( fetchUser, addUserPhoto )
+export default ( fetchUser, addUserPhoto, getUser, addUser, getUserSuccess, getUsers )

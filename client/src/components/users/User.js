@@ -1,14 +1,9 @@
 import React from "react";
-import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
-
-  
-
 
   export const User = ({ user, talent }) => (
    
       <div className={talent ? 'talent_style' : 'user'}>
-      <Navbar />
       <h3>{user.user_name} {user.hometown}</h3>
       
       {talent && (

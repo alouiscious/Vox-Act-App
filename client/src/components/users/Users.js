@@ -1,49 +1,46 @@
 import React, { useEffect } from "react";
-import Navbar from "../Navbar";
-import { User } from "../users/User";
-import  { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
+import { fetchUsers } from '../../actions/usersActions';
+// import User from "./User";
 
-const Users = ({dispatch, loading, users, hasErrors, numberOfUsers }) => {
+const Users = ({dispatch, loading, users, hasErrors }) => {
+  (console.table('users renderUser', users))
   useEffect(() => {
     dispatch(fetchUsers())
   },[dispatch])
-  
+
   
   const renderUsers = () => {
-    if (loading) return <p>Loading User...</p>
-    if (hasErrors) return <p>Unable to display User.</p>
-    return (
-      users.map((user => 
-        <div key={user.id}>
-            <User  className="userLink" user={user} talent /> 
-        </div> 
-      ))
-    )
-  }   
-    
+    if (loading) return <p>Loading Clients...</p>
+    if (hasErrors) return <p>No Clients to display.</p>
+    // users.map((user) => {
+    //   return (
+    //     <div key={user.id}>
+    //       <User user={user}/>
+    //     </div> 
+    //   )
+    // })
+  }
+
   return (
-    <div>
-      <Navbar />
-      <br />
-      <h1>Vox Act - Client List</h1>
-      Get connected to more than {numberOfUsers} clients
-      {renderUsers()}
+    <div className="renderUsers">
+      <div>
+        <br />
+        <h1>Vox Act - Client List</h1>
+        {renderUsers()}
+      </div>
     </div>
   )   
-      
 }
 
 // Map Redux state to React component props
 const mapStateToProps = state => ({
-  loading: state.users.loading,
-  users: state.users.users,
-  hasErrors: state.users.hasErrors,
-  numberOfUsers: state.users.count,
-
+  users: state.users,
+  loading: state.loading,
+  hasErrors: state.hasErrors
 })      
-// Connect Redux to React
 
+// Connect Redux to React
 export default connect(mapStateToProps)(Users)
   
         

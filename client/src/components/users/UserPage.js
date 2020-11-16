@@ -1,9 +1,8 @@
 
 import React, { useEffect } from 'react'
-import Navbar from "../Navbar";
 import { connect } from "react-redux";
 import { fetchUser } from "../../actions/userActions";
-import  User  from "../users/User";
+import { User } from "../users/User";
 import { getTalents } from "../../actions/talentActions";
 import Talent from "../talents/Talent"
 import TalentInput from '../talents/TalentInput';
@@ -11,8 +10,9 @@ import TalentInput from '../talents/TalentInput';
 
 
 
-const UserPage = ({match, dispatch, user, talents, hasErrors, loading }) => {
+const UserPage = ({ match, dispatch, user, talents, hasErrors, loading }) => {
   useEffect(() => {
+    console.table('wa ha userpage match', match.params)
     const { id } = match.params
     dispatch(fetchUser(id))
     dispatch(getTalents(id))
@@ -42,31 +42,28 @@ const UserPage = ({match, dispatch, user, talents, hasErrors, loading }) => {
   }
 
   return (
-      <div className="renderUser">
-    <div>
-
-      <Navbar />
-    </div>
-    {/* <Link to="/" component={VoxAct}>Login</Link> */}
-    {/* <Link to="/Users" component={Users}>Client List</Link> */}
-      <h2>User</h2>
-        {renderUser()}
-      <h3>Talents</h3>
-        {renderTalents()}
-      <br />
-      <br />
-      Add Talents here...
+    <div className="renderUser">
+      <div>
+      </div>
+      {/* <Link to="/" component={VoxAct}>Login</Link> */}
+      {/* <Link to="/Users" component={Users}>Client List</Link> */}
+        <h2>User</h2>
+          {renderUser()}
+        <h3>Talents</h3>
+          {renderTalents()}
+        <br />
+        <br />
+        Add Talents here...
         <TalentInput />
     </div>
   )
 }
       
 const mapStateToProps = state => ({ 
-  user: state.login.user,
-  talents: state.talents.talents,
-  loading: { user: state.user.loading, talents: state.talents.loading },
-  hasErrors: { user: state.user.hasErrors, talents: state.talents.hasErrors },
-  numberOfUsers: state.user.count
+  user: state.user,
+  talent: state.talents,
+  loading: { user: state.loading, talents: state.loading },
+  hasErrors: { user: state.hasErrors, talents: state.hasErrors },
 })
 
 // const mapDispatchToProps = dispatch => ({

@@ -1,0 +1,29 @@
+2020-11-15 12:39:03.063 PST [3384] LOG:  starting PostgreSQL 12.5 on x86_64-apple-darwin16.7.0, compiled by Apple LLVM version 8.1.0 (clang-802.0.42), 64-bit
+2020-11-15 12:39:03.066 PST [3384] LOG:  listening on IPv6 address "::1", port 5432
+2020-11-15 12:39:03.066 PST [3384] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-11-15 12:39:03.067 PST [3384] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2020-11-15 12:39:03.077 PST [3385] LOG:  database system was shut down at 2020-11-15 12:36:08 PST
+2020-11-15 12:39:03.079 PST [3384] LOG:  database system is ready to accept connections
+2020-11-15 12:43:23.692 PST [3384] LOG:  received smart shutdown request
+2020-11-15 12:43:23.693 PST [3384] LOG:  background worker "logical replication launcher" (PID 3391) exited with exit code 1
+2020-11-15 12:43:23.693 PST [3386] LOG:  shutting down
+2020-11-15 12:43:23.698 PST [3384] LOG:  database system is shut down
+2020-11-15 18:14:24.607 PST [13695] LOG:  starting PostgreSQL 12.5 on x86_64-apple-darwin16.7.0, compiled by Apple LLVM version 8.1.0 (clang-802.0.42), 64-bit
+2020-11-15 18:14:24.611 PST [13695] LOG:  listening on IPv6 address "::1", port 5432
+2020-11-15 18:14:24.611 PST [13695] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-11-15 18:14:24.612 PST [13695] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2020-11-15 18:14:24.629 PST [13696] LOG:  database system was shut down at 2020-11-15 12:43:23 PST
+2020-11-15 18:14:24.635 PST [13695] LOG:  database system is ready to accept connections
+2020-11-15 18:15:17.016 PST [13751] FATAL:  database "vox_act_api_development" does not exist
+2020-11-15 18:25:02.451 PST [13695] LOG:  received smart shutdown request
+2020-11-15 18:25:02.452 PST [13695] LOG:  background worker "logical replication launcher" (PID 13702) exited with exit code 1
+2020-11-15 18:25:02.452 PST [13697] LOG:  shutting down
+2020-11-15 18:25:02.459 PST [13695] LOG:  database system is shut down
+2020-11-15 19:19:47.355 PST [7421] LOG:  starting PostgreSQL 12.5 on x86_64-apple-darwin16.7.0, compiled by Apple LLVM version 8.1.0 (clang-802.0.42), 64-bit
+2020-11-15 19:19:47.358 PST [7421] LOG:  could not bind IPv6 address "::1": Address already in use
+2020-11-15 19:19:47.358 PST [7421] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2020-11-15 19:19:47.358 PST [7421] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2020-11-15 19:19:47.358 PST [7421] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2020-11-15 19:19:47.358 PST [7421] WARNING:  could not create listen socket for "localhost"
+2020-11-15 19:19:47.358 PST [7421] FATAL:  could not create any TCP/IP sockets
+2020-11-15 19:19:47.358 PST [7421] LOG:  database system is shut down

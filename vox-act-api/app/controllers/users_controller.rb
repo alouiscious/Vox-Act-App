@@ -3,31 +3,32 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    users = User.all
-    render json: users
+    # binding.pry
+    @users = User.all
+    render json: @users
   end
 
   # GET /users/1
   def show
-    user = Users.find_by(id: params[:id])
+    @user = Users.find_by(id: params[:id])
     # render json: user.to_json(:include => {
     #   :talents => {
     #     :only => [:id, :talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf, :talent_id]
     #   }
     # })
-    render json: user
+    render json: @user
   end
 
   # POST /users
   def create
     # binding.pry
-    user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
+  @user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
     # @user = User.new(user_params)
 
-    if user.save
-      render json: user, status: :created, location: @user
+    if @user.save
+      render json: @user, status: :created, location: user
     else
-      render json: user.errors, status: :unprocessable_entity
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
