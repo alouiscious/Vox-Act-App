@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-// import talentsReducer from "./TalentsReducer";
-import userReducer from "./UserReducer";
+// // import talentsReducer from "./TalentsReducer";
+// import userReducer from "./UserReducer";
 import usersReducer from "./UsersReducer";
 
 const rootReducer = combineReducers({
-  userReducer,
+//   userReducer,
   usersReducer,
-  // talentsReducer
+//   talentsReducer
 })
 
 export default rootReducer

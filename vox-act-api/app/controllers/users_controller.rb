@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    # binding.pry
+    binding.pry
   @user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
     # @user = User.new(user_params)
 

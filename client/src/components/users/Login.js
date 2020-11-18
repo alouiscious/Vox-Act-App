@@ -1,77 +1,77 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { loginUser } from '../../actions/usersActions';
+// import React, { Component } from 'react';
+// import { connect } from "react-redux";
+// import { loginUser } from '../../actions/usersActions';
 
-class Login extends Component {
+// class Login extends Component {
 
-  state = {
-    id: "",
-    email: "",
-    password: ""
+//   state = {
+//     id: "",
+//     email: "",
+//     password: ""
     
-  }
+//   }
 
-  handleLoginInputChange = event => {
-    this.setState({ 
-      [event.target.name]: event.target.value
-    })
-  }
+//   handleLoginInputChange = event => {
+//     this.setState({ 
+//       [event.target.name]: event.target.value
+//     })
+//   }
     
-  handleLoginOnSubmit = event => {
-    event.preventDefault()
-    const user = ({
-      email: this.state.email,
-      password: this.state.password
-    })
+//   handleLoginOnSubmit = event => {
+//     event.preventDefault()
+//     const user = ({
+//       email: this.state.email,
+//       password: this.state.password
+//     })
     
-    console.log('this is state', this.state)
-    this.props.loginUser(user)
-    .then( () => {
-      console.log('this is user', user)
-      this.props.history.push(`/UserPage/${user.id}`)
-    })
+//     console.log('this is state', this.state)
+//     this.props.loginUser(user)
+//     .then( () => {
+//       console.log('this is user', user)
+//       this.props.history.push(`/UserPage/${user.id}`)
+//     })
 
-    this.setState({
-      email: "",
-      password: ""
-    })
-  }
+//     this.setState({
+//       email: "",
+//       password: ""
+//     })
+//   }
   
-  render() {
-      return (
-        <div className="Login">
-          Sign In.
+//   render() {
+//       return (
+//         <div className="Login">
+//           Sign In.
 
-          <form onSubmit={this.handleLoginOnSubmit}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={this.state.email}
-              onChange={this.handleLoginInputChange}
-              placeholder="email"
-            />
-            <br />
-            <label htmlFor="password">Password</label>
-            <input
-              type="text"
-              name="password"
-              id="password"
-              onChange={this.handleLoginInputChange}
-              value={this.state.password}
-              placeholder="password"
-            />
-            <br />
-            <input 
-              type="submit" 
-              value="Login"
-            />
-          </form>
+//           <form onSubmit={this.handleLoginOnSubmit}>
+//             <label htmlFor="email">Email</label>
+//             <input
+//               type="email"
+//               name="email"
+//               id="email"
+//               value={this.state.email}
+//               onChange={this.handleLoginInputChange}
+//               placeholder="email"
+//             />
+//             <br />
+//             <label htmlFor="password">Password</label>
+//             <input
+//               type="text"
+//               name="password"
+//               id="password"
+//               onChange={this.handleLoginInputChange}
+//               value={this.state.password}
+//               placeholder="password"
+//             />
+//             <br />
+//             <input 
+//               type="submit" 
+//               value="Login"
+//             />
+//           </form>
 
-        </div>
-      )
-    }
-  }
+//         </div>
+//       )
+//     }
+//   }
 
-export default connect(null, {loginUser})(Login)
+// export default connect(null, {loginUser})(Login)

@@ -17,9 +17,9 @@ gem 'puma', '~> 4.1'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'active_model_serializers'
-gem 'dot_env', '~> 0.0.3'
+gem 'dotenv-rails'
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+# gem 'image_processing', '~> 1.2'
 gem 'pry'
 gem 'jwt'
 
@@ -27,7 +27,7 @@ gem 'jwt'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem 'rack-cors', '~> 1.0', '>= 1.0.6'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

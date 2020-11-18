@@ -1,25 +1,18 @@
-import React, { useEffect } from "react";
-import { connect } from 'react-redux';
-import { fetchUsers } from '../../actions/usersActions';
+import React, { useEffect } from "react"
+import { connect } from 'react-redux'
+import  { fetchUsers }  from '../../actions/usersActions';
 // import User from "./User";
 
-const Users = ({dispatch, loading, users, hasErrors }) => {
-  (console.table('users renderUser', users))
+const Users = ({users, dispatch, loading, hasErrors }) => {
   useEffect(() => {
     dispatch(fetchUsers())
-  },[dispatch])
-
-  
+  }, [dispatch])
+    console.table(users)
   const renderUsers = () => {
     if (loading) return <p>Loading Clients...</p>
     if (hasErrors) return <p>No Clients to display.</p>
-    // users.map((user) => {
-    //   return (
-    //     <div key={user.id}>
-    //       <User user={user}/>
-    //     </div> 
-    //   )
-    // })
+    // return users.map(user => <User key={user.id} user={user} /> )
+    
   }
 
   return (
@@ -35,8 +28,8 @@ const Users = ({dispatch, loading, users, hasErrors }) => {
 
 // Map Redux state to React component props
 const mapStateToProps = state => ({
-  users: state.users,
   loading: state.loading,
+  users: state.users,
   hasErrors: state.hasErrors
 })      
 
