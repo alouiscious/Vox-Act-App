@@ -1,3 +1,31 @@
+## Dependencies (Gems/packages)
+## Configuration (environment variables/other stuff in config folder)
+## Database
+## Models
+## Views
+## Controllers
+## Routes
+
+THE THUNK CODE
+
+function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) => (next) => (action) => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState, extraArgument);
+    }
+
+    return next(action);
+  };
+}
+
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+export default thunk;
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -8,10 +8,11 @@ const link = {
   borderBottom: '2px solid black', 
   paddingBottom: '10px', 
   marginBottom: '12px' ,
-  // margin: '0 6px 6px',
-  background: 'brown',
+  margin: '0 6px 6px',
+  background: 'yellow',
   textDecoration: 'none',
-  color: 'brown',
+  color: 'yellow',
+  style: 'bold'
 }
 
 const Navbar = () => {
@@ -19,7 +20,7 @@ const Navbar = () => {
     <div >
       <NavLink 
         style={link}
-        activeStyle={{ background: 'darkblue'}}      
+        activeStyle={{ background: 'darkred'}}      
         to="/"
       >
         Sign In
@@ -27,14 +28,14 @@ const Navbar = () => {
 
       <NavLink 
         style={{ link, marginRight: '10px' }} 
-        activeStyle={{ background: 'darkblue'}}      
+        activeStyle={{ background: 'darkred'}}      
         to="/users"
       >
         Client List
       </NavLink>
       <NavLink
         style={{ link, marginRight: '10px' }} 
-        activeStyle={{ background: 'darkblue'}}      
+        activeStyle={{ background: 'darkred'}}      
         to="/users"
       >
         Sign Out
