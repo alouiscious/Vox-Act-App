@@ -17,7 +17,7 @@ const link = {
 
 const Navbar = () => {
   return (
-    <div >
+    <div className='navBar'>
       <NavLink 
         style={link}
         activeStyle={{ background: 'darkred'}}      

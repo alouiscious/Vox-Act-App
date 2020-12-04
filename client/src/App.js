@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Users from './components/users/Users';
 import Navbar from "./components/Navbar";
 import VoxAct from './containers/VoxAct'
-// import User from './/components/users/User';
-// import UserPage from './components/users/UserPage';
+import User from './/components/users/User';
+import UserPage from './components/users/UserPage';
 import logo from './logo.jpg';
 import './App.css';
 
@@ -18,8 +18,8 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={VoxAct} />
           <Route exact path="/Users" component={Users} />
-          {/* <Route exact path="/Users/:id" component={User} /> */}
-          {/* <Route exact path="/UserPage/id" component={UserPage} /> */}
+          <Route exact path="/Users/:id" component={User} />
+          <Route exact path="/UserPage/:id" component={UserPage} />
           {/* <Redirect to="/" /> */}
 
         </Switch>

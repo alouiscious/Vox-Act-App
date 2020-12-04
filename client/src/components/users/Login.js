@@ -1,36 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { loginUser } from '../../actions/usersActions';
+import { fetchUsers } from '../../actions/usersActions'
+import { loginUser } from '../../actions/userActions';
 
 class Login extends Component {
 
   state = {
     id: "",
     email: "",
-    password: ""
+    password: "",
     
   }
 
   handleLoginInputChange = event => {
     this.setState({ 
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      id: this.state.id,
     })
   }
     
   handleLoginOnSubmit = event => {
     event.preventDefault()
-    const user = ({
+    console.table('loginSubmit shape of state', this.state)
+
+    const user = ({ 
+      id: this.state.id,
       email: this.state.email,
-      password: this.state.password
-    })
-    
-    console.log('this is state', this.state)
-    this.props.loginUser(user)
-    .then( () => {
-      console.log('this is user', user)
-      this.props.history.push(`/UserPage/${user.id}`)
+      password: this.state.password,
     })
 
+    this.props.loginUser(user)
+    .then(() => {
+      this.props.history.push(`/UserPage/id`)
+      console.table('user after loginUser action', user)
+    })
+  
+    
     this.setState({
       email: "",
       password: ""
@@ -43,13 +48,12 @@ class Login extends Component {
           Sign In.
 
           <form onSubmit={this.handleLoginOnSubmit}>
-            {/* <label htmlFor="email">Email</label> */}
             <input
               type="email"
               name="email"
               id="email"
-              value={this.state.email}
               onChange={this.handleLoginInputChange}
+              value={this.state.email}
               placeholder="email"
             />
             <br />
@@ -65,8 +69,8 @@ class Login extends Component {
             <br />
             <input 
               type="submit" 
-              value="Login"
-            />
+              value="Act Vox Login"
+            /> 
           </form>
 
         </div>
@@ -74,4 +78,4 @@ class Login extends Component {
     }
   }
 
-export default connect(null, {loginUser})(Login)
+export default connect(null, {fetchUsers, loginUser})(Login)

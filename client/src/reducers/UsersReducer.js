@@ -8,19 +8,22 @@ export const initialState = {
 }
 let idx
 export default function usersReducer(state = initialState, action) {
-  (console.log('actions from usersreducer', action))
+  console.table('actions from usersreducer', action)
+  console.table('state from usersreducer', state)
+
   switch (action.type) { 
+    case usersActions.LOADING_USERS:
+      return {...state, loading: true}
     case usersActions.GET_USERS:
       return { ...state, loading: true }
     case usersActions.GET_USERS_SUCCESS:
       return { list: action.payload, loading: false, hasErrors: false }
     case usersActions.GET_USERS_FAILURE:
       return { ...state, loading: false, hasErrors: true }
-          
-      case usersActions.ADD_USERS:
-        return { ...state, loading: false }
-        case usersActions.ADD_USERS_SUCCESS:
-          // console.log('adduser  - usersRed LOADING_USER after create', state.list)
+    case usersActions.ADD_USERS:
+      return { ...state, loading: false }
+    case usersActions.ADD_USERS_SUCCESS:
+      // console.table('adduser  - usersRed LOADING_USER after create', state.list)
       return {
         ...state,
         user: state.user, loading: false
@@ -38,18 +41,8 @@ export default function usersReducer(state = initialState, action) {
           ]
         }
       )
-
-    case usersActions.LOGIN_USER:
-      // console.log('action login', action)
-      return ({
-        ...state, 
-        user: {...action.user, loggedIn: true, loading: false},
-      })
-
-    case usersActions.LOGIN_ERROR:
-      return ({...state, loginError: action.error})
+    default:
+      return state
+    }    
     
-      default:
-        return state
-    }
   }  

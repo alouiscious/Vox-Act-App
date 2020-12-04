@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Login from '../components/users/Login'
+import { loginUser } from '../actions/userActions'
 import UserInput from '../components/users/UserInput'
-import { addUsers, fetchUsers, loginUser } from "../actions/usersActions";
+import { addUsers, fetchUsers } from "../actions/usersActions";
 
 class VoxAct extends Component {
 
@@ -38,7 +39,7 @@ class VoxAct extends Component {
 }
 
 const mapStateToProps = state => {
-  console.table('voxact', state)
+  console.table('voxact state shape', state)
   return {
     error: <state className="loginerror"></state>
   }

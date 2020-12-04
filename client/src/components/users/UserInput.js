@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/usersActions";
+import { loginUser } from "../../actions/userActions";
 import { addUsers } from "../../actions/usersActions";
 import {v4 as uuid} from 'uuid'
 
@@ -32,22 +32,21 @@ class UserInput extends Component {
       password: this.state.password,
       upph: this.state.upph
     })     
-    console.log('wa ha input user', this.state)
+    console.table('wa ha Userinput state', this.state)
     
     const login = ({
-      upid: this.state.upid,
-      password: this.state.password,
       email: this.state.email, 
+      password: this.state.password,
     })
 
-    console.log('wa ha props user', this.props)
+    console.table('wa ha props user', this.props)
     this.props.addUsers(user)
     .then(userJSON  => {
-      console.log('wa ha input user', userJSON)
+      console.table('wa ha input user', userJSON)
       return this.props.loginUser(login)
     })
     .then(() => {
-      this.props.history.push('/Users')
+      this.props.history.push('/UserPage')
     })
     
     this.setState({
@@ -104,7 +103,7 @@ class UserInput extends Component {
           <br />
           <input 
             type="submit" 
-            value="Create Client Profile"
+            value="Create Act Vox Profile"
           />
         </form>
       </div>
