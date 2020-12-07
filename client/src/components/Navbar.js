@@ -36,7 +36,7 @@ const Navbar = () => {
       <NavLink
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'darkred'}}      
-        to="/users"
+        to="/user"
       >
         Sign Out
       </NavLink>

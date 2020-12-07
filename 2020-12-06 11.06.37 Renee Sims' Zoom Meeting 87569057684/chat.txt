@@ -1,0 +1,2 @@
+12:27:30	 From Dakota Martinez : expose: ['access-token', 'expiry', 'token-type', 'Authorization']
+12:34:01	 From Dakota Martinez : https://github.com/cyu/rack-cors

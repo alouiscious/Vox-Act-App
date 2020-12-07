@@ -1,4 +1,3 @@
-// import all actions
 import * as usersActions from "../actions/usersActions"
 
 export const initialState = {
@@ -8,8 +7,7 @@ export const initialState = {
 }
 let idx
 export default function usersReducer(state = initialState, action) {
-  console.table('actions from usersreducer', action)
-  console.table('state from usersreducer', state)
+  // console.table('actions from usersreducer', action)
 
   switch (action.type) { 
     case usersActions.LOADING_USERS:

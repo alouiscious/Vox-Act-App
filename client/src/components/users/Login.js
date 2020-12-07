@@ -24,14 +24,13 @@ class Login extends Component {
     console.table('loginSubmit shape of state', this.state)
 
     const user = ({ 
-      id: this.state.id,
       email: this.state.email,
       password: this.state.password,
     })
 
     this.props.loginUser(user)
     .then(() => {
-      this.props.history.push(`/UserPage/id`)
+      // this.props.history.push(`/UserPage/${user.id}`)
       console.table('user after loginUser action', user)
     })
   

@@ -1,11 +1,66 @@
-// import { fetchusers } from '../actions/usersActions'
+// import { fetchUsers } from '../actions/usersActions'
+
+export const LOGIN_USER = 'LOGIN_USER'
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+
+export const loginLoader = () => ({ 
+  type: LOGIN_USER,
+})
+export const loginSuccess = (user) => ({
+  type: LOGIN_USER_SUCCESS,
+  payload: user,
+})
+
+export function loginUser(user) {
+  console.table('userObj when login is called', user)
+  return async (dispatch) => {
+    // dispatch(fetchClient(user.id))
+    dispatch(loginLoader())
+
+    const configLogin = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": "true",
+        "Accept": "application/json",
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        user: user
+      })
+    }
+    // dispatch({ type: 'LOADING_USER'})
+    return fetch(`http://localhost:3000/login`, configLogin)
+    .then(resp => resp.json())
+    .then(loginJSON => {
+      console.table('login promise', loginJSON)
+      // if (loginJSON.error) {
+      //   dispatch(loginActionFailure()) 
+      //   alert("Sorry. Not a Vox Act client? Sign up...")
+      //   // dispatch({ type: 'LOGIN_ERROR', error: loginJSON.error})
+      // } 
+      // else {
+        // dispatch(fetchUsers(user))
+        return dispatch(loginSuccess(loginJSON))
+
+        // localStorage.setItem('jwt', user.auth_token)
+        // dispatch({ type: 'LOGIN_USER', user: loginJSON.user })
+    //   }
+    })
+    .catch(console.log)  
+  }
+}
+
 
 export const LOADING_USER = 'LOADING_USER'
 export const GET_USER = 'GET_USER'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const GET_USER_FAILURE = 'USER_ACTION_FAILURE'
 
-export const getUser = () => ({ type: GET_USER })
+export const getUser = () => ({ 
+  type: GET_USER,
+})
 export const getUserSuccess = user => ({
   type: GET_USER_SUCCESS,
   payload: user,
@@ -15,12 +70,10 @@ export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
 // Get Client Details
 export function fetchClient(id) {
-  const USERURL = `https://localhost:3000/users/${id}`
-
+  const USERURL = `http://localhost:3000/users/${id}`
   return async (dispatch) => {
     dispatch(getUser())
-    
-    
+  
     dispatch({type: 'LOADING_USER'})
     return fetch(USERURL)
     .then(resp => resp.json())
@@ -49,7 +102,7 @@ export const addUserPhotoSuccess = (userPhoto) => ({
 export const userPhotoActionFailure = () => ({ type: ADD_USER_PHOTO_FAILURE })
 
 export function addUserPhoto(userPhoto, id) {
-  const USERURL = `https://localhost:3000/users/${id}`
+  const USERURL = `http://localhost:3000/users/${id}`
 
   return async (dispatch) => {
     const configUpph = {
@@ -58,7 +111,7 @@ export function addUserPhoto(userPhoto, id) {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         userPhoto: userPhoto,
       })
@@ -72,6 +125,7 @@ export function addUserPhoto(userPhoto, id) {
       //   alert("Vox Act client creation not complete. - Please try again.")
       // } 
       // else {
+        dispatch(fetchClient(clientJSON.user.id))
         dispatch(getUserPhoto())
         dispatch(addUserPhotoSuccess(clientJSON))
       // }
@@ -85,61 +139,37 @@ export function addUserPhoto(userPhoto, id) {
 }
 
 
-export const LOGIN_USER = 'LOGIN_USER'
-export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
-export const LOGIN_ERROR = 'LOGIN_ERROR'
-export const LOGOUT = 'LOGOUT'
-
-export const loginLoader = () => ({ type: LOGIN_USER })
-export const loginSuccess = (user) => ({
-  type: LOGIN_USER_SUCCESS,
-  payload: user,
-})
-
 export const loginActionFailure = () => ({ type: LOGIN_ERROR })
+
+export const LOGOUT = 'LOGOUT'
 export const logout = () => ({ type: LOGOUT })
-
-export function loginUser(user) {
-  console.table(user)
+export function logoutUser() {
   return async (dispatch) => {
-    dispatch(loginLoader())
-
-    const configLogin = {
-      method: "POST",
+    const configDeleteUser = {
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Accept": "application/json",
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        user: user
-      })
+      credentials: 'include'
     }
-    dispatch({ type: 'LOADING_USER'})
-    return fetch(`https://localhost:3000/users/`, configLogin)
+    return fetch(`auth`, configDeleteUser)
     .then(resp => resp.json())
-    .then(loginJSON => {
-      console.table('login resp', loginJSON)
-      if (loginJSON.error) {
-        dispatch(loginActionFailure()) 
-        alert("Sorry. Not a Vox Act client? Sign up...")
-        // dispatch({ type: 'LOGIN_ERROR', error: loginJSON.error})
-      } 
-      else {
-        dispatch(loginSuccess(loginJSON))
-        localStorage.setItem('jwt', user.auth_token)
-        // dispatch({ type: 'LOGIN_USER', user: loginJSON.user })
-      }
+    .then(logoutJSON => {
+      dispatch(logout(logoutJSON))
+      alert('Logged Out')
     })
-    .catch(console.log)  
   }
 }
 
-function currentUser(user) {
 
-  return fetch(`https://localhost:3000/users/`)
-  ({
-    credentials: 'include'
 
+function currentUser() {
+  return fetch(`http://localhost:3000/current_user`)
+  ({ credentials: 'include' })
+  .then(resp => resp.json())
+  .then(currentUserJSON => {
+    console.log(currentUserJSON)
   })
 }
 

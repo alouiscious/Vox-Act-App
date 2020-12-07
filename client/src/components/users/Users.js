@@ -7,13 +7,18 @@ const Users = ({list, dispatch, loading, hasErrors }) => {
   useEffect(() => {
     dispatch(fetchUsers())
   }, [dispatch])
-    // console.table('Users List', list)
+    console.table('Users List', list)
     
   const renderUsers = () => {
     if (loading) return <p>Loading Clients...</p>
     if (hasErrors) return <p>No Clients to display.</p>
     console.table('Users List', list)
-    return list.map((user) => <User key={user.id} user={user} /> );
+    return list.map(
+      (user) => <User 
+      key={user.id} user={user}
+
+      />
+      )
   }
 
   return (
@@ -28,7 +33,8 @@ const Users = ({list, dispatch, loading, hasErrors }) => {
 }
 
 // Map Redux state to React component props
-const mapStateToProps = ({usersReducer}) => ({
+const mapStateToProps = ({usersReducer, userReducer}) => ({
+  user: userReducer.user,
   list: usersReducer.list,
   loading: usersReducer.loading,
   hasErrors: usersReducer.hasErrors

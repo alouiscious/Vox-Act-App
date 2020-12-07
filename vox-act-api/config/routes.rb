@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  resources :users
   post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#delete'
+  delete '/logout', to: 'sessions#destroy'
   get 'get_current_user', to: 'sessions#get_current_user'
   
+  resources :users
   post '/user', to: 'users#create'
   get '/users', to: 'users#index'
   get '/user', to: 'users#show'
-
+  
   resources :talents
   post '/talent', to: 'talents#create'
   get '/talents', to: 'talents#index'

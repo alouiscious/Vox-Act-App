@@ -50,7 +50,7 @@ export const addUsers = (user) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         user: user,
       })
@@ -71,8 +71,6 @@ export const addUsers = (user) => {
     .catch(console.table) 
   }
 }
-
-
 
 export const REMOVE_USER = 'REMOVE_USER'
 
