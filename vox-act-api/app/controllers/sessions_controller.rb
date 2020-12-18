@@ -1,14 +1,16 @@
 class SessionsController < ApplicationController
 
-  def create #login
+  def login
     # binding.pry
     user = User.find_by(email: params[:user][:email])
 
     if user && user.authenticate(params[:user][:password])
-      token = encode_token(id: user.id)
+      
+      payload = {id: user.id}
+      token = encode_token(payload)
+      # token = encode_token(id: user.id)
       cookies.signed[:jwt] = {value: token, httponly: true, expires: 2.hours.from_now}
       # binding.pry
-      # render json: UserSerializer.new(user, {token: token})
       userObj = {
         id: user.id,
         username: user.user_name,
@@ -16,14 +18,21 @@ class SessionsController < ApplicationController
         password: user.password,
         token: token
       }
-      render json: userObj, status: 200
+      render json: => {userObj, token: token, status: 200}
     else
       resp = {
-        error: "Login not valid.",
+        error: "Login or User not valid.",
         details: user.errors.full_messages
       }
       render json: resp, status: :unauthorized
     end
+  end
+
+  def token_auth
+    token = request.headers["Authenticate"]
+    user = User.find(decode(token)["id"])
+
+    render json: user
   end
 
   def destroy

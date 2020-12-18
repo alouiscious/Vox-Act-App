@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  post '/login', to: 'sessions#create'
+  post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
-  get 'get_current_user', to: 'sessions#get_current_user'
+  get 'get_current_user', to: 'sessions#token_auth'
   
+
   resources :users
   post '/user', to: 'users#create'
   get '/users', to: 'users#index'

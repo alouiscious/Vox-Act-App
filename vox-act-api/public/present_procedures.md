@@ -12,7 +12,7 @@ User.find_by_id(decoded[:id]) #? not sure it will look exactly like that
 # when you test this, you'll want to paste in your encode_token and decode_token methods
 into the rails console
 
-# encode and decode and try client-side local cookie jwt.
+# encode and decode and try client-side local cookie jwt storage.
 
 # Cors: settings
 include credential for login actions

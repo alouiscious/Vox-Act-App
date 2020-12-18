@@ -22,33 +22,39 @@ export function loginUser(user) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": "true",
+        // "Access-Control-Allow-Credentials": "true",
         "Accept": "application/json",
+        "Authenticate": localStorage.token,
       },
       credentials: 'include',
       body: JSON.stringify({
         user: user
       })
     }
-    // dispatch({ type: 'LOADING_USER'})
-    return fetch(`http://localhost:3000/login`, configLogin)
-    .then(resp => resp.json())
-    .then(loginJSON => {
-      console.table('login promise', loginJSON)
-      // if (loginJSON.error) {
-      //   dispatch(loginActionFailure()) 
-      //   alert("Sorry. Not a Vox Act client? Sign up...")
-      //   // dispatch({ type: 'LOGIN_ERROR', error: loginJSON.error})
-      // } 
-      // else {
-        // dispatch(fetchUsers(user))
-        return dispatch(loginSuccess(loginJSON))
+    if(localStorage.getItem("token")) {
+      return fetch(`http://localhost:3000/login`, configLogin)
+      .then(resp => resp.json())
+      .then(user => {
+        this.user(user)
+      })
+      .then(loginJSON => {
+        console.table('login promise', loginJSON)
+        if (loginJSON.error) {
+          dispatch(loginActionFailure()) 
+          alert("Sorry. Not a Vox Act client? Sign up...")
+          // dispatch({ type: 'LOGIN_ERROR', error: loginJSON.error})
+        } 
+        else {
+          localStorage.setItem('jwt', user.auth_token)
+          localStorage.setItem('token', loginJSON.token)
+          this.user(loginJSON.user)
+          // dispatch({ type: 'LOGIN_USER', user: loginJSON.user })
+          return dispatch(loginSuccess(loginJSON))
 
-        // localStorage.setItem('jwt', user.auth_token)
-        // dispatch({ type: 'LOGIN_USER', user: loginJSON.user })
-    //   }
-    })
-    .catch(console.log)  
+        }
+      })
+      .catch(console.log) 
+    } 
   }
 }
 
@@ -142,7 +148,12 @@ export function addUserPhoto(userPhoto, id) {
 export const loginActionFailure = () => ({ type: LOGIN_ERROR })
 
 export const LOGOUT = 'LOGOUT'
-export const logout = () => ({ type: LOGOUT })
+export const logout = () =>  
+  ({type: LOGOUT})
+
+  localStorage.removeItem("token")
+
+
 export function logoutUser() {
   return async (dispatch) => {
     const configDeleteUser = {
@@ -157,6 +168,7 @@ export function logoutUser() {
     .then(resp => resp.json())
     .then(logoutJSON => {
       dispatch(logout(logoutJSON))
+      this.user({})
       alert('Logged Out')
     })
   }

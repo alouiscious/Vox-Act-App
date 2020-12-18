@@ -30,7 +30,7 @@ class Login extends Component {
 
     this.props.loginUser(user)
     .then(() => {
-      // this.props.history.push(`/UserPage/${user.id}`)
+      this.props.history.push(`/UserPage/${user.id}`)
       console.table('user after loginUser action', user)
     })
   
