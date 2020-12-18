@@ -13,49 +13,39 @@ export const loginSuccess = (user) => ({
 })
 
 export function loginUser(user) {
-  console.table('userObj when login is called', user)
+  console.table("userObj when login is called", user);
   return async (dispatch) => {
     // dispatch(fetchClient(user.id))
-    dispatch(loginLoader())
+    //dispatch(loginLoader())
 
     const configLogin = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // "Access-Control-Allow-Credentials": "true",
-        "Accept": "application/json",
-        "Authenticate": localStorage.token,
+        Accept: "application/json",
+        Authenticate: localStorage.token,
       },
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify({
-        user: user
-      })
-    }
-    if(localStorage.getItem("token")) {
-      return fetch(`http://localhost:3000/login`, configLogin)
-      .then(resp => resp.json())
-      .then(user => {
-        this.user(user)
-      })
-      .then(loginJSON => {
-        console.table('login promise', loginJSON)
+        user: user,
+      }),
+    };
+    return fetch(`http://localhost:3000/login`, configLogin)
+      .then((resp) => resp.json())
+      .then((loginJSON) => {
+        console.table("login promise", loginJSON);
         if (loginJSON.error) {
-          dispatch(loginActionFailure()) 
-          alert("Sorry. Not a Vox Act client? Sign up...")
-          // dispatch({ type: 'LOGIN_ERROR', error: loginJSON.error})
-        } 
-        else {
-          localStorage.setItem('jwt', user.auth_token)
-          localStorage.setItem('token', loginJSON.token)
-          this.user(loginJSON.user)
-          // dispatch({ type: 'LOGIN_USER', user: loginJSON.user })
-          return dispatch(loginSuccess(loginJSON))
-
+          dispatch(loginActionFailure());
+          alert("Sorry. Not a Vox Act client? Sign up...");
+        } else {
+          // localStorage.setItem("jwt", user.auth_token);
+          localStorage.setItem("token", loginJSON.token);
+          return dispatch(loginSuccess(loginJSON));
         }
       })
-      .catch(console.log) 
-    } 
-  }
+      .catch(console.log);
+  };
 }
 
 
@@ -76,25 +66,31 @@ export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
 // Get Client Details
 export function fetchClient(id) {
-  const USERURL = `http://localhost:3000/users/${id}`
-  return async (dispatch) => {
-    dispatch(getUser())
-  
-    dispatch({type: 'LOADING_USER'})
-    return fetch(USERURL)
-    .then(resp => resp.json())
-    .then(clientJSON => {
-      dispatch(getUserSuccess(clientJSON))
-      console.table('getUserSuc from actions', clientJSON)
-    })
-    .catch(
-      console.error(
-        dispatch(userActionFailure()),
-        alert('No User available from userActions')
+  // if (localStorage.getItem("token")) {
+    const USERURL = `http://localhost:3000/users/${id}`;
+    return async (dispatch) => {
+      dispatch(getUser());
 
-      )
-    )
-  }
+      dispatch({ type: "LOADING_USER" });
+      return fetch(USERURL)
+        .then((resp) => resp.json())
+        // .then((user) => {
+        //   setUser(user);
+        // })
+        .then((clientJSON) => {
+          // localStorage.setItem("token", clientJSON.token);
+          // setUser(clientJSON.user);
+          dispatch(getUserSuccess(clientJSON));
+          console.table("getUserSuc from actions", clientJSON);
+        })
+        .catch(() => {
+          console.error(
+            dispatch(userActionFailure()),
+            alert("No User available from userActions")
+          );
+        });
+    };
+  // }
 }
 
 export const ADD_USER_PHOTO = 'ADD_USER_PHOTO'

@@ -34,7 +34,6 @@ class Login extends Component {
       console.table('user after loginUser action', user)
     })
   
-    
     this.setState({
       email: "",
       password: ""

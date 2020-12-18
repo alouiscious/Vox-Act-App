@@ -4,10 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   def index
     # binding.pry
-    if logged_in? && current_user.user?
+    # if logged_in? && current_user.user?
 
-    @users = User.all
-    render json: @users, status: 200
+      @users = User.all
+      render json: @users, status: 200
+    # end
   end
 
   # GET /users/1
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
   # POST /users
   def create
     # binding.pry
-  @user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
+    @user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
     # @user = User.new(user_params)
 
     if @user.save
@@ -56,8 +57,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(
-        :user_name, :hometown, :email, :password, :upid, :upph, :talent_id
-      )
+      params.require(:user).permit(:user_name, :hometown, :email, :password, :upid, :upph, :talent_id)
     end
 end

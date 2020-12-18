@@ -6,11 +6,12 @@ decoded = decode_token(encoded)
 # encode_token
 User.find_by_id(decoded[:id]) #? not sure it will look exactly like that
 # 'super secret' should be your rails secret key base
-# check rails credentials by running `EDITOR="code --wait" rails credentials:edit`
-# replace "super secret" with Rails.application.credentials.config[:secret_key_base]
+# check rails credentials by running 
+`EDITOR="code --wait" rails credentials:edit`
+# replace "super secret" with 
+Rails.application.credentials.config[:secret_key_base]
 # that secret will be used to decode the token as well
-# when you test this, you'll want to paste in your encode_token and decode_token methods
-into the rails console
+# when you test this, you'll want to paste in your encode_token and decode_token methods into the rails console
 
 # encode and decode and try client-side local cookie jwt storage.
 

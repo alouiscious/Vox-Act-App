@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  def login
+  def create #login
     # binding.pry
     user = User.find_by(email: params[:user][:email])
 
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         password: user.password,
         token: token
       }
-      render json: => {userObj, token: token, status: 200}
+      render json: {user: userObj, token: token, status: 200}
     else
       resp = {
         error: "Login or User not valid.",
