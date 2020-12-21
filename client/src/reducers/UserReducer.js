@@ -25,7 +25,6 @@ export default function userReducer(state = initialState, action) {
   
     case userActions.LOGIN_USER:
       const user = {
-        id: action.id,
         email: action.email,
         password: action.password,
       }
@@ -39,7 +38,8 @@ export default function userReducer(state = initialState, action) {
       )
         // return {...state, loading: true, id: action.id, user_name: action.user_name, upid: action.upid}
       case userActions.LOGIN_USER_SUCCESS:
-        return { user: action.payload, id: action.id, loading: false, hasErrors: false }
+        console.log("case login user success", { user: action.payload, id: action.payload.id, loading: false, hasErrors: false })
+        return { user: action.payload, id: action.payload.id, loading: false, hasErrors: false }
   
     case userActions.LOGIN_ERROR:
       return ({...state, loginError: action.error})

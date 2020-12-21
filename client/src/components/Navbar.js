@@ -9,33 +9,43 @@ const link = {
   paddingBottom: '10px', 
   marginBottom: '12px' ,
   margin: '0 6px 6px',
-  background: 'yellow',
+  background: 'brown',
   textDecoration: 'none',
-  color: 'yellow',
+  color: 'brown',
   style: 'bold'
 }
 
 const Navbar = () => {
   return (
     <div className='navBar'>
+
       <NavLink 
-        style={link}
-        activeStyle={{ background: 'darkred'}}      
+        style={{ link, marginRight: '10px' }} 
+        activeStyle={{ background: 'crimson'}}      
         to="/"
       >
         Sign In
       </NavLink>
-
+            
       <NavLink 
         style={{ link, marginRight: '10px' }} 
-        activeStyle={{ background: 'darkred'}}      
+        activeStyle={{ background: 'crimson'}}      
+        to="/userInput"
+      >
+        Sign Up
+      </NavLink>
+      
+      <NavLink 
+        style={{ link, marginRight: '10px' }} 
+        activeStyle={{ background: 'crimson'}}      
         to="/users"
       >
         Client List
       </NavLink>
+
       <NavLink
         style={{ link, marginRight: '10px' }} 
-        activeStyle={{ background: 'darkred'}}      
+        activeStyle={{ background: 'crimson'}}      
         to="/user"
       >
         Sign Out

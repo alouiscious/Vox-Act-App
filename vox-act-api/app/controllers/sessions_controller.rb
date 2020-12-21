@@ -1,16 +1,12 @@
 class SessionsController < ApplicationController
 
   def create #login
-    # binding.pry
     user = User.find_by(email: params[:user][:email])
-
+    
     if user && user.authenticate(params[:user][:password])
-      
-      payload = {id: user.id}
+      payload = {user_id: user.id}
       token = encode_token(payload)
-      # token = encode_token(id: user.id)
       cookies.signed[:jwt] = {value: token, httponly: true, expires: 2.hours.from_now}
-      # binding.pry
       userObj = {
         id: user.id,
         username: user.user_name,
@@ -27,10 +23,10 @@ class SessionsController < ApplicationController
       render json: resp, status: :unauthorized
     end
   end
-
+  
   def token_auth
     token = request.headers["Authenticate"]
-    user = User.find(decode(token)["id"])
+    user = User.find(decode(token)["user_id"])
 
     render json: user
   end

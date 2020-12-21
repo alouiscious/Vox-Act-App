@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Users from './components/users/Users';
 import Navbar from "./components/Navbar";
-import VoxAct from './containers/VoxAct'
+import VoxActSignIn from './containers/VoxActSignIn'
+import VoxActSignUp from './containers/VoxActSignUp'
 import User from './/components/users/User';
 import UserPage from './components/users/UserPage';
 import logo from './logo.jpg';
@@ -16,12 +17,12 @@ const App = () => {
         <br />
         <img src={logo} className="App-logo" alt="logo" />
         <Switch>
-          <Route exact path="/" component={VoxAct} />
+          <Route exact path="/" component={VoxActSignIn} />
+          <Route exact path="/UserInput" component={VoxActSignUp} />
           <Route exact path="/Users" component={Users} />
           <Route exact path="/Users/:id" component={User} />
           <Route exact path="/UserPage/:id" component={UserPage} />
           {/* <Redirect to="/" /> */}
-
         </Switch>
       </Router>
 

@@ -22,16 +22,21 @@ class Login extends Component {
   handleLoginOnSubmit = event => {
     event.preventDefault()
     console.table('loginSubmit shape of state', this.state)
+    console.table(' shape of state.id', this.state.id)
 
     const user = ({ 
+      id: this.state.id,
       email: this.state.email,
       password: this.state.password,
     })
 
+    console.table('user after loginUser action', user)
     this.props.loginUser(user)
-    .then(() => {
-      this.props.history.push(`/UserPage/${user.id}`)
-      console.table('user after loginUser action', user)
+    .then((resp) => {
+    
+      console.log("before or after",`${resp.payload.id}`)
+      this.props.history.push(`/UserPage/${resp.payload.id}`)
+      // this.props.fetchClient(`${resp.payload.id}`)
     })
   
     this.setState({

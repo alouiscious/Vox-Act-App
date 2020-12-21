@@ -3,23 +3,17 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
+    if logged_in? && current_user.user?
     # binding.pry
-    # if logged_in? && current_user.user?
-
-      @users = User.all
-      render json: @users, status: 200
-    # end
+    @users = User.all
+    render json: @users, status: 200
+    end
   end
-
+  
   # GET /users/1
   def show
-    @user = Users.find_by(id: params[:id])
-    # render json: user.to_json(:include => {
-    #   :talents => {
-    #     :only => [:id, :talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf, :talent_id]
-    #   }
-    # })
-    render json: @user
+    # user = Users.find(params["token"])
+    render json: @user, status: 200
   end
 
   # POST /users
@@ -52,11 +46,12 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params{:id})
+      # binding.pry
+      @user = User.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:user_name, :hometown, :email, :password, :upid, :upph, :talent_id)
+      params.require(:user).permit(:id, :user_name, :hometown, :email, :password, :upid, :upph, :talent_id)
     end
 end

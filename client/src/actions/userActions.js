@@ -13,11 +13,8 @@ export const loginSuccess = (user) => ({
 })
 
 export function loginUser(user) {
-  console.table("userObj when login is called", user);
+  console.table("first userObj when login is called", user);
   return async (dispatch) => {
-    // dispatch(fetchClient(user.id))
-    //dispatch(loginLoader())
-
     const configLogin = {
       method: "POST",
       headers: {
@@ -41,7 +38,11 @@ export function loginUser(user) {
         } else {
           // localStorage.setItem("jwt", user.auth_token);
           localStorage.setItem("token", loginJSON.token);
-          return dispatch(loginSuccess(loginJSON));
+          console.table("userObj when login is called", loginJSON.user);
+          return (
+            dispatch(loginSuccess(loginJSON.user))
+            // dispatch(fetchClient(loginJSON.user.id))
+          )
         }
       })
       .catch(console.log);
@@ -66,7 +67,7 @@ export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
 // Get Client Details
 export function fetchClient(id) {
-  // if (localStorage.getItem("token")) {
+  if (localStorage.getItem("token")) {
     const USERURL = `http://localhost:3000/users/${id}`;
     return async (dispatch) => {
       dispatch(getUser());
@@ -74,13 +75,13 @@ export function fetchClient(id) {
       dispatch({ type: "LOADING_USER" });
       return fetch(USERURL)
         .then((resp) => resp.json())
-        // .then((user) => {
-        //   setUser(user);
-        // })
+        .then((user) => {
+          localStorage.setItem(user);
+        })
         .then((clientJSON) => {
-          // localStorage.setItem("token", clientJSON.token);
-          // setUser(clientJSON.user);
-          dispatch(getUserSuccess(clientJSON));
+          localStorage.setItem("token", clientJSON.token);
+          localStorage.setItem("user", clientJSON.user);
+          dispatch(getUserSuccess(clientJSON.user));
           console.table("getUserSuc from actions", clientJSON);
         })
         .catch(() => {
@@ -90,7 +91,7 @@ export function fetchClient(id) {
           );
         });
     };
-  // }
+  }
 }
 
 export const ADD_USER_PHOTO = 'ADD_USER_PHOTO'
