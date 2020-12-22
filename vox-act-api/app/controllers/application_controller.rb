@@ -4,7 +4,6 @@ class ApplicationController < ActionController::API
   def authenticate_user
     jwt = cookies.signed[:jwt]
     decode_jwt(jwt)
-    # decode_token(jwt)
   end
   
   # helper_method :current_user
@@ -14,17 +13,17 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def logged_in
+  def logged_in?
     !!current_user
   end
 
   def encode_token(payload)
+    # binding.pry
     # JWT.encode(payload, "super secret")
-    JWT.encode(payload, `{Rails.application.credentials.config[:secret_key_base]}`)
+    JWT.encode(payload, Rails.application.credentials.config[:secret_key_base])
   end
 
   def decode_token(token)
-    # JWT.decode(token, encode_token)
-    JWT.decode(token, "Rails.application.credentials.config[:secret_key_base]")[0]
+    JWT.decode(token, Rails.application.credentials.config[:secret_key_base])[0]
   end
 end

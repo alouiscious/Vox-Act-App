@@ -19,6 +19,7 @@ export const addNewTalent = (talent, user) => {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: "include",
       body: JSON.stringify({
         talent: talent,
         user: user
@@ -85,6 +86,7 @@ export function deleteTalent(talent) {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: "include",
       body: JSON.stringify({
         talent: talent
       })

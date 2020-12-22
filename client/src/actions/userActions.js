@@ -69,28 +69,23 @@ export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 export function fetchClient(id) {
   if (localStorage.getItem("token")) {
     const USERURL = `http://localhost:3000/users/${id}`;
-    return async (dispatch) => {
-      dispatch(getUser());
-
-      dispatch({ type: "LOADING_USER" });
-      return fetch(USERURL)
-        .then((resp) => resp.json())
-        .then((user) => {
-          localStorage.setItem(user);
-        })
-        .then((clientJSON) => {
-          localStorage.setItem("token", clientJSON.token);
-          localStorage.setItem("user", clientJSON.user);
-          dispatch(getUserSuccess(clientJSON.user));
-          console.table("getUserSuc from actions", clientJSON);
-        })
-        .catch(() => {
-          console.error(
-            dispatch(userActionFailure()),
-            alert("No User available from userActions")
-          );
-        });
-    };
+    return async dispatch => {
+      dispatch(getUser())
+      try {
+        const resp = await fetch(USERURL)
+        const clientJSON = await resp.json()
+        dispatch(getUserSuccess(clientJSON));
+        localStorage.setItem("user", clientJSON.user);
+        localStorage.setItem("token", clientJSON.token);
+      } 
+      catch(error)  {
+        console.error(
+          dispatch(userActionFailure()),
+          alert("No User available from userActions")
+        )
+      }
+  
+    }
   }
 }
 

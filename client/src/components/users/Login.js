@@ -6,7 +6,7 @@ import { loginUser } from '../../actions/userActions';
 class Login extends Component {
 
   state = {
-    id: "",
+    // id: "",
     email: "",
     password: "",
     
@@ -15,28 +15,25 @@ class Login extends Component {
   handleLoginInputChange = event => {
     this.setState({ 
       [event.target.name]: event.target.value,
-      id: this.state.id,
+      // id: this.state.id,
     })
   }
     
   handleLoginOnSubmit = event => {
     event.preventDefault()
-    console.table('loginSubmit shape of state', this.state)
-    console.table(' shape of state.id', this.state.id)
+    console.table('handleSubmit shape of state', this.state)
 
     const user = ({ 
-      id: this.state.id,
       email: this.state.email,
       password: this.state.password,
     })
 
     console.table('user after loginUser action', user)
     this.props.loginUser(user)
-    .then((resp) => {
-    
-      console.log("before or after",`${resp.payload.id}`)
-      this.props.history.push(`/UserPage/${resp.payload.id}`)
-      // this.props.fetchClient(`${resp.payload.id}`)
+    .then((loginJSON) => {
+      console.log("before or after",`${loginJSON.payload.id}`)
+      // this.props.history.push(`/UserPage/`)
+      this.props.history.push(`/UserPage/${loginJSON.payload.id}`)
     })
   
     this.setState({

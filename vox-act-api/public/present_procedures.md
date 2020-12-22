@@ -3,6 +3,7 @@ encoded = encode_token(id: 1)
 # we need to get id:1 out of the token with 
 decoded = decode_token(encoded)
 # decode token needs to be able to decode the token created by encode_token and return id: 1
+
 # encode_token
 User.find_by_id(decoded[:id]) #? not sure it will look exactly like that
 # 'super secret' should be your rails secret key base

@@ -2,6 +2,7 @@ import * as userActions from '../actions/userActions'
 
 export const initialState = {
   user: [],
+  list: [],
   loading: true, 
   hasErrors: false,
   logged_in: false,
@@ -9,26 +10,22 @@ export const initialState = {
 
 export default function userReducer(state = initialState, action) {
   console.table('actions from userreducer is called', action)
-  // console.table('state from userReducer', state)
   
   switch(action.type) {
-    
     case userActions.LOADING_USER:
       return { ...state, loading: true}
-
     case userActions.GET_USER:
       return { ...state, loading: true }
     case userActions.GET_USER_SUCCESS:
       return { user: action.payload, loading: false, hasErrors: false }
     case userActions.GET_USER_FAILURE:
       return { ...state, loading: false, hasErrors: true }
-  
     case userActions.LOGIN_USER:
       const user = {
         email: action.email,
         password: action.password,
       }
-      console.table('user obj for loginUser action', user)
+
       return (
         { 
           ...state, 

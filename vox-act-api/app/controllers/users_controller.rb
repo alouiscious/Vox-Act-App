@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    if logged_in? && current_user.user?
+    if logged_in? || current_user.user?
     # binding.pry
     @users = User.all
     render json: @users, status: 200
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   
   # GET /users/1
   def show
-    # user = Users.find(params["token"])
+    # user = Users.find(params[:id])
     render json: @user, status: 200
   end
 
@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      # binding.pry
       @user = User.find(params[:id])
     end
 
