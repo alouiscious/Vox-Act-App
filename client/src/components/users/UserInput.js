@@ -45,8 +45,9 @@ class UserInput extends Component {
       console.table('wa ha input user', userJSON)
       return this.props.loginUser(login)
     })
-    .then(() => {
-      this.props.history.push('/UserPage')
+    .then(clientJSON => {
+      console.table('wa ha userafter login', clientJSON)
+      this.props.history.push(`/UserPage/${clientJSON.payload.id}`)
     })
     
     this.setState({

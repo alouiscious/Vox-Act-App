@@ -3,11 +3,13 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    if logged_in? || current_user.user?
+    # if logged_in? && current_user.user?
+    # if logged_in? || current_user.user?
+    # if logged_in? && current_user.user?
     # binding.pry
     @users = User.all
     render json: @users, status: 200
-    end
+    # end
   end
   
   # GET /users/1
