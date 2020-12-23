@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-  const User = ({ user, talent }) => {
+  const UserEdit = ({ user, talent }) => {
     return <div className={talent ? 'talent_style' : 'user'}>
       {console.table('wa ha user from user', user)}
         <h3>
@@ -16,6 +16,6 @@ import { Link } from "react-router-dom";
     </div>  
   }
 
-export default User
+export default UserEdit
 
 
