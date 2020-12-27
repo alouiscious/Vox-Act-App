@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+// import { loginUser } from '../../actions/userActions'
 import { addNewTalent } from "../../actions/talentActions"
 
 class TalentInput extends Component {
   state = {
     talentStyle: '', 
     user_name: '', 
-    upid: '', 
+    upid: ``, 
     title: '', 
     description: '',
     phmf: '',
@@ -23,13 +24,13 @@ class TalentInput extends Component {
   
   handleTalentOnSubmit = event => {
     event.preventDefault()
-    // const user = ({
-    //   upid: this.state.upid, 
-    //   user_name: this.state.user_name
-    // })
-    const talent =  this.state
+    const user = ({
+      upid: this.current_user.upid, 
+      user_name: this.state.user_name
+    })
+    const talent = this.state
     console.table('wa ha input talent', this.state)
-    // console.table('user current', this.session.upid, this.user.user.id)
+    console.table('user current', this.state.upid, this.user.user.id)
     
     this.props.addNewTalent(
       talent, 
@@ -40,7 +41,7 @@ class TalentInput extends Component {
 
     this.setState({
       talent_style: '', 
-      user_name: this.user.user_name, 
+      user_name: user.user_name, 
       upid: this.user.upid, 
       title: '', 
       description: '',

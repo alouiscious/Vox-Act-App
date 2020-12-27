@@ -26,10 +26,9 @@ class SessionsController < ApplicationController
   end
   
   def token_auth
+    puts current_user
     token = request.headers["Authenticate"]
-    binding.pry
-    user = User.find(decode(token)["id"])
-
+    user = User.find_by(decode_token(token)["id"])
     render json: user
   end
 

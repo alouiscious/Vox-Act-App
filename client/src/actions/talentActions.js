@@ -57,7 +57,6 @@ export const getTalentsFailure = () => ({ type: GET_TALENTS_FAILURE })
 export const fetchTalents = (userId) => {
   return async dispatch => {
     dispatch(getTalents())
-
     return fetch(TALENTURL+`?/userId=${userId}`)
     .then(resp => resp.json())
     .then(talentsJSON => {

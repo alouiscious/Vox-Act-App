@@ -8,8 +8,13 @@ class ApplicationController < ActionController::API
   
   # helper_method :current_user
   def current_user
-    if session[:id]
-      @current_user ||= User.find(session[:id]) 
+    if cookies.signed[:jwt] 
+      # byebug
+      # encoded = cookies.signed[:jwt][:value]
+      decoded = decode_token(cookies.signed[:jwt])
+      # puts decode_token(encoded)
+
+      @current_user ||= User.find_by_id(decoded["id"]) 
     end
   end
 
@@ -18,8 +23,6 @@ class ApplicationController < ActionController::API
   end
 
   def encode_token(payload)
-    # binding.pry
-    # JWT.encode(payload, "super secret")
     JWT.encode(payload, Rails.application.credentials.config[:secret_key_base])
   end
 

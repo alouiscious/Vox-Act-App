@@ -3,24 +3,24 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    # if logged_in? && current_user.user?
-    # if logged_in? || current_user.user?
-    # if logged_in? && current_user.user?
+    if logged_in? && current_user.users?
     # binding.pry
     @users = User.all
     render json: @users, status: 200
-    # end
+    else
+      render json: {
+        error: 'not logged in', status: :unauthorized
+      }
+    end
   end
   
   # GET /users/1
   def show
-    # user = Users.find(params[:id])
     render json: @user, status: 200
   end
 
   # POST /users
   def create
-    # binding.pry
     @user = User.new(user_name: params[:user][:user_name], hometown: params[:user][:hometown], email: params[:user][:email], password: params[:user][:password], upid: params[:user][:upid], upph: params[:user][:upph])
     # @user = User.new(user_params)
 

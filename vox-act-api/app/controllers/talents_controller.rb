@@ -3,19 +3,20 @@ class TalentsController < ApplicationController
 
   # GET /talents
   def index
-    if logged_in? && current_user.talents?
-
+    if logged_in? && current_user.talents
+      # binding.pry
       @talents = current_user.talents
       render json: @talents, status: :ok
     else
       render json: {
         error: 'not logged in', status: :unauthorized
       }
+    end
   end
 
   # GET /talents/1
   def show
-    render json: @talent
+    render json: @talent, status: 200
   end
 
   # POST /talents
@@ -42,16 +43,16 @@ class TalentsController < ApplicationController
   def destroy
     @talent.destroy
   end
-end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_talent
       @talent = Talent.find(params{:id})
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # Only allow a trusted parameter "allowed list" through.
     def talent_params
-      params.require(:talent).permit(:talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf)
+      params.require(:talent).permit(:id, :talent_style, :user_name, :upid, :title, :description, :phmf, :vimf, :aumf, :user_id)
     end
 end
 
