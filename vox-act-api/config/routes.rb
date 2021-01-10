@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   get '/user', to: 'users#show'
   
   resources :talents
-  post '/talent', to: 'talents#create'
-  get '/talents', to: 'talents#index'
-  get '/talent', to: 'talents#show'
+
   
   resources :agents
 
