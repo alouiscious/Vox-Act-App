@@ -13,9 +13,7 @@ const Users = ({list, dispatch, loading, hasErrors }) => {
     if (loading) return <p>Loading Clients...</p>
     if (hasErrors) return <p>No Clients to display.</p>
     console.table('Users List', list)
-    return list.map((user) => <
-      User key={user.id} user={user}
-    />)
+    return list.map((user) => <User key={user.id} user={user}/>)
   }
 
   return (
