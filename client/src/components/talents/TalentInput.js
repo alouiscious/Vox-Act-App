@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { loginUser } from '../../actions/userActions'
 import { addNewTalent } from "../../actions/talentActions"
+import { fetchClient } from "../../actions/userActions"
 
 class TalentInput extends Component {
+  
   state = {
     talentStyle: '', 
-    user_name: '', 
-    upid: ``, 
     title: '', 
     description: '',
     phmf: '',
@@ -18,31 +17,34 @@ class TalentInput extends Component {
   handleTalentInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
-
+      
     })
   }
   
   handleTalentOnSubmit = event => {
     event.preventDefault()
-    const user = ({
-      upid: this.current_user.upid, 
-      user_name: this.state.user_name
+
+    const talent = ({ 
+      talent_style: this.state.talentStyle,
+      title: this.state.title,
+      description: this.state.description,
+      phmf: this.state.phmf,
+      vimf: this.state.vimf,
+      aumf: this.state.aumf
     })
-    const talent = this.state
-    console.table('wa ha input talent', this.state)
-    console.table('user current', this.state.upid, this.user.user.id)
+    console.table('wa ha Talentinput state', this.state)
     
-    this.props.addNewTalent(
-      talent, 
-    )
-    .then(() => {
-      this.props.history.push('/Talents')
+    this.props.addNewTalent(talent)
+    .then(id => {
+      this.props.history.push(`/Talents/${id}`)
     })
+    console.table('wa ha state from talentinput', this.state)
+    console.table('wa ha action from talentinput', this.action)
+    console.table('user current', this.state.upid, this.user)
+
 
     this.setState({
       talent_style: '', 
-      user_name: user.user_name, 
-      upid: this.user.upid, 
       title: '', 
       description: '',
       aumf: '',
@@ -53,7 +55,7 @@ class TalentInput extends Component {
 
   render(){
     return (
-      <div className="Talent">
+      <div className="TalentInput">
         Complete this form and add your Talent, {this.state.user_name}!
        
         <form onSubmit={this.handleTalentOnSubmit}>
@@ -87,41 +89,21 @@ class TalentInput extends Component {
                 name="talent03"
               >Model</option>                        
             </select> 
-
             <br />
-            <label htmlFor="user_name">Client Name: </label>
-              <input 
-                type="text" 
-                name="user_name"
-                id="userName"
-                defaultValue={this.state.user_name}
-                readOnly={this.state.user_name}
-              />
 
-          <br />
           <label htmlFor="description"> Description </label>
-          <input 
+          <textarea 
             type="textarea" 
             name="description"
             id="description"
             value={this.state.description}
             onChange={this.handleTalentInputChange}
-            cols={400} 
-            rows={100}
-            // wrap={1}
+            cols={50} 
+            rows={20}
+            wrap={1}
             // required={1}
             placeholder="Provide Description"
           />
-
-          <br />
-          <label htmlFor="upid"> Talent Key </label>
-          <input 
-            type="text"
-            id="upid"
-            defaultValue={this.state.upid}
-            readOnly={this.state.upid}
-          />
-
 
           <br />
         <label htmlFor="phmf"> Add Photo </label>
@@ -168,4 +150,5 @@ class TalentInput extends Component {
   }
 }
 
-export default connect(null, {addNewTalent})(TalentInput)
+
+export default connect(null, {addNewTalent, fetchClient})(TalentInput)

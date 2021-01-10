@@ -20,7 +20,6 @@ export const usersActionFailure = () => ({ type: GET_USERS_FAILURE })
 // Get Client List
 export function fetchUsers() {
   return async (dispatch) => {
-    dispatch({type: 'LOADING_USERS'})
     dispatch(getUsers())
 
     try {
@@ -28,7 +27,7 @@ export function fetchUsers() {
       fetch(USERSURL)
       const usersJSON = await resp.json()
       dispatch(getUsersSuccess(usersJSON))
-      // console.table('getUsersSuc from actions', usersJSON)
+      console.table('getUsersSuc usersJSON', usersJSON)
     } 
     catch (error) {
       dispatch(usersActionFailure())

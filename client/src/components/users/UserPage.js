@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 
 // import  {loginUser }  from '../../actions/userActions';
 import { fetchClient } from "../../actions/userActions";
-import { fetchTalents } from "../../actions/talentActions";
+import { fetchTalent } from "../../actions/talentActions";
 
 import User from "./User";
 import Talents from "../talents/Talents"
-import TalentInput from '../talents/TalentInput';
 
 const UserPage = ({
   match, 
@@ -20,7 +19,7 @@ const UserPage = ({
     useEffect(() => {
     const { id } = match.params
     dispatch(fetchClient(id))
-    dispatch(fetchTalents(id))
+    dispatch(fetchTalent(id))
     // dispatch(fetchUsers())
     // dispatch(addUserPhoto())
 
@@ -30,9 +29,7 @@ const UserPage = ({
     console.table('wa ha user from userpage', (user))
     if (loading.user) return <p>Loading User...</p>
     if (hasErrors.user) return <p>Unable to display User.</p>
-    // return <User user={user} />
     return <User key={user.id} user={user} />
-    // return list && list.map(÷<User user={user} />)
 
   }
 
@@ -51,10 +48,7 @@ const UserPage = ({
           {renderUser()}
         <h3>Talents</h3>
           {renderTalents()}
-        <br />
-        <br />
-        Add New Talents here...
-        <TalentInput />
+
     </section>
   )
 }

@@ -25,7 +25,6 @@ export default function userReducer(state = initialState, action) {
         email: action.email,
         password: action.password,
       }
-
       return (
         { 
           ...state, 

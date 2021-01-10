@@ -1,42 +1,55 @@
 import * as talentActions from "../actions/talentActions";
+// import * as userActions from "../actions/userActions"
 
 export const initialState = {
+  talents: [],
+  user: [],
   loading: false,
   hasErrors: false,
-  talents: []
-}
+};
 
+let idx;
 export default function talentsReducer(state = initialState, action) {
-  let idx
+  console.table("actions from talentsReducer is called", action);
 
   switch (action.type) {
-    case talentActions.ADD_TALENT:
-      let existingUser = state.filter(
-        user => user.user_name === action.talent.user_name
-      );
-      if (existingUser.length > 0) {
-        return state;
-      } else {
-        return {...state, loading: true, user_name: action.user_name, upid: action.upid};
-      }
-   
+    // case userActions.GET_USER:
+    //   return { ...state, loading: true }
+    // case userActions.GET_USER_SUCCESS:
+    //   return { user: action.payload, loading: false, hasErrors: false }
+    // case userActions.GET_USER_FAILURE:
+    //   return { ...state, loading: false, hasErrors: true }
+
+    case talentActions.LOADING_TALENTS:
+      return { ...state, loading: true };
     case talentActions.GET_TALENTS:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case talentActions.GET_TALENTS_SUCCESS:
-      return { ...state, talents: action.payload, loading: false}
+      return { list: action.payload, loading: false, hasErrors: false };
     case talentActions.GET_TALENTS_FAILURE:
-      return { ...state, loading: false, hasErrors: true } 
+      return { ...state, loading: false, hasErrors: true };
+    case talentActions.ADD_TALENT:
+      return {
+        ...state,
+        loading: false,
+        user_name: action.user_name,
+        upid: action.upid,
+      };
+    case talentActions.ADD_TALENT_SUCCESS:
+      return {
+        ...state,
+        talent: state.talent,
+        loading: false,
+        hasErrors: false,
+      };
+    case talentActions.ADD_TALENT_FAILURE:
+      return { ...state, loading: false, hasErrors: true };
 
     case talentActions.DELETE_TALENT:
-      idx = state.talents.findIndex(talent => talent.id === action.id)
-      return [
-        ...state.talents.slice(0, idx), 
-        ...state.talents.slice(idx + 1)
-      ]
+      idx = state.list.findIndex((talent) => talent.id === action.id);
+      return [...state.talents.slice(0, idx), ...state.talents.slice(idx + 1)];
 
     default:
-      return state
+      return state;
   }
 }
-
-
