@@ -48,14 +48,15 @@ export const GET_TALENTS = "GET TALENTS";
 export const GET_TALENTS_SUCCESS = "GET_TALENTS_SUCCESS";
 export const GET_TALENTS_FAILURE = "GET_TALENTS_FAILURE";
 export const getTalents = () => ({ type: GET_TALENTS });
-export const getTalentsSuccess = (list) => ({
+export const getTalentsSuccess = list => ({
   type: GET_TALENTS_SUCCESS,
   payload: list,
 });
 export const getTalentsFailure = () => ({ type: GET_TALENTS_FAILURE });
 
+//Get Talents List
 export function fetchTalents() {
-  const configTalent = {
+  const configTalents = {
     method: "GET",
     headers: {
       "Content-Type": "appliction/json",
@@ -63,22 +64,21 @@ export function fetchTalents() {
     },
     credentials: "include"
   }
-  
   return async (dispatch) => {
     dispatch(getTalents())
     try {
-      const resp = await fetch(TALENTURL, configTalent)
+      const resp = await 
+      fetch(TALENTURL, configTalents)
       const talentsJSON = await resp.json()
-      dispatch(getTalentsSuccess())
+      dispatch(getTalentsSuccess(talentsJSON))
       console.table('getTalentsSuc talentsJSON', talentsJSON)
     }
     catch (error) {
       dispatch(getTalentsFailure())
-      alert('No Talents to List from TalentActions')
+      console.table('No Talents from fetchTalents talentsJSON')
     }
   }
 }
-
 
 export const GET_TALENT = 'GET_TALENT'
 export const GET_TALENT_SUCCESS = 'GET_TALENT_SUCCESS'
@@ -93,7 +93,8 @@ export const getTalentSuccess = talent => ({
 })
 export const getTalentFailure = () => ({ type: GET_TALENT_FAILURE })
 
-export function fetchTalent(talentId) {
+//Get User Talents
+export function fetchTalent(userID) {
     const configTalent = {
       method: "GET",
       headers: {
@@ -106,21 +107,21 @@ export function fetchTalent(talentId) {
   return async dispatch => {
     dispatch(getTalent())
     try {
-      const resp = await fetch(TALENTURL + `/${talentId}`, configTalent)
+      const resp = await fetch(TALENTURL + `/${userID}`, configTalent)
       const talentJSON = await resp.json()
       if (resp.ok) {
         dispatch(getTalentSuccess(talentJSON));
-        console.table("talentsJSON from actions", talentJSON);
-
+        // dispatch(getTalentSuccess(talentJSON.user_id));
+        console.table("talentsJSON from actions", talentJSON.user_id);
       }
       else {
         alert("Your not logged in")
         dispatch(getTalentFailure());
       }
     }
-    catch (error) {
+    catch(error) {
       dispatch(getTalentFailure());
-      alert("No Talents to List. getTalentActions");
+      alert("No Talent fetched. getTalentActions");
     }
   }
   

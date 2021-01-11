@@ -2,7 +2,7 @@ import * as talentActions from "../actions/talentActions";
 // import * as userActions from "../actions/userActions"
 
 export const initialState = {
-  talents: [],
+  list: [],
   user: [],
   loading: false,
   hasErrors: false,
@@ -10,7 +10,7 @@ export const initialState = {
 
 let idx;
 export default function talentsReducer(state = initialState, action) {
-  console.table("actions from talentsReducer is called", action);
+  console.table("talentsReducer actions called", action)
 
   switch (action.type) {
     // case userActions.GET_USER:

@@ -9,29 +9,34 @@ export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
 // Create Redux action creators that return an action
 //GET USERS
 export const getUsers = () => ({ type: GET_USERS })
-
 export const getUsersSuccess = list => ({
   type: GET_USERS_SUCCESS,
   payload: list,
 })
-
 export const usersActionFailure = () => ({ type: GET_USERS_FAILURE })
 
-// Get Client List
+// Get Users List
 export function fetchUsers() {
+  const configUsers = {
+    method: "GET",
+    headers: {
+      "Content-Type": "appliction/json",
+      "Accept": "application/json"
+    },
+    credentials: "include"
+  }
   return async (dispatch) => {
     dispatch(getUsers())
-
     try {
       const resp = await
-      fetch(USERSURL)
+      fetch(USERSURL, configUsers)
       const usersJSON = await resp.json()
       dispatch(getUsersSuccess(usersJSON))
       console.table('getUsersSuc usersJSON', usersJSON)
     } 
     catch (error) {
       dispatch(usersActionFailure())
-      alert('No Users available from usersActions')
+      alert('No Users available from fetchUsers')
     }
   }
 }

@@ -2,7 +2,6 @@
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
-
 export const loginLoader = () => ({ 
   type: LOGIN_USER,
 })
@@ -18,9 +17,7 @@ export function loginUser(user) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        // Authenticate: localStorage.token,
+        "Accept": "application/json",
       },
       credentials: "include",
       body: JSON.stringify({
@@ -33,9 +30,9 @@ export function loginUser(user) {
         console.table("login promise", loginJSON);
         if (loginJSON.error) {
           dispatch(loginActionFailure());
-          alert("Sorry. Not a Vox Act client? Sign up...");
+          alert("Sorry. Not a Vox Act client? Sign up...")
+
         } else {
-          // localStorage.setItem("jwt", user.auth_token);
           localStorage.setItem("token", loginJSON.token);
           console.table("userObj when login is called", loginJSON.user);
           return (
@@ -61,19 +58,29 @@ export const getUserSuccess = user => ({
   type: GET_USER_SUCCESS,
   payload: user,
 })
-
 export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
-// Get Client Details
-export function fetchClient(id) {
-    const USERURL = `http://localhost:3000/users/${id}`;
+// Get User Details
+export function fetchClient(userID) {
+  const configUser = {
+    method: "GET",
+    headers: {
+      "Content-Type": "appliction/json",
+      "Accept": "application/json"
+    },
+    credentials: "include"
+  }
+  
+    const USERURL = `http://localhost:3000/users/${userID}`;
     return async dispatch => {
       dispatch(getUser())
       try {
-        const resp = await fetch(USERURL)
+        const resp = await fetch(USERURL, configUser)
         const clientJSON = await resp.json()
-        dispatch(getUserSuccess(clientJSON));
-        localStorage.setItem("token", clientJSON.token);
+        if (resp.ok) {
+          dispatch(getUserSuccess(clientJSON));
+          localStorage.setItem("token", clientJSON.token);
+        }
       } 
       catch(error)  {
         console.error(
