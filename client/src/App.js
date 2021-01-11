@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 
 import Users from './components/users/Users';
 import Navbar from "./components/Navbar";
-import VoxActSignIn from './containers/VoxActSignIn'
-import VoxActSignUp from './containers/VoxActSignUp'
-import UserEditPage from './/components/users/UserEditPage';
-import UserPage from './components/users/UserPage';
+import VoxActSignIn from './containers/login/VoxActSignIn'
+import VoxActSignUp from './containers/login/VoxActSignUp'
+import UserEditPage from './/containers/users/UserEditPage';
+import UserPage from './containers/users/UserPage';
 import logo from './logo.jpg';
 import './App.css';
 import TalentInput from './components/talents/TalentInput';

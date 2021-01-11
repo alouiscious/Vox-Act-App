@@ -3,78 +3,71 @@ import { connect } from "react-redux";
 
 // import  {loginUser }  from '../../actions/userActions';
 import { fetchClient } from "../../actions/userActions";
-import { fetchTalents, addNewTalent } from "../../actions/talentActions";
+import { fetchTalent } from "../../actions/talentActions";
 
-import UserEdit from "./User";
-import Talents from "../talents/Talents"
-import TalentInput from '../talents/TalentInput';
+import User from "../../components/users/User";
+import Talents from "../../components/talents/Talents"
 
-const UserEditPage = ({
+const UserPage = ({
   match, 
-  history,
   dispatch, 
   user, 
-  list, 
+  talents, 
   hasErrors,
   loading, 
 }) => {
     useEffect(() => {
     const { id } = match.params
     dispatch(fetchClient(id))
-    dispatch(fetchTalents())
+    dispatch(fetchTalent(id))
+    // dispatch(fetchUsers())
     // dispatch(addUserPhoto())
 
   }, [dispatch, match])
    
   const renderUser = () => {
-    console.table('wa ha user from userEditPage', (user))
+    console.table('wa ha user from userpage', (user))
     if (loading.user) return <p>Loading User...</p>
     if (hasErrors.user) return <p>Unable to display User.</p>
-    return  <UserEdit key={user.id} user={user} />
+    return <User key={user.id} user={user} />
 
   }
-
-
 
   const renderTalents = () => {
     if (loading.talents) return <p>Loading User...</p>
     if (hasErrors.talents) return <p>Unable to display User.</p>
-      return <Talents key={user.upid} list={list} />
     
-
+    return talents && talents.map((talent) => 
+    <Talents key={talent.id} talent={talent} />
+    )
   }
 
   return (
     <section className="renderUser">
         <h2>Vox Act Client Talent Details...</h2>
           {renderUser()}
-         
         <h3>Talents</h3>
           {renderTalents()}
-        <br />
-        <br />
-        Add New Talents here...
-        <TalentInput history={history}/>
+
     </section>
   )
 }
       
-const mapStateToProps = ({ userReducer, talentsReducer }) => ({ 
+const mapStateToProps = ({ userReducer }) => ({ 
   user: userReducer.user,
-  talent: talentsReducer.talent,
-  // talents: talentsReducer.talents,
+  talents: userReducer.talents,
   loading: { 
     user: userReducer.loading, 
-    talent: userReducer.loading 
+    talents: userReducer.loading 
   },
 
   hasErrors: { 
     user: userReducer.hasErrors, 
-    talent: userReducer.hasErrors 
+    talents: userReducer.hasErrors 
   },
 })
 
-export default connect(mapStateToProps)(UserEditPage)
+export default connect(mapStateToProps)(UserPage)
 
 
 // const mapDispatchToProps = dispatch => ({

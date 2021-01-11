@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginUser } from '../actions/userActions'
-import UserInput from '../components/users/UserInput'
-import { addUsers, fetchUsers } from "../actions/usersActions";
+import Login from '../../components/users/Login'
+import { loginUser } from '../../actions/userActions'
+import { addUsers, fetchUsers } from "../../actions/usersActions";
 
 class VoxActSignUp extends Component {
+
   render() {
     return (
-      <div className="VoxActNew">
+      <div className="VoxActSignIn">
+
         <table>
           <thead></thead>
           <tbody>
             <tr>
               <td>
-                <UserInput
+                <Login
                   history={this.props.history}
-                  addUsers={this.props.addUsers}
                   loginUser={this.props.loginUser}
                 />
               </td>
@@ -29,7 +30,7 @@ class VoxActSignUp extends Component {
 }
 
 const mapStateToProps = state => {
-  console.table('voxact state shape', state)
+  console.table('voxactSignIn state shape', state)
   return {
     error: <state className="loginerror"></state>
   }
@@ -38,4 +39,4 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps, { addUsers, loginUser, fetchUsers})(VoxActSignUp)
+export default connect(mapStateToProps, { addUsers, loginUser, fetchUsers })(VoxActSignUp)
