@@ -112,7 +112,7 @@ export function fetchTalent(userID) {
       if (resp.ok) {
         dispatch(getTalentSuccess(talentJSON));
         // dispatch(getTalentSuccess(talentJSON.user_id));
-        console.table("talentsJSON from actions", talentJSON.user_id);
+        console.table("talentsJSON from actions", talentJSON);
       }
       else {
         alert("Your not logged in")

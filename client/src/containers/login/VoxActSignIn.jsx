@@ -9,7 +9,6 @@ class VoxActSignUp extends Component {
   render() {
     return (
       <div className="VoxActSignIn">
-
         <table>
           <thead></thead>
           <tbody>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
-// import  {loginUser }  from '../../actions/userActions';
 import { fetchClient } from "../../actions/userActions";
 import { fetchTalent } from "../../actions/talentActions";
 
@@ -9,10 +8,11 @@ import User from "../../components/users/User";
 import Talents from "../../components/talents/Talents"
 
 const UserPage = ({
-  match, 
+  match,
+  history,
   dispatch, 
   user, 
-  talents, 
+  list, 
   hasErrors,
   loading, 
 }) => {
@@ -30,16 +30,12 @@ const UserPage = ({
     if (loading.user) return <p>Loading User...</p>
     if (hasErrors.user) return <p>Unable to display User.</p>
     return <User key={user.id} user={user} />
-
   }
 
   const renderTalents = () => {
     if (loading.talents) return <p>Loading User...</p>
     if (hasErrors.talents) return <p>Unable to display User.</p>
-    
-    return talents && talents.map((talent) => 
-    <Talents key={talent.id} talent={talent} />
-    )
+    return <Talents key={user.id} list={list} />
   }
 
   return (
@@ -48,14 +44,13 @@ const UserPage = ({
           {renderUser()}
         <h3>Talents</h3>
           {renderTalents()}
-
     </section>
   )
 }
       
-const mapStateToProps = ({ userReducer }) => ({ 
+const mapStateToProps = ({ userReducer, talentsReducer }) => ({ 
   user: userReducer.user,
-  talents: userReducer.talents,
+  talent: talentsReducer.talent,
   loading: { 
     user: userReducer.loading, 
     talents: userReducer.loading 
