@@ -35,7 +35,7 @@ const UserPage = ({
   const renderTalents = () => {
     if (loading.talents) return <p>Loading User...</p>
     if (hasErrors.talents) return <p>Unable to display User.</p>
-    return <Talents key={user.id} list={list} />
+    return <Talents key={user.upid} list={list} />
   }
 
   return (
