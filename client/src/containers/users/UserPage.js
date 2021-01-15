@@ -42,7 +42,6 @@ const UserPage = ({
     <section className="renderUser">
         <h2>Vox Act Client Talent Details...</h2>
           {renderUser()}
-        <h3>Talents</h3>
           {renderTalents()}
     </section>
   )

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as talentActions from "../../actions/talentActions";
-// import { fetchClient } from "../../actions/userActions";
 import Talent from "./Talent";
 
 const Talents = ({ list, dispatch, loading, hasErrors }) => {
@@ -9,18 +8,16 @@ const Talents = ({ list, dispatch, loading, hasErrors }) => {
     dispatch(talentActions.fetchTalents());
   }, [dispatch]);
   console.table("Talents List", list);
-  // const user = fetchClient(upid)
-  // dispatch(fetchClient(upid))
 
   const renderTalents = () => {
     if (loading) return <p>Loading Clients...</p>;
     if (hasErrors) return <p>No Clients to display.</p>;
     console.table("Talents List", list);
     return list.map(
-      (talent) => <Talent talent={talent} />,
+      (talent) => <Talent key={talent.upid} talent={talent} />,
       <button type="text" value={talentActions.deleteTalent()}>
-      Delete Talent
-    </button>
+        Delete Talent
+      </button>
     );
   };
 
@@ -30,7 +27,6 @@ const Talents = ({ list, dispatch, loading, hasErrors }) => {
     <div className="renderTalents">
       <h1> Talents' List</h1>
       {renderTalents()}
-
     </div>
   );
 };

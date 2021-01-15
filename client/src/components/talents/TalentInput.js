@@ -39,10 +39,7 @@ class TalentInput extends Component {
       this.props.history.push(`/Talents/${id}`)
     })
     console.table('wa ha state from talentinput', this.state)
-    console.table('wa ha action from talentinput', this.action)
-    console.table('user current', this.state.upid, this.user)
-
-
+    
     this.setState({
       talent_style: '', 
       title: '', 
@@ -77,16 +74,16 @@ class TalentInput extends Component {
               onChange={this.handleTalentInputChange}
             >
               <option
-                value="Actor"
-                name='talent01'
+                value={"Actor"}
+                name={"talent01"}
               >Actor</option>
               <option
-                value="Voice"
-                name="talent02"
+                value={"Voice"}
+                name={"talent02"}
               >Voice</option>
               <option
-                value="Model"
-                name="talent03"
+                value={"Model"}
+                name={"talent03"}
               >Model</option>                        
             </select> 
             <br />
