@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/userActions";
 import { addUsers } from "../../actions/usersActions";
 import {v4 as uuid} from 'uuid'
+import { Link } from "react-router-dom";
 
 class UserInput extends Component {
 
@@ -107,6 +108,10 @@ class UserInput extends Component {
             value="Create Act Vox Profile"
           />
         </form>
+
+        <br />
+          VoxAct Users... <Link to={`/VoxActSignIn`}> Sign In </Link> Here
+        
       </div>
     )
   }

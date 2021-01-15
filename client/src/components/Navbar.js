@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import * as usersActions from "../actions/usersActions"
 
 const link = {
   width: '100px',
@@ -9,32 +10,28 @@ const link = {
   paddingBottom: '10px', 
   marginBottom: '12px' ,
   margin: '0 6px 6px',
-  background: 'brown',
+  background: 'crimson',
   textDecoration: 'none',
   color: 'brown',
   style: 'bold'
 }
 
 const Navbar = () => {
+  const location = useLocation();
+
   return (
     <div className='navBar'>
 
-      <NavLink 
-        style={{ link, marginRight: '10px' }} 
-        activeStyle={{ background: 'crimson'}}      
-        to="/"
-      >
-        Sign In
-      </NavLink>
-            
-      <NavLink 
+           
+      {(!location.pathname.includes("user" || "User")) ? <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
         to="/userInput"
       >
         Sign Up
       </NavLink>
-      
+      :
+
       <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
@@ -42,14 +39,25 @@ const Navbar = () => {
       >
         Client List
       </NavLink>
-
-      <NavLink
+}
+      {location.pathname === "/" || "" ? <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
-        to="/user"
+        to="/"
       >
-        Sign Out
+        Sign In
       </NavLink>
+      :
+
+      <NavLink
+      style={{ link, marginRight: '10px' }} 
+      activeStyle={{ background: 'crimson'}}      
+      to="/user"
+    >
+      Sign Out
+    </NavLink>
+      }
+
     </div>
   );
 }

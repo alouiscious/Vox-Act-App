@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchUsers } from '../../actions/usersActions'
 import { loginUser } from '../../actions/userActions';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -43,8 +44,8 @@ class Login extends Component {
   render() {
       return (
         <div className="Login">
-          Sign In.
-
+          Sign In  
+          <br />
           <form onSubmit={this.handleLoginOnSubmit}>
             <input
               type="email"
@@ -70,7 +71,8 @@ class Login extends Component {
               value="Act Vox Login"
             /> 
           </form>
-
+          <br />
+          New VoxAct User... <Link to={`/VoxActSignUp`}> Sign Up </Link> Here
         </div>
       )
     }

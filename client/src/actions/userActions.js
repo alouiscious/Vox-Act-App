@@ -154,7 +154,7 @@ export const logout = () =>
 
 
 export function logoutUser() {
-  return async (dispatch) => {
+  return async dispatch => {
     const configDeleteUser = {
       method: 'DELETE',
       headers: {
@@ -163,11 +163,11 @@ export function logoutUser() {
       },
       credentials: 'include'
     }
-    return fetch(`auth`, configDeleteUser)
+    return fetch(`http://localhost:3000/users/token_auth`, configDeleteUser)
     .then(resp => resp.json())
     .then(logoutJSON => {
       dispatch(logout(logoutJSON))
-      this.user({})
+      // this.user({})
       alert('Logged Out')
     })
   }
