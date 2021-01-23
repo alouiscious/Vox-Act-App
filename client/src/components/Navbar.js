@@ -20,10 +20,8 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div className='navBar'>
-
-           
-      {(!location.pathname.includes("user" || "User")) ? <NavLink 
+    <div className='navBar'>           
+      {(!location.pathname.includes("user" || "")) ? <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
         to="/userInput"

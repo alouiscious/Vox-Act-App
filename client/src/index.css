@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 4;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,9 +7,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-VoxActSignIn {
-  margin: 0,
-  drop-shadow(0 0 0.75rem crimson);}
+.VoxActSignIn {
+  margin: 2;
+  border-style: dashed double none
+  drop-shadow(0 0 0.75rem crimson);
+} 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
