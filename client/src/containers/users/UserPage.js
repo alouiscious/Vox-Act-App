@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { fetchClient } from "../../actions/userActions";
 import { fetchTalent } from "../../actions/talentActions";
 
-import User from "../../components/users/User";
+import UserEdit from "../../components/users/UserEdit";
 import Talents from "../../components/talents/Talents"
 
 const UserPage = ({
@@ -29,7 +29,7 @@ const UserPage = ({
     console.table('wa ha user from userpage', (user))
     if (loading.user) return <p>Loading User...</p>
     if (hasErrors.user) return <p>Unable to display User.</p>
-    return <User key={user.id} user={user} />
+    return <UserEdit key={user.id} user={user} /> 
   }
 
   const renderTalents = () => {

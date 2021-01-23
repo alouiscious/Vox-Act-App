@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { fetchClient } from "../../actions/userActions";
 import { fetchTalent } from "../../actions/talentActions";
 
-import UserEdit from "../../components/users/User";
+import User from "../../components/users/User";
 import Talents from "../../components/talents/Talents"
 import TalentInput from '../../components/talents/TalentInput';
+import UserAddDetails from '../../components/users/UserAddDetails';
 
 const UserEditPage = ({
   match,
@@ -14,6 +15,7 @@ const UserEditPage = ({
   dispatch,
   user,
   list,
+  photo,
   hasErrors,
   loading,
 }) => {
@@ -30,13 +32,22 @@ const UserEditPage = ({
   const renderUser = () => {
     if (loading.user) return <p>Loading User...</p>;
     if (hasErrors.user) return <p>Unable to display User.</p>;
-    return <UserEdit key={user.id} user={user} />;
+    return (
+    <div>
+      <User key={user.id} user={user} />
+      <div>
+
+      <UserAddDetails photo={photo} />
+      </div>
+    </div>
+    )
   };
 
   const renderTalents = () => {
     if (loading.talents) return <p>Loading User...</p>;
     if (hasErrors.talents) return <p>Unable to display User.</p>;
     return <Talents key={user.id} list={list} />;
+    
   };
 
   return (

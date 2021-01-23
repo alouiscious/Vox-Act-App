@@ -2,72 +2,77 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/userActions";
 import { addUsers } from "../../actions/usersActions";
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from "uuid";
 import { Link } from "react-router-dom";
 
 class UserInput extends Component {
-
   state = {
-    user_name: '',
-    hometown: '',
-    email: '',
-    password: '',
-    upid: (uuid()),
-    upph: ''
-    
-  }
+    user_name: "",
+    hometown: "",
+    email: "",
+    password: "",
+    upid: uuid(),
+    upph: "",
+  };
 
-  handleUserOnChange = event => {
-    this.setState({ 
-      [event.target.name]: event.target.value
-    })
-  }
-    
-  handleUserOnSubmit = event => {
-    event.preventDefault()
-    const user = ({
+  handleUserOnChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleUserOnSubmit = (event) => {
+    event.preventDefault();
+    const user = {
       user_name: this.state.user_name,
-      hometown: this.state.hometown, 
+      hometown: this.state.hometown,
       email: this.state.email,
       upid: this.state.upid,
       password: this.state.password,
-      upph: this.state.upph
-    })     
-    console.table('wa ha Userinput state', this.state)
-    
-    const login = ({
-      email: this.state.email, 
-      password: this.state.password,
-    })
+      upph: this.state.upph,
+    };
+    console.table("wa ha Userinput state", this.state);
 
-    console.table('wa ha props user', this.props)
-    this.props.addUsers(user)
-    .then(userJSON  => {
-      console.table('wa ha input user', userJSON)
-      return this.props.loginUser(login)
-    })
-    .then(clientJSON => {
-      console.table('wa ha userafter login', clientJSON)
-      this.props.history.push(`/UserPage/${clientJSON.payload.id}`)
-    })
-    
+    const login = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    console.table("wa ha props user", this.props);
+    this.props
+      .addUsers(user)
+      .then((userJSON) => {
+        console.table("wa ha input user", userJSON);
+        return this.props.loginUser(login);
+      })
+      .then((clientJSON) => {
+        console.table("wa ha userafter login", clientJSON);
+        this.props.history.push(`/UserPage/${clientJSON.payload.id}`)
+      })
+  
     this.setState({
-      user_name: '', 
-      hometown: '', 
-      email: '', 
-      password: ''
-    })
-  }
+      user_name: "",
+      hometown: "",
+      email: "",
+      password: "",
+    });
+  };
 
   render() {
     return (
       <div className="UserInput">
         <br />
-        Create NEW VoxAct
-      
+        <h2>
+        ~ Welcome to VoxAct ~ 
+        </h2>
+        The easiest talent organizer 
+        <br />
+        for Talents and Agents
+        <br />
+        <h4>Create NEW VoxAct Account</h4>
         <form onSubmit={this.handleUserOnSubmit}>
           <input
-            type="text" 
+            type="text"
             name="user_name"
             id="userName"
             onChange={this.handleUserOnChange}
@@ -76,7 +81,7 @@ class UserInput extends Component {
           />
           <br />
           <input
-            type="text" 
+            type="text"
             name="hometown"
             id="hometown"
             onChange={this.handleUserOnChange}
@@ -103,18 +108,14 @@ class UserInput extends Component {
             placeholder="password"
           />
           <br />
-          <input 
-            type="submit" 
-            value="Create Act Vox Profile"
-          />
+          <input type="submit" value="Create Act Vox Profile" />
         </form>
-
         <br />
-          VoxAct Users... <Link to={`/VoxActSignIn`}> Sign In </Link> Here
-        
+        {`Existing VoxAct Users... `} 
+        <Link to={`/VoxActSignIn`}>Sign In</Link>{` Here`}
       </div>
-    )
+    );
   }
 }
 
-export default connect(null, {addUsers, loginUser})(UserInput);
+export default connect(null, { addUsers, loginUser })(UserInput);

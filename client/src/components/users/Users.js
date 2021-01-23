@@ -1,7 +1,7 @@
 import React, {useEffect} from "react"
 import { connect } from 'react-redux'
 import  {fetchUsers}  from '../../actions/usersActions';
-import User from "./User"
+import UserShow from "./User"
 
 const Users = ({list, dispatch, loading, hasErrors }) => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const Users = ({list, dispatch, loading, hasErrors }) => {
     if (loading) return <p>Loading Clients...</p>
     if (hasErrors) return <p>No Clients to display.</p>
     console.table('Users List', list)
-    return list.map((user) => <User key={user.id} user={user}/>)
+    return list.map((user) => <UserShow key={user.id} user={user}/>)
   }
 
   return (

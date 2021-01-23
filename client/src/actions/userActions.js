@@ -30,8 +30,9 @@ export function loginUser(user) {
         console.table("login promise", loginJSON);
         if (loginJSON.error) {
           dispatch(loginActionFailure());
-          alert("Sorry. Not a Vox Act client? Sign up...")
-
+          if (window.confirm("Sorry. Not a Vox Act client? Sign up...")) {
+            window.open("localhost:3001/userInput.html", "sign up now?");
+          }
         } else {
           localStorage.setItem("token", loginJSON.token);
           console.table("userObj when login is called", loginJSON.user);
@@ -61,7 +62,7 @@ export const getUserSuccess = user => ({
 export const userActionFailure = () => ({ type: GET_USER_FAILURE })
 
 // Get User Details
-export function fetchClient(userID) {
+export function fetchClient(id) {
   const configUser = {
     method: "GET",
     headers: {
@@ -71,11 +72,11 @@ export function fetchClient(userID) {
     credentials: "include"
   }
   
-    const USERURL = `http://localhost:3000/users/${userID}`;
+  // const USERURL = `http://localhost:3000/users/${userID}`;
     return async dispatch => {
       dispatch(getUser())
       try {
-        const resp = await fetch(USERURL, configUser)
+        const resp = await fetch(`http://localhost:3000/users/${id}`, configUser)
         const clientJSON = await resp.json()
         if (resp.ok) {
           dispatch(getUserSuccess(clientJSON));
@@ -88,16 +89,15 @@ export function fetchClient(userID) {
           alert("No User available from userActions")
         )
       }
-  
     }
-  
 }
 
 export const ADD_USER_PHOTO = 'ADD_USER_PHOTO'
 export const ADD_USER_PHOTO_SUCCESS = 'ADD_USER_PHOTO_SUCCESS'
 export const ADD_USER_PHOTO_FAILURE = 'ADD_USER_PHOTO_FAILURE'
+export const LOADING_USER_PHOTO = 'LOADING_USER_PHOTO'
 
-export const loadUserPhoto = () => ({ type: ADD_USER_PHOTO })
+export const addUserPhoto = () => ({ type: ADD_USER_PHOTO })
 export const userPhotoSuccess = (userPhoto) => ({
   type: ADD_USER_PHOTO_SUCCESS,
   payload: userPhoto,
@@ -105,9 +105,10 @@ export const userPhotoSuccess = (userPhoto) => ({
 export const userPhotoActionFailure = () => ({ 
   type: ADD_USER_PHOTO_FAILURE 
 })
+export const loadingUserPhoto = () => ({ type: LOADING_USER_PHOTO });
 
-export function addUserPhoto(userPhoto, id) {
-  const USERURL = `http://localhost:3000/users/${id}`
+export function addNewPhoto(photo) {
+  // const USERURL = `http://localhost:3000/users/${id}`
 
   return async (dispatch) => {
     const configUpph = {
@@ -118,27 +119,30 @@ export function addUserPhoto(userPhoto, id) {
       },
       credentials: 'include',
       body: JSON.stringify({
-        userPhoto: userPhoto,
+        upph: photo,
       })
     }
-    console.table('addUserPhoto from userAction', userPhoto)
-    dispatch(loadUserPhoto())
 
-    return fetch(USERURL, configUpph)
+    // const renderAddUserPhoto = ({ user, photo }) => {
+    //   console.table("user from userEdit(06)", user)
+    //   return <UserAddDetails key={user.id} photo={photo} />;
+    
+    // };
+    console.table('addUserPhoto from userAction', photo)
+    dispatch(loadingUserPhoto())
+    return fetch(`http://localhost:3000/users/`, configUpph)
     .then(resp => resp.json())
     .then(photoJSON => {
       // if (clientJSON.error) {
       //   alert("Vox Act client creation not complete. - Please try again.")
       // } 
       // else {
-        dispatch(loadUserPhoto())
-        dispatch(userPhotoSuccess(photoJSON))
+        dispatch(addUserPhoto())
+        dispatch(userPhotoSuccess(photoJSON.id))
       // }
     })
-    .catch(console.error(
+    .catch(console.error(dispatch(userPhotoActionFailure()),
       console.log,
-      dispatch(userPhotoActionFailure())
-
     )) 
   }
 }
@@ -184,4 +188,4 @@ function currentUser() {
   })
 }
 
-export default ( loginUser, currentUser, fetchClient, addUserPhoto )
+export default (loginUser, currentUser, fetchClient, addUserPhoto)
