@@ -4,7 +4,6 @@ import { addNewTalent } from "../../actions/talentActions"
 import { fetchClient } from "../../actions/userActions"
 
 class TalentInput extends Component {
-  
   state = {
     talentStyle: '', 
     title: '', 
@@ -53,7 +52,7 @@ class TalentInput extends Component {
   render(){
     return (
       <div className="TalentInput">
-        Complete this form and add your Talent, {this.state.user_name}!
+        Complete this form and add your Talent, {this.user_name}!
        
         <form onSubmit={this.handleTalentOnSubmit}>
           <div className="talentDetails">
@@ -95,8 +94,8 @@ class TalentInput extends Component {
             id="description"
             value={this.state.description}
             onChange={this.handleTalentInputChange}
-            cols={50} 
-            rows={20}
+            cols={40} 
+            rows={14}
             wrap={1}
             // required={1}
             placeholder="Provide Description"

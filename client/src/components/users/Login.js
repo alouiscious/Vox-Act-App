@@ -72,7 +72,7 @@ class Login extends Component {
             /> 
           </form>
           <br />
-          New VoxAct User... <Link to={`/VoxActSignUp`}> Sign Up </Link> Here
+          New VoxAct User... <Link to={`/UserInput`}> Sign Up </Link> Here
         </div>
       )
     }

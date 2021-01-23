@@ -115,7 +115,7 @@ export function fetchTalent(userID) {
         console.table("talentsJSON from actions", talentJSON);
       }
       else {
-        alert("Your not logged in")
+        alert("You're not logged in")
         dispatch(getTalentFailure());
       }
     }
@@ -124,7 +124,6 @@ export function fetchTalent(userID) {
       alert("No Talent fetched. getTalentActions");
     }
   }
-  
 }
 
 

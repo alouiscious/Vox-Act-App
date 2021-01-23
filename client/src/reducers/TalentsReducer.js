@@ -13,12 +13,6 @@ export default function talentsReducer(state = initialState, action) {
   console.table("talentsReducer actions called", action)
 
   switch (action.type) {
-    // case userActions.GET_USER:
-    //   return { ...state, loading: true }
-    // case userActions.GET_USER_SUCCESS:
-    //   return { user: action.payload, loading: false, hasErrors: false }
-    // case userActions.GET_USER_FAILURE:
-    //   return { ...state, loading: false, hasErrors: true }
 
     case talentActions.LOADING_TALENTS:
       return { ...state, loading: true };

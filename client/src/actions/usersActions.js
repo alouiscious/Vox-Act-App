@@ -45,6 +45,17 @@ export const ADD_USERS = 'ADD_USERS'
 export const ADD_USERS_SUCCESS = 'ADD_USERS_SUCCESS'
 export const ADD_USERS_FAILURE = 'ADD_USERS_FAILURE'
 
+export const addUser = () => ({ type: ADD_USERS })
+export const addUserSuccess = (user) => ({ 
+  type: ADD_USERS_SUCCESS,
+  payload: user,
+})
+
+export const addUserFailure = () => ({
+  type: ADD_USERS_FAILURE,
+})
+
+
 //ADD USER
 export const addUsers = (user) => {
   return async (dispatch) => {
@@ -64,13 +75,15 @@ export const addUsers = (user) => {
     return fetch(USERSURL, configAddUser)
     .then(resp => resp.json())
     .then(userJSON => {
-      // if (userJSON.error) {
-      //   alert("Vox Act client creation not complete. - Please try again.")
-      //   dispatch({ type: 'ADD_USERS_FAILURE' })
-      // } else {
+      if (userJSON.error) {
+        dispatch({ type: 'ADD_USERS_FAILURE' })
+        if (window.confirm("Vox Act client creation not complete. - Please try again.")) {
+          window.open("localhost:3001/userInput.html", "sign up now?");
+        }
+      } else {
         dispatch({ type: 'ADD_USERS', user: userJSON.user })
         dispatch({ type: 'ADD_USER_SUCESS', user: userJSON.user })
-      // }
+      }
     })
     .catch(console.table) 
   }
