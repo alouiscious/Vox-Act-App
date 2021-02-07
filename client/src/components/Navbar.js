@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import * as usersActions from "../actions/usersActions"
 
 const link = {
   width: '100px',
@@ -21,7 +20,9 @@ const Navbar = () => {
 
   return (
     <div className='navBar'>           
-      {(!location.pathname.includes("user" || "")) ? <NavLink 
+      {(!location.pathname.includes("user" || "")) ?
+
+       <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
         to="/userInput"
@@ -29,15 +30,18 @@ const Navbar = () => {
         Sign Up
       </NavLink>
       :
-
       <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
         to="/users"
       >
         Client List
-      </NavLink>
-}
+      </NavLink>      
+      }
+
+    
+
+
       {location.pathname === "/" || "" ? <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      

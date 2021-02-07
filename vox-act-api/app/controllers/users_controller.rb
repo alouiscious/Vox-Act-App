@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     # binding.pry
-    if logged_in? && current_user.upid?
+    if logged_in? && current_user
     @users = User.all
     render json: @users, status: 200
     else

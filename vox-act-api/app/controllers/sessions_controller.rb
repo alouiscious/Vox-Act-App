@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       cookies.signed[:jwt] = {value: token, httponly: true, expires: 2.hours.from_now}
       userObj = {
         id: user.id,
-        username: user.user_name,
+        user_name: user.user_name,
+        hometown: user.hometown,
         email: user.email,
         password: user.password,
         token: token

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import UserInput from '../../components/users/UserInput'
+
 import { addUsers, fetchUsers } from "../../actions/usersActions";
 import { loginUser } from '../../actions/userActions'
+
+import UserInput from '../../components/users/UserInput'
 
 class VoxActSignUp extends Component {
   render() {

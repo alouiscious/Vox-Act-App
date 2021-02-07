@@ -32,7 +32,7 @@ class Login extends Component {
     .then((loginJSON) => {
       console.log("before or after",`${loginJSON.payload.id}`)
       // this.props.history.push(`/UserPage/`)
-      this.props.history.push(`/UserEditPage/${loginJSON.payload.id}`)
+      this.props.history.push(`/UserEditPage`)
     })
   
     this.setState({

@@ -36,7 +36,9 @@ export function fetchUsers() {
     } 
     catch (error) {
       dispatch(usersActionFailure())
-      alert('No Users available from fetchUsers')
+      if (window.confirm("No Vox Act clients available. - Please try again.")) {
+        window.open("localhost:3001/userInput", "Sign up now OR Sign In?");
+      }
     }
   }
 }
@@ -76,13 +78,13 @@ export const addUsers = (user) => {
     .then(resp => resp.json())
     .then(userJSON => {
       if (userJSON.error) {
-        dispatch({ type: 'ADD_USERS_FAILURE' })
-        if (window.confirm("Vox Act client creation not complete. - Please try again.")) {
-          window.open("localhost:3001/userInput.html", "sign up now?");
+        dispatch(addUserFailure())
+        if (window.confirm("Vox Act client not added successfully. - Please try again.")) {
+          window.open("localhost:3001/userInput", "sign up now?");
         }
       } else {
-        dispatch({ type: 'ADD_USERS', user: userJSON.user })
-        dispatch({ type: 'ADD_USER_SUCESS', user: userJSON.user })
+        dispatch(addUser())
+        dispatch(addUserSuccess(userJSON.user))
       }
     })
     .catch(console.table) 

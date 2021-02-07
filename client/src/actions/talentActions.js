@@ -115,8 +115,10 @@ export function fetchTalent(userID) {
         console.table("talentsJSON from actions", talentJSON);
       }
       else {
-        alert("You're not logged in")
         dispatch(getTalentFailure());
+        if (window.confirm("Next-Up... Add your talents")) {
+          window.open("localhost:3001/UserEditPage/", "set up now?");
+        }
       }
     }
     catch(error) {

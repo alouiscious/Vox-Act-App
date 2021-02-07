@@ -1,3 +1,25 @@
+VoxAct project workflow for React-Redux design
+
+Build a Rails API for a app user, user's talents, and user authentication using Javascript Web Token.
+
+Upon user authentication via the UI Login.js,
+guide the user to their own UserEditPage.js.
+
+when logged_in? is true, from the UserEditPage matching  user.id fetches the User display component
+the user can:
+  add a profile photo to update the user record.
+    recommend add photo with window.confirm
+    user input/file type to upload a user profile photo to the server.
+
+  view their user profile and verify updated content
+  add media files and descriptions to their talents list
+  edit their profile pic 
+  edit or delete their talent list items
+  view a list of users
+  view only other user's profiles
+
+Build
+Thunk getstate action creater can take in getstate
 ## Dependencies (Gems/packages)
 ## Configuration (environment variables/other stuff in config folder)
 ## Database
@@ -5,6 +27,9 @@
 ## Views
 ## Controllers
 ## Routes
+
+rails vainilla with a  file field used byebug to observe the file upload.
+
 
 THE THUNK CODE
 

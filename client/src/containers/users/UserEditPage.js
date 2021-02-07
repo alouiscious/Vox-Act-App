@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
-import { fetchClient } from "../../actions/userActions";
-import { fetchTalent } from "../../actions/talentActions";
+import { currentUser, addNewPhoto } from "../../actions/userActions";
+// import { fetchTalent } from "../../actions/talentActions";
 
 import User from "../../components/users/User";
+// import UserAddMedia from '../../components/users/UserAddMedia';
 import Talents from "../../components/talents/Talents"
 import TalentInput from '../../components/talents/TalentInput';
-import UserAddDetails from '../../components/users/UserAddDetails';
 
 const UserEditPage = ({
   match,
@@ -15,68 +15,72 @@ const UserEditPage = ({
   dispatch,
   user,
   list,
-  photo,
   hasErrors,
   loading,
 }) => {
   useEffect(() => {
-    const { id } = match.params;
-    dispatch(fetchClient(id));
-    dispatch(fetchTalent(id));
-    // dispatch(addUserPhoto())
-    console.table("id from useEffect", id);
+    // dispatch(addNewPhoto(upph));
+    dispatch(currentUser());
+    // dispatch(fetchTalent(id));  
+
   }, [dispatch, match]);
 
-  console.table("user.id from userEditPage", user.id);
-  console.table("user from userEditPage", user);
+  // console.table("user.id from userEditPage", list);
+  // console.table("user from userEditPage", this.props);
   const renderUser = () => {
     if (loading.user) return <p>Loading User...</p>;
     if (hasErrors.user) return <p>Unable to display User.</p>;
     return (
     <div>
       <User key={user.id} user={user} />
-      <div>
 
-      <UserAddDetails photo={photo} />
-      </div>
     </div>
     )
   };
 
   const renderTalents = () => {
-    if (loading.talents) return <p>Loading User...</p>;
+    if (loading.talents || !user) return <p>Loading User...</p>;
     if (hasErrors.talents) return <p>Unable to display User.</p>;
     return <Talents key={user.id} list={list} />;
-    
   };
 
-  return (
-    <section className="renderUser">
-      <h2>Vox Act Client Talent Details...</h2>
-      {renderUser()}
-      <div>
-        {renderTalents()}
-        <br />
-        <br />
-        <div></div>
-        <h3>Add New Talents here...</h3>
-        <TalentInput history={history} />
-      </div>
-    </section>
-  );
+  if (user) {
+    return (
+      <section className="renderUser">
+        <h2>Vox Act Client Talent Details...</h2>
+        {renderUser()}
+        <div>
+          {user && renderTalents()}
+          <br />
+          <br />
+          <div></div>
+          <h3>Add New Talents here {user.user_name}</h3>
+          <TalentInput history={history} />
+        </div>
+      </section>
+    );
+  }
+  else {
+    return (
+    <p>loading</p>
+    )
+  }
 };
-      
+
 const mapStateToProps = ({ userReducer, talentsReducer }) => ({ 
   user: userReducer.user,
+  // upph: userReducer.upph,
   talent: talentsReducer.talent,
-  // talents: talentsReducer.talents,
+  
   loading: { 
     user: userReducer.loading, 
+    // upph: userReducer.loading,
     talent: userReducer.loading 
   },
 
   hasErrors: { 
     user: userReducer.hasErrors, 
+    // upph: userReducer.hasErrors,
     talent: userReducer.hasErrors 
   },
 })

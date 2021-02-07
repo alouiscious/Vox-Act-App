@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addNewTalent } from "../../actions/talentActions"
-import { fetchClient } from "../../actions/userActions"
 
 class TalentInput extends Component {
   state = {
-    talentStyle: '', 
-    title: '', 
-    description: '',
-    phmf: '',
-    vimf: '',
-    aumf: ''
+    talent: {
+      talentStyle: '', 
+      title: '', 
+      description: '',
+      phmf: '',
+      vimf: '',
+      aumf: ''
+    }
   }
-  
-  handleTalentInputChange = event => {
+    
+    handleTalentInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
       
@@ -22,9 +23,8 @@ class TalentInput extends Component {
   
   handleTalentOnSubmit = event => {
     event.preventDefault()
-
     const talent = ({ 
-      talent_style: this.state.talentStyle,
+      talent_style: this.state.talent_style,
       title: this.state.title,
       description: this.state.description,
       phmf: this.state.phmf,
@@ -36,8 +36,9 @@ class TalentInput extends Component {
     this.props.addNewTalent(talent)
     .then(id => {
       this.props.history.push(`/Talents/${id}`)
+      
     })
-    console.table('wa ha state from talentinput', this.state)
+    console.table('wa ha state from talentinput', talent)
     
     this.setState({
       talent_style: '', 
@@ -49,11 +50,10 @@ class TalentInput extends Component {
     })
   }
 
-  render(){
+  render() {
     return (
       <div className="TalentInput">
-        Complete this form and add your Talent, {this.user_name}!
-       
+        Complete this form and add your Talent!
         <form onSubmit={this.handleTalentOnSubmit}>
           <div className="talentDetails">
           <label htmlFor="title">Define your talents: </label>
@@ -144,7 +144,8 @@ class TalentInput extends Component {
       </div>
     )
   }
+  
 }
 
 
-export default connect(null, {addNewTalent, fetchClient})(TalentInput)
+export default connect(null, {addNewTalent })(TalentInput)

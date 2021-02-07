@@ -25,7 +25,7 @@ const App = () => {
         <Route exact path="/" component={VoxActSignIn} />
         <Route exact path="/UserInput" component={VoxActSignUp} />
         <Route exact path="/Users" component={Users} />
-        <Route exact path="/UserEditPage/:id" component={UserEditPage} />
+        <Route exact path="/UserEditPage" component={UserEditPage} />
         <Route path="/UserPage/:id" component={UserPage} />
         <Redirect to="/" />
       </Switch>
