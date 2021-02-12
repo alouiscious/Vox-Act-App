@@ -1,39 +1,23 @@
-import React, {useEffect} from "react"
-import { connect } from 'react-redux'
-import  {fetchUsers}  from '../../actions/usersActions';
-import UserShow from "./User"
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Users = ({list, dispatch, loading, hasErrors }) => {
-  useEffect(() => {
-    dispatch(fetchUsers())
-  }, [dispatch])
-    console.table('Users List', list)
-    
-  const renderUsers = () => {
-    if (loading) return <p>Loading Clients...</p>
-    if (hasErrors) return <p>No Clients to display.</p>
-    console.table('Users List', list)
-    return list.map((user) => <UserShow key={user.id} user={user}/>)
+
+  const Users = ({ user, talent }) => {
+    return <div className={talent ? 'talent_style' : 'user'}>
+      {console.table('wa ha user from user', user)}
+        <h3>
+          <Link to={`/UserPage/${user.id}`}className="button">
+            {user.user_name} ~ {user.hometown}
+            <br />
+            <button type="text" >{`View This Profile`}</button>
+          </Link>
+        </h3>
+          Email: {user.email}
+          <br />
+        {talent && talent ? user.email : user.upph}
+    </div>  
   }
 
-  return (
-    <div className="renderUsers">
-      <div>
-        <br />
-        <h1>Vox Act - Client List</h1>
-        {renderUsers()}
-      </div>
-    </div>
-  )   
-}
+export default Users
 
-// Map Redux state to React component props
-const mapStateToProps = ({usersReducer, userReducer}) => ({
-  user: userReducer.user,
-  list: usersReducer.list,
-  loading: usersReducer.loading,
-  hasErrors: usersReducer.hasErrors
-})      
 
-// Connect Redux to React
-export default connect(mapStateToProps)(Users)
