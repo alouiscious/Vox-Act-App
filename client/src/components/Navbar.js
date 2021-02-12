@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import * as userActions from "../actions/userActions";
 
 const link = {
   width: '100px',
@@ -20,7 +21,7 @@ const Navbar = () => {
 
   return (
     <div className='navBar'>           
-      {(!location.pathname.includes("user" || "")) ?
+      {(!location.pathname.includes("") ) ?
 
        <NavLink 
         style={{ link, marginRight: '10px' }} 
@@ -42,7 +43,8 @@ const Navbar = () => {
     
 
 
-      {location.pathname === "/" || "" ? <NavLink 
+      {(location.pathname === ("/" || "") )? 
+      <NavLink 
         style={{ link, marginRight: '10px' }} 
         activeStyle={{ background: 'crimson'}}      
         to="/"
