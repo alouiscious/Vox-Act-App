@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 const User = ({ user }) => {
   return (
     <div className={"user"}>
-      {console.table("user from user", user)}
       <h3>
         <Link to={`/UserEditPage/${user.id}`} className="button">
           {user.user_name} ~ {user.hometown}
           <br />
-          <button type="text">View Your Talent Profile</button>
+          <button type="text">Edit Your Talent Profile</button>
         </Link>
       </h3>
       Email: {user.email}

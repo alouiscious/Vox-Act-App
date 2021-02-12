@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
-import { fetchClient } from "../../actions/userActions";
-import { fetchTalent } from "../../actions/talentActions";
+import { currentUser } from "../../actions/userActions";
+// import { fetchTalent } from "../../actions/talentActions";
 
-import UserEdit from "../../components/users/UserEdit";
+import User from '../../components/users/User';
 import Talents from "../../components/talents/Talents"
 
 const UserPage = ({
   match,
-  history,
   dispatch, 
   user, 
   list, 
@@ -17,19 +16,17 @@ const UserPage = ({
   loading, 
 }) => {
     useEffect(() => {
-    const { id } = match.params
-    dispatch(fetchClient(id))
-    dispatch(fetchTalent(id))
+      dispatch(currentUser())
+    // dispatch(fetchTalent(id))
     // dispatch(fetchUsers())
     // dispatch(addUserPhoto())
 
   }, [dispatch, match])
    
   const renderUser = () => {
-    console.table('wa ha user from userpage', (user))
     if (loading.user) return <p>Loading User...</p>
     if (hasErrors.user) return <p>Unable to display User.</p>
-    return <UserEdit key={user.id} user={user} /> 
+    return <User key={user.id} user={user} /> 
   }
 
   const renderTalents = () => {
@@ -38,13 +35,17 @@ const UserPage = ({
     return <Talents key={user.upid} list={list} />
   }
 
+  if (user){
   return (
     <section className="renderUser">
-        <h2>Vox Act Client Talent Details...</h2>
+        <h2>Vox Act Client Profile</h2>
           {renderUser()}
-          {renderTalents()}
+          {user && renderTalents()}
     </section>
   )
+  } else {
+    return <p>loading</p>;
+  }
 }
       
 const mapStateToProps = ({ userReducer, talentsReducer }) => ({ 
