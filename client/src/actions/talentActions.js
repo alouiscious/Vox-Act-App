@@ -13,9 +13,12 @@ export const addTalentSuccess = (talent) => ({
 });
 export const addTalentFailure = () => ({ type: ADD_TALENT_FAILURE });
 export const loadingTalents = () => ({ type: LOADING_TALENTS });
-
+//ADD TALENT
 export const addNewTalent = (talent) => {
-  return async (dispatch) => {
+  // return async (dispatch) => {
+  return (dispatch) => {
+    dispatch(loadingTalents());
+
     const configTalent = {
       method: "POST",
       headers: {
@@ -28,25 +31,26 @@ export const addNewTalent = (talent) => {
       })
     };
 
-    dispatch(loadingTalents());
     return fetch(TALENTURL, configTalent)
       .then(resp => resp.json())
       .then(talentJSON => {
         dispatch(addTalent());
-        dispatch(addTalentSuccess(talentJSON.id));
+        dispatch(addTalentSuccess(talentJSON));
         if (talentJSON.error) {
           alert("Talent creation was not complete.");
         }
-        return talentJSON.id
+        return talentJSON
       })
       
       .catch(console.error(dispatch(addTalentFailure()), console.table));
   };
 };
 
+
 export const GET_TALENTS = "GET TALENTS";
 export const GET_TALENTS_SUCCESS = "GET_TALENTS_SUCCESS";
 export const GET_TALENTS_FAILURE = "GET_TALENTS_FAILURE";
+
 export const getTalents = () => ({ type: GET_TALENTS });
 export const getTalentsSuccess = list => ({
   type: GET_TALENTS_SUCCESS,
@@ -128,34 +132,55 @@ export function fetchTalent(userID) {
   }
 }
 
+export const QUEUE_DELETE_TALENT = "QUEUE_DELETE_TALENT";
+export const queueDeleteTalent = () => ({
+   type: QUEUE_DELETE_TALENT 
+  })
+export const DELETE_TALENT_SUCCESS = "DELETE_TALENT_SUCCESS";
+export const deleteTalentSuccess = (talent) => ({
+  type: DELETE_TALENT_SUCCESS,
+  payload: talent,
 
-export const DELETE_TALENT = "DELETE_TALENT";
-// export const deleteTalent = () => ({ type: DELETE_TALENT })
+})
+export const DELETE_TALENT_FAILURE = "DELETE_TALENT_FAILURE";
+export const deleteTalentFailure = () => ({
+  type: DELETE_TALENT_FAILURE
+})
 
 export function deleteTalent(talent) {
-  return (dispatch) => {
-    const configTalent = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        talent: talent,
-      }),
-    };
+  const configTalent = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      talent: talent,
+    }),
+  };
 
-    fetch(TALENTURL, configTalent)
-      .then((resp) => resp.json())
-      .then((talentJSON) => {
-        if (talentJSON.error) {
-          alert("Talent deletion was not complete.");
-        } else {
-          dispatch({ type: "DELETE_TALENT", talent: talentJSON });
-          alert("Talent Removed.");
+  return async (dispatch) => {
+    dispatch(queueDeleteTalent())
+    try {
+      const resp = await fetch(TALENTURL + `/${talent}`, configTalent)
+      const delTalentJSON = await resp.json()
+      if (resp.ok){
+        alert(`Are you sure you want to delete the ${talent.title} talent?`);
+        dispatch(deleteTalentSuccess(delTalentJSON.id))
+        alert("Talent Removed.");
+      } 
+      else {
+        dispatch(deleteTalentFailure())
+        if (window.confirm("Talent deletion was not complete.")) {
+          window.open("localhost:3001/UserEditPage", "Please try again.");
         }
-      })
-      .catch(console.log);
+      }
+    }
+    catch(error) {
+      dispatch(deleteTalentFailure())
+      window.open("localhost:3001/UserEditPage", "Please try again.");
+    };
   };
 }
 

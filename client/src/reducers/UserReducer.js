@@ -16,10 +16,7 @@ export default function userReducer(state = initialState, action) {
         password: action.password,
       };
       console.log("case login user", {
-        user: action.user,
-        list: action.payload,
-        logged_in: true,
-        loading: false,
+        user: action.user, list: action.payload, logged_in: true, loading: false,
       });
       return {
         ...state,

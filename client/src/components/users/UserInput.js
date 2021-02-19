@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { loginUser } from "../../actions/userActions";
-import { addUsers } from "../../actions/usersActions";
+import { addUser } from "../../actions/usersActions";
 import { v4 as uuid } from "uuid";
 import { Link } from "react-router-dom";
 
@@ -41,7 +41,7 @@ class UserInput extends Component {
 
     console.table("wa ha props user", this.props);
     this.props
-      .addUsers(user)
+      .addUser(user)
       .then((userJSON) => {
         console.table("wa ha input user", userJSON);
         return this.props.loginUser(login);
@@ -119,4 +119,4 @@ class UserInput extends Component {
   }
 }
 
-export default connect(null, { addUsers, loginUser })(UserInput);
+export default connect(null, { addUser, loginUser })(UserInput);

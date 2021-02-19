@@ -29,7 +29,7 @@ export function loginUser(user) {
         console.table("login promise", loginJSON);
         if (loginJSON.error) {
           dispatch(loginActionFailure());
-          // if (window.confirm("Sorry. Not a Vox Act client? Sign up...")) {
+          return <p></p>// if (window.confirm("Sorry. Not a Vox Act client? Sign up...")) {
           //   window.open("localhost:3001/userInput", "sign up now?");
           // }
         } else {
@@ -97,7 +97,9 @@ export const ADD_USER_PHOTO_SUCCESS = "ADD_USER_PHOTO_SUCCESS";
 export const ADD_USER_PHOTO_FAILURE = "ADD_USER_PHOTO_FAILURE";
 export const LOADING_USER_PHOTO = "LOADING_USER_PHOTO";
 
-export const addUserPhoto = () => ({ type: ADD_USER_PHOTO });
+export const addUserPhoto = () => ({ 
+  type: ADD_USER_PHOTO 
+});
 export const userPhotoSuccess = (upph) => ({
   type: ADD_USER_PHOTO_SUCCESS,
   payload: upph,
@@ -105,11 +107,12 @@ export const userPhotoSuccess = (upph) => ({
 export const userPhotoActionFailure = () => ({
   type: ADD_USER_PHOTO_FAILURE,
 });
-export const loadingUserPhoto = () => ({ type: LOADING_USER_PHOTO });
+export const loadingUserPhoto = () => ({ 
+  type: LOADING_USER_PHOTO 
+});
+
 
 export function addNewPhoto(upph) {
-  // const USERURL = `http://localhost:3000/users/${id}`
-
   return async (dispatch) => {
     const configUpph = {
       method: "POST",

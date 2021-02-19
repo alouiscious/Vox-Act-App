@@ -2,10 +2,9 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
 import { currentUser } from "../../actions/userActions";
-// import { fetchTalent } from "../../actions/talentActions";
 
 import User from '../../components/users/User';
-import Talents from "../../components/talents/Talents"
+import UserTalents from "../../components/users/UserTalents"
 
 const UserPage = ({
   match,
@@ -17,7 +16,6 @@ const UserPage = ({
 }) => {
     useEffect(() => {
       dispatch(currentUser())
-    // dispatch(fetchTalent(id))
     // dispatch(fetchUsers())
     // dispatch(addUserPhoto())
 
@@ -32,19 +30,19 @@ const UserPage = ({
   const renderTalents = () => {
     if (loading.talents) return <p>Loading User...</p>
     if (hasErrors.talents) return <p>Unable to display User.</p>
-    return <Talents key={user.upid} list={list} />
+    return <UserTalents key={user.upid} list={list} />
   }
 
   if (user){
   return (
     <section className="renderUser">
-        <h2>Vox Act Client Profile</h2>
-          {renderUser()}
-          {user && renderTalents()}
+      <h2>Vox Act Client Profile</h2>
+      {renderUser()}
+      {user && renderTalents()}
     </section>
-  )
+  );
   } else {
-    return <p>loading</p>;
+    return <p>Loading...</p>;
   }
 }
       

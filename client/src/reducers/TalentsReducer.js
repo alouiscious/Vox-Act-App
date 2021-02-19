@@ -22,7 +22,7 @@ export default function talentsReducer(state = initialState, action) {
     case talentActions.ADD_TALENT:
       return {
         ...state,
-        loading: false,
+        loading: true,
         user_name: action.user_name,
         upid: action.upid,
       };
@@ -36,10 +36,18 @@ export default function talentsReducer(state = initialState, action) {
     case talentActions.ADD_TALENT_FAILURE:
       return { ...state, loading: false, hasErrors: true };
 
-    case talentActions.DELETE_TALENT:
-      idx = state.list.findIndex((talent) => talent.id === action.id);
+    case talentActions.QUEUE_DELETE_TALENT:
+      return {
+        ...state,
+        loading: true,
+        user_name: action.user_name,
+        upid: action.upid,
+      };
+    case talentActions.DELETE_TALENT_SUCCESS:
+      idx = state.list.findIndex((talent) => talent.upid === action.upid);
       return [...state.talents.slice(0, idx), ...state.talents.slice(idx + 1)];
-
+    case talentActions.DELETE_TALENT_FAILURE:
+      return { ...state, loading: false, hasErrors: true };
     default:
       return state;
   }

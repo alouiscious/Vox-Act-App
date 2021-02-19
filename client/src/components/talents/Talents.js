@@ -1,40 +1,19 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import * as talentActions from "../../actions/talentActions";
-import Talent from "./Talent";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Talents = ({ list, dispatch, loading, hasErrors }) => {
-  useEffect(() => {
-    dispatch(talentActions.fetchTalents());
-  }, [dispatch]);
-  console.table("Talents List", list);
 
-  const renderTalents = () => {
-    if (loading) return <p>Loading Clients...</p>;
-    if (hasErrors) return <p>No Clients to display.</p>;
-    console.table("Talents List", list);
-    return list.map(
-      (talent) => <Talent key={talent.upid} talent={talent} />,
-      <button type="text" value={talentActions.deleteTalent()}>
-        Delete Talent
-      </button>
-    );
-  };
-
-  // const talents = talentActions.fetchTalent()
-
+const Talents = ({ talent }) => {
   return (
-    <div className="renderTalents">
-      <h1> Talents' List</h1>
-      {renderTalents()}
+    <div className={talent ? "talent_style" : "user"}>
+      {console.table("talents list from talents")}
+      <b>
+        <Link to={`/UserPage/${talent.user_id}`} className="talents">
+          {talent.title} | {talent.talent_style}
+        </Link>
+      </b>
+      <br />
+      <br />
     </div>
   );
 };
-
-const mapStateToProps = ({ talentsReducer }) => ({
-  list: talentsReducer.list,
-  loading: talentsReducer.loading,
-  hasErrors: talentsReducer.hasErrors,
-});
-
-export default connect(mapStateToProps)(Talents);
+export default Talents;

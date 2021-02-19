@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import * as userActions from "../actions/userActions";
 
 const link = {
   width: '100px',

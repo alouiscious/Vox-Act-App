@@ -8,7 +8,7 @@ export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
 
 // Create Redux action creators that return an action
 //GET USERS
-export const getUsers = () => ({ type: GET_USERS })
+export const loadUsers = () => ({ type: LOADING_USERS })
 export const getUsersSuccess = list => ({
   type: GET_USERS_SUCCESS,
   payload: list,
@@ -26,7 +26,7 @@ export function fetchUsers() {
     credentials: "include"
   }
   return async (dispatch) => {
-    dispatch(getUsers())
+    dispatch(loadUsers())
     try {
       const resp = await
       fetch(USERSURL, configUsers)
@@ -43,11 +43,9 @@ export function fetchUsers() {
   }
 }
       
-export const ADD_USERS = 'ADD_USERS'
 export const ADD_USERS_SUCCESS = 'ADD_USERS_SUCCESS'
 export const ADD_USERS_FAILURE = 'ADD_USERS_FAILURE'
 
-export const addUser = () => ({ type: ADD_USERS })
 export const addUserSuccess = (user) => ({ 
   type: ADD_USERS_SUCCESS,
   payload: user,
@@ -59,38 +57,41 @@ export const addUserFailure = () => ({
 
 
 //ADD USER
-export const addUsers = (user) => {
+export const addUser = (user) => {
+  const configAddUser = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      user: user,
+    })
+  }
   return async (dispatch) => {
-    const configAddUser = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        user: user,
-      })
-    }
-    dispatch({type: 'LOADING_USERS'})
-    
-    return fetch(USERSURL, configAddUser)
-    .then(resp => resp.json())
-    .then(userJSON => {
-      if (userJSON.error) {
-        dispatch(addUserFailure())
-        if (window.confirm("Vox Act client not added successfully. - Please try again.")) {
-          window.open("localhost:3001/userInput", "sign up now?");
-        }
-      } else {
+    try {
+      const resp = await fetch(USERSURL, configAddUser)
+      const userJSON = await resp.json()
+      if (resp.ok){
+        dispatch(loadUsers())
         dispatch(addUser())
         dispatch(addUserSuccess(userJSON.user))
       }
-    })
-    .catch(console.table) 
+      else {
+        dispatch(addUserFailure())
+        if (window.confirm("Vox Act client already exists. - Please try again.")) {
+          window.open("localhost:3001/VoxActSignUp/", "sign up now?", "replacetrue");
+        }
+      }
+    }
+    catch(eror) {
+      dispatch(addUserFailure())
+      window.open(`localhost:3001/UserPage`)
+    }
   }
 }
 
 export const REMOVE_USER = 'REMOVE_USER'
 
-export default ( fetchUsers, addUsers )
+export default ( fetchUsers, addUser )
