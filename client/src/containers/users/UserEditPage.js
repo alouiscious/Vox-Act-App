@@ -39,7 +39,7 @@ const UserEditPage = ({
   if (user) {
     return (
       <section className="renderEditUser">
-        <h2>Vox Act Profile Updates Page...</h2>
+        <h2>Vox Act Profile Creation Page...</h2>
         {renderUser()}
         <div>
           <br />

@@ -5,7 +5,8 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
+Rails.application.config.middleware.insert_before 0, 
+Rack::Cors do
   allow do
     origins '127.0.0.1:3001', 'localhost:3001', '192.168.1.40:3001'
 

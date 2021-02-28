@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
         password: user.password,
         token: token
       }
-      render json: {user: userObj, token: token, status: 200}
+      # render json: {user: userObj, token: token, status: 200}
+      render json: {user: user, token: token, status: 200}
     else
       resp = {
         error: "Login or User not valid.",

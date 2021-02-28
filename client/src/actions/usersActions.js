@@ -9,9 +9,9 @@ export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
 // Create Redux action creators that return an action
 //GET USERS
 export const loadUsers = () => ({ type: LOADING_USERS })
-export const getUsersSuccess = list => ({
+export const getUsersSuccess = (list, user) => ({
   type: GET_USERS_SUCCESS,
-  payload: list,
+  payload: list, user,
 })
 export const usersActionFailure = () => ({ type: GET_USERS_FAILURE })
 

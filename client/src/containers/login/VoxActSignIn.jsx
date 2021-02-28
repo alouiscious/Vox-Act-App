@@ -15,8 +15,8 @@ class VoxActSignUp extends Component {
             <tr>
               <td>
                 <Login
-                  history={this.props.history}
                   loginUser={this.props.loginUser}
+                  history={this.props.history}
                 />
               </td>
             </tr>
