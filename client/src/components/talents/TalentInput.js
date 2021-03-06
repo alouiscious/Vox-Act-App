@@ -15,6 +15,7 @@ class TalentInput extends Component {
     phmf: "",
     vimf: "",
     aumf: "",
+    user_id: "",
   };
 
   handleTalentInputChange = (event) => {
@@ -32,6 +33,7 @@ class TalentInput extends Component {
       phmf: this.state.phmf,
       vimf: this.state.vimf,
       aumf: this.state.aumf,
+      user_id: this.state.user_id,
     };
     console.table("Talentinput state", this.state);
 
@@ -48,9 +50,11 @@ class TalentInput extends Component {
       talent_style: "",
       title: "",
       description: "",
-      aumf: "",
       phmf: "",
       vimf: "",
+      aumf: "",
+      user_id: "",
+
     });
   };
 

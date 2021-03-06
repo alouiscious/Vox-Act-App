@@ -73,22 +73,3 @@ const mapStateToProps = ({ userReducer, talentsReducer }) => ({
 
 export default connect(mapStateToProps)(UserEditPage);
 
-// const mapDispatchToProps = dispatch => ({
-//   addUser: ({upid, user_name, hometown, email, password, upph}) => dispatch({
-//     type: 'ADD_USER',
-//     upid,
-//     user_name,
-//     hometown,
-//     email,
-//     password,
-//     upph
-//   }),
-//   deleteUser: id => dispatch({
-//     type: 'DELETE_USER',
-//     id
-//   }),
-//   getTalents: id => dispatch({
-//     type: 'GET_TALENT',
-//     id
-//   })
-// })

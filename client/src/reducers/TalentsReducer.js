@@ -11,6 +11,7 @@ export const initialState = {
 let idx;
 export default function talentsReducer(state = initialState, action) {
   switch (action.type) {
+
     case talentActions.LOADING_TALENTS:
       return { ...state, loading: true };
     case talentActions.GET_TALENTS:

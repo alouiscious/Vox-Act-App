@@ -119,3 +119,50 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+// class VoteBtn extends Component {
+//   handleVoteClick = () => {
+//     this.props.onClick(this.props.incrementVote())
+//   };
+
+//   render() {
+//     return (
+//       <button onClick={this.handleVoteClick()}>
+//       Votes +{this.props.incrementVote()}
+//     </button>
+//     )
+//   };
+// }
+
+// const Result = (props) => {
+//   return (
+//     <div>
+//       {props.counter}
+//     </div>
+//   )
+// }
+
+// class VoteCount extends Component {
+//   state = {
+//     counter: 0
+//   }
+//   incrementCounter = (incrementVote) => {
+//     this.setState((prevState) => {
+//       return {
+//         counter: prevState.counter + incrementVote
+//       }
+//     })
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <VoteBtn incrementValue={1} onClick={this.incrementCounter()} />
+//         <Result counter={this.state.counter} />
+//       </div>
+        
+//     )
+//   }
+// }

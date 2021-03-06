@@ -420,3 +420,6 @@ For pkg-config to find qt you may need to set:
 * Deployment instructions
 
 * ...
+
+
+

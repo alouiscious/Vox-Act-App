@@ -12,6 +12,7 @@ import VoxActSignIn from "./containers/login/VoxActSignIn";
 import VoxActSignUp from "./containers/login/VoxActSignUp";
 import UserEditPage from ".//containers/users/UserEditPage";
 import UserPage from "./containers/users/UserPage";
+import UserTalents from "./components/users/UserTalents";
 import logo from "./logo.jpg";
 import "./App.css";
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route exact path="/UserInput" component={VoxActSignUp} />
         <Route exact path="/Users" component={UsersList} />
         <Route exact path="/UserEditPage/" component={UserEditPage} />
+        <Route exact path="/Talents/:id" component={UserTalents} />
         <Route path="/UserPage/:id" component={UserPage} />
         <Redirect to="/" />
       </Switch>

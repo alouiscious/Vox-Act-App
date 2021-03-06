@@ -44,8 +44,15 @@ class Login extends Component {
   render() {
       return (
         <div className="Login">
-          Sign In  
-          <br />
+        <br />
+        <h2>
+        ~ Welcome to VoxAct ~ 
+        </h2>
+        The easiest talent organizer 
+        <br />
+        for Talents and Agents
+        <br />
+        <h4>Sign In</h4>
           <form onSubmit={this.handleLoginOnSubmit}>
             <input
               type="email"

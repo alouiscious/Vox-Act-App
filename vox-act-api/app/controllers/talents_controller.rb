@@ -29,7 +29,9 @@ class TalentsController < ApplicationController
       description: params[:talent][:description], 
       phmf: params[:talent][:phmf], 
       vimf: params[:talent][:vimf], 
-      aumf: params[:talent][:aumf]
+      aumf: params[:talent][:aumf],
+      user_id: params[:talent][:user_id],
+      
     )
 
     if @talent.save

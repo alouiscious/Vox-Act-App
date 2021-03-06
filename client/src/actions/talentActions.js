@@ -13,6 +13,8 @@ export const addTalentSuccess = (talent) => ({
 });
 export const addTalentFailure = () => ({ type: ADD_TALENT_FAILURE });
 export const loadingTalents = () => ({ type: LOADING_TALENTS });
+
+
 //ADD TALENT
 export const addNewTalent = (talent) => {
   // return async (dispatch) => {

@@ -77,8 +77,8 @@ export function fetchClient(id) {
       const resp = await fetch(`http://localhost:3000/users/${id}`, configUser);
       const clientJSON = await resp.json();
       if (resp.ok) {
-        dispatch(getUserSuccess(clientJSON));
         localStorage.setItem("token", clientJSON.token);
+        dispatch(getUserSuccess(clientJSON));
       }
     } catch (error) {
       console.error(
