@@ -25,16 +25,29 @@ export const subTalentVote = (count) => {
   }
 }
 
-
-
+// export const [talentId, setTalentId, talentUserId, setTalentUserId] = useState(0)
 
 class Counter extends Component {
+  // export const onChangeVoteCount = (e) => {
+  // console.log("voteid", e.target.value)
+  // setTalentid(e.target.value ? Number(e.target.value) : 0)
+
   state = {
     count: 0,
-    votes: []
+    votes: [],
+    talentId: undefined,
+    talentUserId: undefined
   };
-  
-   counterReducer(state, action) {
+  // componentDidMount(){
+  //   this.setCurrentRanks()
+  // }
+
+  // add
+  //   this.setState({
+  //   votes: this.state.concat(talent.id + talent)
+  // })
+
+  counterReducer(state, action) {
     switch (action.type) {
       case INCREASE_VOTE:
         return {count: state.count + 1}
@@ -45,15 +58,25 @@ class Counter extends Component {
     }
   }
 
-  handleVoteClick = (count) => {
+
+
+  handleAddVoteClick = (count) => {
     this.props.dispatch(addTalentVote(count))
   }
-  render() {
-    // const { votes, count } = this.state;
+  handleSubVoteClick = (count) => {
+    this.props.dispatch(subTalentVote(count))
+  }
 
-    return <div>
-      <button onClick={this.handleVoteClick}>
-        {this.props.count} Votes!
+
+  render() {
+
+    return <div className="Vote">
+      <button onClick={this.handleAddVoteClick} className="addTalentVote">
+        {this.props.count} UpVotes!
+      </button>
+      <br />
+      <button onClick={this.handleSubVoteClick} className="subTalentVote">
+        {this.props.count} DnVotes!
       </button>
     </div>
 
@@ -66,6 +89,13 @@ const mapStateToProps = ({ counterReducer }) => ({
   count: counterReducer.count,
 
 });
+
+// function mapDispatchToProps(dispatch) {
+//   return { 
+//     votes: () => dispatch(addVote()),
+//     votes: () => dispatch(subVote()),
+//   }
+// }
 
 export default connect(mapStateToProps)(Counter)
 // export default connect(state => ({count: state.count}), mapStateToProps)(Counter)

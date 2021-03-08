@@ -6,6 +6,7 @@ import * as talentActions from "../../actions/talentActions";
 import Counter from "../../components/Counter";
 import Talent from "../talents/Talent";
 
+
 const UserTalents = ({
   match,
   history,
@@ -18,34 +19,59 @@ const UserTalents = ({
     dispatch(talentActions.fetchTalents());
   }, [dispatch, match]);
 
+  // const { votes, voted, talentId, talentUserId, setTalentId, setTalentUserId  } = this.state;
+  // function castVote(id, status, talent) {
+  //   this.setState({
+  //     votes: votes.filter(vote => !(vote === id)),
+  //     voted: status === 'voted' ? count : voted,
+  //     talentId: Number(talent.id),
+  //   })
+  // }
+
   const renderTalent = () => {
 
     if (loading) return <p>Loading Talents...</p>;
     if (hasErrors) return <p>No Talents to display.</p>;
+
+
     return list.map((talent, index) => (
-      <Talent
-        key={talent.id}
-        talent={talent}
-        history={talent.history}
-        // deleteTalent={talentActions.deleteTalent()}
-        // deleteTalent={this.props.deleteTalent}
-        // renderVoteCount={this.props.renderVoteCount}
-        // renderVoteCount={this.props.renderVoteCount}
-        />
-    ))
+
+    
+      <table>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td>
+              <Talent
+                key={talent.id}
+                talent={talent}
+                history={talent.history}
+              />
+            </td>
+            <td>
+              <Counter
+                key={index}
+                id={`${talent.user_id}_${talent.id}`}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+       )
+    )
   }
 
-  const renderVoteCount = () => {
-    if (loading) return <p>Loading Talents...</p>;
-    if (hasErrors) return <p>No Talents to display.</p>;
-    return <Counter />
-  };
+  // const renderVoteCount = () => {
+  //   if (loading) return <p>Loading Talents...</p>;
+  //   if (hasErrors) return <p>No Talents to display.</p>;
+    
+  //   return <Counter />
+  // };
 
   return (
     <div className="renderTalents">
       <h1> Talents' List</h1>
       {renderTalent()}
-      {renderVoteCount()}
     </div>
   );
 };
